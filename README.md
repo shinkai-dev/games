@@ -15,6 +15,10 @@ Play directly in your browser or open each folder's `index.html` locally:
 - **[Mako7](./mako7/)** — A cyberpunk/fantasy RPG *(inspired by Final Fantasy VII)*.
 - **[Pocket Battler](./pocket-battler/)** — A monster-collecting & turn-based battle RPG *(inspired by Pokémon)*.
 - **[Pocket Battler 2](./pocket-battler2/)** — A modernized roguelite sequel to Pocket Battler *(inspired by Pokémon)*.
+- **[Solitaire](./solitaire/)** — A classic single-player card game *(Klondike Solitaire)*.
+- **[Dragon-Hero](./dragon-hero/)** — A classic turn-based fantasy RPG *(inspired by Dragon Quest)*.
+- **[Pink-Pinball](./pink-pinball/)** — A multi-tier arcade pinball game *(inspired by Kirby's Pinball Land)*.
+- **[Pink-Ball](./pink-ball/)** — An isometric arcade golf-puzzle game *(inspired by Kirby's Dream Course)*.
 
 ## How to Run Locally
 
