@@ -9,6 +9,7 @@ Most of the games here are quick prototypes that have only been lightly tested�
 Play directly in your browser or open each folder's `index.html` locally:
 
 - **[Super Hopper](./super-hopper/)** — A 2D side-scrolling platformer *(inspired by Super Mario Bros.)*.
+- **[Star Shooter](./star-shooter/)** — A classic horizontal-scrolling space shooter with power-up gauges *(inspired by Gradius)*.
 - **[Block Stacker](./block-stacker/)** — A classic falling-block puzzle game *(inspired by Tetris)*.
 - **[Bomb Maze](./bomb-maze/)** — A grid-based bomb-placing action game *(inspired by Bomberman)*.
 - **[Gate Rush](./gate-rush/)** — A lane-moving auto-shooter runner *(inspired by mobile ad games like Last War)*.
