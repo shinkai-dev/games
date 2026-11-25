@@ -10,6 +10,7 @@ Play directly in your browser or open each folder's `index.html` locally:
 
 - **[Block Stacker](./block-stacker/)** — A classic falling-block puzzle game *(inspired by Tetris)*.
 - **[Bomb Maze](./bomb-maze/)** — A grid-based bomb-placing action game *(inspired by Bomberman)*.
+- **[Card Duel](./card-duel/)** — A 1v1 turn-based monster & spell card battle game with multiple decks *(inspired by Yu-Gi-Oh!)*.
 - **[Disk Farm](./disk-farm/)** — A monster-raising & auto-battle sim where creatures are generated from text/seeds *(inspired by Monster Rancher)*.
 - **[Dragon-Hero](./dragon-hero/)** — A classic turn-based fantasy RPG *(inspired by Dragon Quest)*.
 - **[Gate Rush](./gate-rush/)** — A lane-moving auto-shooter runner *(inspired by mobile ad games like Last War)*.
