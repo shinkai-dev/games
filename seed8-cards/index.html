@@ -189,6 +189,7 @@ h1.title-logo{font-family:var(--disp);font-size:clamp(46px,8.5vw,88px);line-heig
 .deck-top{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:16px;margin-bottom:16px;align-items:center}
 .slots{display:flex;gap:9px;flex-wrap:wrap}
 .slot{width:clamp(76px,9vw,104px);aspect-ratio:1;border-radius:11px;position:relative}
+.slot.replace-target{outline:3px solid var(--gold-b);outline-offset:3px;filter:drop-shadow(0 0 7px rgba(232,182,76,.55))}
 .slot.empty{border:2px dashed rgba(232,182,76,.4);display:grid;place-items:center;color:rgba(232,182,76,.5);font-size:22px;background:rgba(232,182,76,.03)}
 .slot .rm{position:absolute;inset:0;background:none;border:none;border-radius:11px}
 .slot .rm:hover{box-shadow:0 0 0 2px var(--danger),0 0 16px rgba(255,84,104,.5)}
@@ -1077,7 +1078,7 @@ function renderSetupDeck(){
 }
 
 /* ================= deck ================= */
-const deckUI={lv:'all',sort:'lvdesc',q:''};
+const deckUI={lv:'all',sort:'lvdesc',q:'',replaceSlot:null};
 function lvMatch(c,g){return g==='all'||(g==='1'&&c.lv<=3)||(g==='4'&&c.lv>=4&&c.lv<=6)||(g==='7'&&(c.lv===7||c.lv===8))||(g==='9'&&c.lv>=9);}
 function sortCards(arr,mode){
   const a=arr.slice();
@@ -1092,7 +1093,7 @@ function renderDeck(){
   const slots=$('#deckSlots');
   slots.innerHTML=Array.from({length:5},(_,i)=>{
     const id=S.deck[i];
-    return id?`<div class="slot" title="クリックで外す">${svgCard(id,{owner:'p'})}<button class="rm" data-slot="${i}" aria-label="外す"></button></div>`
+    return id?`<div class="slot ${deckUI.replaceSlot===i?'replace-target':''}" title="交換するスロットを選択">${svgCard(id,{owner:'p'})}<button class="rm" data-slot="${i}" aria-label="交換するスロットを選択"></button></div>`
              :`<div class="slot empty">＋</div>`;}).join('');
   const cards=S.deck.map(id=>CARDS[id]);
   const avg=cards.length?(cards.reduce((a,c)=>a+c.lv,0)/cards.length):0;
@@ -1679,11 +1680,28 @@ function bindGlobal(){
   /* deck */
   $('#deckSlots').addEventListener('click',e=>{
     const b=e.target.closest('[data-slot]');if(!b)return;
-    SFX.click();S.deck.splice(+b.dataset.slot,1);save();renderDeck();
+    const index=+b.dataset.slot;
+    SFX.click();
+    deckUI.replaceSlot=deckUI.replaceSlot===index?null:index;
+    renderDeck();
+    if(deckUI.replaceSlot!==null)toast('交換したいカードを下から選んでください','good');
   });
   $('#deckGrid').addEventListener('click',e=>{
     const b=e.target.closest('[data-add]');if(!b)return;
-    if(addToDeck(b.dataset.add))renderDeck();
+    const id=b.dataset.add;
+    if(deckUI.replaceSlot!==null){
+      const index=deckUI.replaceSlot;
+      const remaining=S.deck.filter((x,i)=>i!==index&&x===id).length;
+      if(remaining>=(S.col[id]||0)){
+        toast('所持枚数を超えて投入できません','warn');SFX.error();return;
+      }
+      const oldId=S.deck[index];
+      if(oldId===id){toast('同じカードが選択されています','warn');SFX.error();return;}
+      S.deck[index]=id;deckUI.replaceSlot=null;save();SFX.select();
+      toast(`《${CARDS[oldId].n}》を《${CARDS[id].n}》に交換しました`,'good');
+      renderDeck();return;
+    }
+    if(addToDeck(id))renderDeck();
   });
   $('#deckLv').addEventListener('click',e=>{
     const b=e.target.closest('[data-lv]');if(!b)return;
