@@ -23,10 +23,12 @@
 - **[Pocket Baseball](./pocket-baseball/)** — ミートカーソル打撃と変化球を楽しめるデフォルメ野球ゲーム（*実況パワフルプロ野球* 風）
 - **[Pocket Battler](./pocket-battler/)** — モンスター収集＆ターン制バトルRPG（*ポケットモンスター* 風）
 - **[Pocket Battler 2](./pocket-battler2/)** — Pocket Battler を現代風にアレンジしたローグライク続編（*ポケットモンスター* 風）
+- **[Seed8 Cards](./seed8-cards/)** — 3×3の盤面で4辺の数字を比べ合い、セイムやプラスなどの特殊ルールやカード奪取を楽しめる対戦カードゲーム（*ファイナルファンタジーVIII* トリプルトライアド風）
 - **[Solitaire](./solitaire/)** — 定番の一人用トランプゲーム（*クロンダイク・ソリティア*）
 - **[Star Shooter](./star-shooter/)** — パワーアップゲージ制の横スクロールシューティング（*グラディウス* 風）
 - **[Super Hopper](./super-hopper/)** — 2D横スクロールアクションゲーム（*スーパーマリオブラザーズ* 風）
 - **[Taiko Beat](./taiko-beat/)** — 1レーン横スクロールの和太鼓リズムゲーム（*太鼓の達人* 風）
+- **[Word Link](./word-link/)** — 毎回ランダム生成される全100ステージの日本語ひらがなワードパズル
 
 ## ローカルでの動かし方
 

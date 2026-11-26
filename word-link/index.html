@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#16283f">
+<title>Word Link ― ことば結び｜ひらがなワードパズル 全100ステージ</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%23e2a63d'/%3E%3Crect x='9' y='9' width='6' height='6' fill='%2316283f'/%3E%3C/svg%3E">
+<style>
+:root{
+ --i950:#0d1726;--i900:#12233d;--i800:#1a3153;--i700:#24466f;--i500:#33608f;--i300:#6d8db0;
+ --washi:#f6eed9;--wdeep:#ece0c4;--wedge:#d8c8a4;--wdim:#cdbb92;--sumi:#372e22;--sumi2:#6b5d47;
+ --shu:#d9482b;--shu2:#b93a20;--beni:#b93a56;--kin:#e2a63d;--kin2:#c68a24;
+ --matsu:#679a5b;--sakura:#e8a9b8;--fuji:#93a9c9;--wood:#8a5a33;--wood2:#6e4526;--wood3:#a9744a;
+ --scrim:rgba(9,14,25,.66);
+ --disp:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP","MS PMincho",serif;
+ --body:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP","Meiryo",sans-serif;
+ --panel:0 10px 30px rgba(5,10,20,.45),0 2px 6px rgba(5,10,20,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--body);color:var(--washi);background:var(--i950);user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:2px solid var(--kin);outline-offset:2px;border-radius:8px}
+svg.ic{width:20px;height:20px;flex:none;display:block}
+.scroll{scrollbar-width:thin;scrollbar-color:var(--wdim) rgba(18,35,61,.6)}
+.scroll::-webkit-scrollbar{width:10px}
+.scroll::-webkit-scrollbar-track{background:rgba(18,35,61,.6);border-radius:8px;border:1px solid rgba(246,238,217,.08)}
+.scroll::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--wedge),var(--wdim));border-radius:8px;border:2px solid rgba(18,35,61,.6)}
+.scroll::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--kin),var(--kin2))}
+#bg{position:fixed;inset:0;z-index:0;overflow:hidden;background:radial-gradient(1100px 700px at 18% -10%,#24466f 0%,transparent 55%),radial-gradient(900px 700px at 105% 30%,#33284d 0%,transparent 55%),radial-gradient(800px 600px at 50% 115%,#1c4348 0%,transparent 60%),linear-gradient(165deg,#152a45,#101d31 55%,#14213a);transition:filter 1.2s}
+body[data-screen=home] #bg{filter:hue-rotate(-14deg) saturate(1.08)}
+body[data-screen=select] #bg{filter:hue-rotate(10deg)}
+#bg .pattern{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='30'%3E%3Cg fill='none' stroke='%23f6eed9' stroke-opacity='.055'%3E%3Ccircle cx='30' cy='32' r='26'/%3E%3Ccircle cx='30' cy='32' r='19'/%3E%3Ccircle cx='30' cy='32' r='12'/%3E%3Ccircle cx='30' cy='32' r='5'/%3E%3Ccircle cx='0' cy='17' r='26'/%3E%3Ccircle cx='0' cy='17' r='19'/%3E%3Ccircle cx='0' cy='17' r='12'/%3E%3Ccircle cx='0' cy='17' r='5'/%3E%3Ccircle cx='60' cy='17' r='26'/%3E%3Ccircle cx='60' cy='17' r='19'/%3E%3Ccircle cx='60' cy='17' r='12'/%3E%3Ccircle cx='60' cy='17' r='5'/%3E%3C/g%3E%3C/svg%3E")}
+#bg .grain{position:absolute;inset:0;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+#bg .orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.16}
+#bg .orb.a{width:44vmin;height:44vmin;left:-8vmin;top:16vmin;background:radial-gradient(circle,var(--kin),transparent 70%);animation:orbA 26s ease-in-out infinite alternate}
+#bg .orb.b{width:52vmin;height:52vmin;right:-12vmin;bottom:-6vmin;background:radial-gradient(circle,var(--shu),transparent 70%);animation:orbB 32s ease-in-out infinite alternate}
+@keyframes orbA{to{transform:translate(10vmin,-8vmin) scale(1.18)}}
+@keyframes orbB{from{transform:scale(1.1)}to{transform:translate(-9vmin,-10vmin) scale(.92)}}
+#bg .petal{position:absolute;width:12px;height:10px;border-radius:60% 40% 60% 40%;background:linear-gradient(135deg,var(--sakura),#d98ba0);opacity:.35;top:-20px;animation:pf linear infinite}
+#bg .petal:nth-child(4){left:12%;animation-duration:23s;animation-delay:-4s}
+#bg .petal:nth-child(5){left:38%;animation-duration:31s;animation-delay:-16s;transform:scale(.7)}
+#bg .petal:nth-child(6){left:66%;animation-duration:27s;animation-delay:-9s;transform:scale(1.2)}
+#bg .petal:nth-child(7){left:86%;animation-duration:35s;animation-delay:-22s;transform:scale(.85)}
+@keyframes pf{0%{transform:translate(0,-4vh) rotate(0)}25%{transform:translate(5vw,26vh) rotate(120deg)}50%{transform:translate(-3vw,52vh) rotate(230deg)}75%{transform:translate(4vw,78vh) rotate(320deg)}100%{transform:translate(-2vw,108vh) rotate(430deg)}}
+.tategaki{position:fixed;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-family:var(--disp);color:rgba(246,238,217,.32);letter-spacing:.42em;font-size:15px;z-index:0;pointer-events:none;display:none}
+#sideL{left:calc(50% - 350px)}#sideR{right:calc(50% - 350px)}
+@media(min-width:1100px){.tategaki{display:block}}
+#app{position:relative;z-index:1;width:min(100vw,520px);height:100vh;height:100dvh;margin:0 auto;overflow:hidden}
+@media(min-width:560px){#app{border-left:1px solid rgba(246,238,217,.1);border-right:1px solid rgba(246,238,217,.1);box-shadow:0 0 80px rgba(4,8,16,.6);background:linear-gradient(180deg,rgba(246,238,217,.025),transparent 30%)}}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;min-height:0}
+.hidden{display:none!important}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;border-radius:12px;padding:13px 22px;font-size:15px;letter-spacing:.06em;transition:transform .12s,box-shadow .12s,filter .15s;box-shadow:0 4px 0 rgba(5,10,20,.35),0 8px 18px rgba(5,10,20,.3)}
+.btn:active{transform:translateY(2px) scale(.98);box-shadow:0 1px 0 rgba(5,10,20,.35),0 3px 8px rgba(5,10,20,.3)}
+.btn-primary{background:linear-gradient(150deg,#e05a35,var(--shu) 45%,var(--beni));color:var(--washi);border:1px solid rgba(246,238,217,.25);text-shadow:0 1px 2px rgba(90,20,10,.4)}
+.btn-primary:hover{filter:brightness(1.07)}
+.btn-indigo{background:linear-gradient(150deg,var(--i500),var(--i700) 70%);color:var(--washi);border:1px solid rgba(246,238,217,.2)}
+.btn-indigo:hover{filter:brightness(1.12)}
+.btn-ghost{background:rgba(246,238,217,.08);color:var(--washi);border:1px solid rgba(246,238,217,.25);box-shadow:none}
+.btn-ghost:hover{background:rgba(246,238,217,.15)}
+.icon-btn{width:38px;height:38px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:rgba(246,238,217,.08);border:1px solid rgba(246,238,217,.18);color:var(--washi);transition:background .15s,transform .1s;flex:none}
+.icon-btn:hover{background:rgba(246,238,217,.18)}
+.icon-btn:active{transform:scale(.92)}
+#screen-home{align-items:center;justify-content:center;padding:24px;overflow-y:auto;text-align:center}
+#logoWrap{position:relative;width:190px;height:190px;margin-bottom:6px;flex:none}
+#logoWrap .lt{position:absolute;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fdf7e8,var(--wdeep));color:var(--sumi);font-family:var(--disp);font-weight:700;font-size:23px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(5,10,20,.4),inset 0 -3px 0 rgba(120,95,55,.25);transform:translate(-50%,-50%);animation:lt 6s ease-in-out infinite}
+@keyframes lt{0%,72%,100%{box-shadow:0 3px 8px rgba(5,10,20,.4),inset 0 -3px 0 rgba(120,95,55,.25)}8%,20%{box-shadow:0 0 18px rgba(226,166,61,.85),inset 0 -3px 0 rgba(120,95,55,.25)}}
+#logoSvg{position:absolute;inset:0;width:100%;height:100%}
+#logoSvg .trace{stroke-dasharray:100;stroke-dashoffset:100;animation:ltr 6s ease-in-out infinite}
+@keyframes ltr{0%{stroke-dashoffset:100;opacity:0}6%{opacity:1}30%,72%{stroke-dashoffset:0;opacity:1}86%,100%{opacity:0}}
+h1.logo{font-family:Georgia,var(--disp);font-size:44px;font-weight:700;line-height:1.05;background:linear-gradient(120deg,var(--washi) 20%,var(--kin) 55%,var(--sakura) 90%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 8px rgba(5,10,20,.5))}
+.logo-sub{font-family:var(--disp);font-size:17px;color:var(--kin);letter-spacing:.5em;margin:6px 0 2px;text-indent:.5em}
+.logo-tag{font-size:12.5px;color:rgba(246,238,217,.72);line-height:1.8;margin:10px 0 18px}
+.hanko{display:inline-flex;width:30px;height:30px;background:linear-gradient(140deg,#e05a35,var(--shu2));color:var(--washi);font-family:var(--disp);font-size:17px;font-weight:700;align-items:center;justify-content:center;border-radius:6px;transform:rotate(-6deg);box-shadow:0 2px 6px rgba(5,10,20,.4);vertical-align:-6px;margin-left:8px}
+#homeStats{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.stat-chip{display:flex;align-items:center;gap:7px;background:rgba(18,35,61,.65);border:1px solid rgba(246,238,217,.16);border-radius:99px;padding:7px 14px;font-size:12.5px;color:rgba(246,238,217,.85)}
+.stat-chip b{color:var(--kin);font-size:14px}
+.stat-chip .ic{width:15px;height:15px;color:var(--kin)}
+#homeBtns{display:flex;flex-direction:column;gap:11px;width:min(320px,100%)}
+#homeBtns .btn{width:100%}
+.home-foot{margin-top:20px;font-size:10.5px;color:rgba(246,238,217,.4);letter-spacing:.12em}
+.sel-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(246,238,217,.12);background:rgba(13,23,38,.72);backdrop-filter:blur(8px);flex:none}
+.sel-head h2{font-family:var(--disp);font-size:17px;letter-spacing:.14em;flex:1}
+.sel-prog{padding:12px 16px 4px;flex:none}
+.sel-prog .txt{display:flex;justify-content:space-between;font-size:12px;color:rgba(246,238,217,.75);margin-bottom:6px}
+.sel-prog .txt b{color:var(--kin)}
+.pbar{height:8px;border-radius:99px;background:rgba(18,35,61,.8);border:1px solid rgba(246,238,217,.14);overflow:hidden}
+.pbar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--kin2),var(--kin) 60%,#f4cf7a);transition:width .6s cubic-bezier(.3,.9,.3,1);box-shadow:0 0 10px rgba(226,166,61,.6)}
+#selList{flex:1;min-height:0;overflow-y:auto;padding:8px 16px 16px}
+.band-sec{margin-top:14px}
+.band-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.band-kanji{font-family:var(--disp);font-size:20px;font-weight:700;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--washi);flex:none;transform:rotate(-3deg);box-shadow:0 2px 6px rgba(5,10,20,.4)}
+.band-head .nm{font-family:var(--disp);font-size:15px;letter-spacing:.2em}
+.band-head .ds{font-size:10.5px;color:rgba(246,238,217,.55)}
+.stage-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:7px}
+.stage-btn{position:relative;aspect-ratio:1;border-radius:10px;font-weight:700;font-size:14px;background:rgba(246,238,217,.07);border:1px solid rgba(246,238,217,.18);color:rgba(246,238,217,.85);transition:transform .12s,background .15s,box-shadow .15s}
+.stage-btn:hover{transform:translateY(-2px);background:rgba(246,238,217,.16);box-shadow:0 5px 12px rgba(5,10,20,.35)}
+.stage-btn:active{transform:scale(.93)}
+.stage-btn.cleared{background:linear-gradient(150deg,#e05a35,var(--shu2));border-color:rgba(246,238,217,.35);color:var(--washi)}
+.stage-btn.cleared::after{content:"✓";position:absolute;right:3px;top:1px;font-size:9px;color:var(--kin)}
+.stage-btn.current{box-shadow:0 0 0 2px var(--kin),0 0 14px rgba(226,166,61,.5);animation:cp 2s ease-in-out infinite}
+@keyframes cp{50%{box-shadow:0 0 0 2px var(--kin),0 0 20px rgba(226,166,61,.8)}}
+.sel-foot{flex:none;padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid rgba(246,238,217,.1);background:rgba(13,23,38,.6)}
+.sel-foot .btn{width:100%}
+#gameHeader{display:flex;align-items:center;gap:9px;height:52px;padding:0 10px;flex:none;background:rgba(13,23,38,.78);backdrop-filter:blur(8px);border-bottom:1px solid rgba(246,238,217,.12);position:relative;z-index:6}
+.stage-label{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.stage-label .no{font-family:Georgia,var(--disp);font-size:16px;font-weight:700;white-space:nowrap}
+.band-chip{font-size:10px;padding:3px 9px;border-radius:99px;letter-spacing:.14em;color:var(--washi);white-space:nowrap;font-family:var(--disp)}
+#coinBox{display:flex;align-items:center;gap:6px;background:rgba(18,35,61,.85);border:1px solid rgba(226,166,61,.45);border-radius:99px;padding:5px 12px 5px 8px;font-weight:700;font-size:14px;color:var(--kin);flex:none}
+#coinBox .ic{width:18px;height:18px;color:var(--kin)}
+#coinBox.bump{animation:bump .45s cubic-bezier(.3,1.6,.4,1)}
+#coinBox.shake{animation:shake .4s}
+@keyframes bump{35%{transform:scale(1.22)}}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+#btnSound{position:relative}
+#btnSound .st{position:absolute;bottom:-1px;right:-3px;font-size:8px;background:var(--matsu);color:var(--washi);border-radius:6px;padding:0 4px;line-height:1.5;font-weight:700}
+#btnSound.muted .st{background:var(--sumi2)}
+#gameBody{flex:1;min-height:0;display:flex;flex-direction:column}
+#boardArea{flex:1 1 auto;min-height:104px;display:flex;padding:8px 10px 4px}
+#boardPanel{position:relative;flex:1;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#f8f1de,var(--washi) 40%,var(--wdeep));border-radius:14px 18px 14px 20px;box-shadow:var(--panel),inset 0 0 0 1px var(--wedge),inset 0 0 40px rgba(190,165,115,.25);padding:30px 12px 12px;overflow:hidden}
+#boardPanel::before{content:"";position:absolute;inset:0;opacity:.35;pointer-events:none;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E")}
+#bandStamp{position:absolute;top:7px;right:9px;width:27px;height:27px;border-radius:5px;transform:rotate(5deg);background:linear-gradient(140deg,rgba(224,90,53,.92),rgba(185,58,32,.92));color:var(--washi);font-family:var(--disp);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(90,40,20,.35);opacity:.9}
+#progChip{position:absolute;top:8px;left:10px;display:flex;align-items:center;gap:7px;font-size:11px;color:var(--sumi2);font-weight:700}
+#progChip .pbar{width:64px;height:6px;background:rgba(120,95,55,.2);border-color:rgba(120,95,55,.3)}
+#boardGrid{position:relative;flex:none}
+.cell{position:absolute;border-radius:6px;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#efe4c9,var(--wdeep));box-shadow:inset 0 2px 4px rgba(120,95,55,.3),inset 0 -1px 0 rgba(255,250,235,.7),0 1px 0 rgba(255,250,235,.5);border:1px solid var(--wedge);transition:background .2s,box-shadow .2s;padding:0}
+.cell .ch{font-family:var(--disp);font-weight:700;color:var(--washi);opacity:0;transform:scale(.4);transition:opacity .18s,transform .18s;line-height:1;pointer-events:none}
+.cell.revealed{background:linear-gradient(155deg,var(--i500),var(--i700) 60%,var(--i800));border-color:var(--i300);box-shadow:0 2px 5px rgba(15,30,55,.4),inset 0 1px 0 rgba(246,238,217,.25);cursor:default}
+.cell.revealed .ch{opacity:1;transform:scale(1);text-shadow:0 1px 3px rgba(8,15,30,.6)}
+.cell.pop{animation:cpop .5s cubic-bezier(.3,1.5,.4,1)}
+@keyframes cpop{0%{transform:scale(.6)}45%{transform:scale(1.18);box-shadow:0 0 22px rgba(226,166,61,.95)}100%{transform:scale(1)}}
+.cell.hintmark::after{content:"";position:absolute;top:2px;right:2px;width:5px;height:5px;border-radius:50%;background:var(--kin);box-shadow:0 0 4px rgba(226,166,61,.9)}
+.cell.flash{animation:cfl .65s ease}
+@keyframes cfl{40%{box-shadow:0 0 0 2px var(--kin),0 0 14px rgba(226,166,61,.8)}}
+.cell.targetable{animation:tp 1.1s ease-in-out infinite;cursor:pointer;border:2px dashed var(--kin2)}
+@keyframes tp{50%{box-shadow:inset 0 2px 4px rgba(120,95,55,.3),0 0 12px 3px rgba(226,166,61,.75)}}
+#targetBanner{position:absolute;top:6px;left:50%;transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:8px;background:linear-gradient(140deg,var(--kin),var(--kin2));color:var(--sumi);font-size:11.5px;font-weight:700;border-radius:99px;padding:5px 7px 5px 13px;box-shadow:0 4px 12px rgba(90,60,10,.4);white-space:nowrap}
+#targetBanner button{background:rgba(55,46,34,.85);color:var(--washi);border-radius:99px;font-size:10.5px;padding:3px 10px;font-weight:700}
+#playArea{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:5px;padding:0 10px calc(8px + env(safe-area-inset-bottom));min-height:0}
+#wordStrip{position:relative;width:100%;height:62px;flex:none;display:flex;align-items:center;justify-content:center}
+#stripGuide{font-size:12px;color:rgba(246,238,217,.5);letter-spacing:.16em;display:flex;align-items:center;gap:8px}
+#stripGuide .dot{width:5px;height:5px;border-radius:50%;background:var(--kin);animation:gp 1.8s ease-in-out infinite}
+@keyframes gp{50%{opacity:1;transform:scale(1.2)}}
+#stripChain{display:none;align-items:center;justify-content:center;gap:2px}
+#stripChain .wch{font-family:var(--disp);font-weight:700;font-size:36px;color:var(--washi);line-height:1;text-shadow:0 0 16px rgba(226,166,61,.55),0 2px 4px rgba(5,10,20,.6);animation:win .18s cubic-bezier(.3,1.5,.4,1)}
+@keyframes win{from{transform:translateY(10px) scale(.5);opacity:0}}
+#stripResult{display:none;flex-direction:column;align-items:center;gap:1px;text-align:center}
+#stripResult .main{font-family:var(--disp);font-weight:700;font-size:26px;line-height:1.15}
+#stripResult .sub{font-size:11px;letter-spacing:.06em;opacity:.9}
+#stripResult.good .main,#stripResult.bonus .main{color:var(--kin);text-shadow:0 0 18px rgba(226,166,61,.8)}
+#stripResult.good .sub{color:var(--sakura)}
+#stripResult.bonus .sub{color:var(--washi)}
+#stripResult.miss .main{color:var(--fuji)}
+#stripResult.miss .sub{color:rgba(246,238,217,.62)}
+#stripResult.dup .main{color:var(--fuji)}
+#stripResult.dup .sub{color:rgba(246,238,217,.6)}
+#wordStrip[data-mode=chain] #stripGuide{display:none}
+#wordStrip[data-mode=chain] #stripChain{display:flex}
+#wordStrip[data-mode=result] #stripGuide{display:none}
+#wordStrip[data-mode=result] #stripResult{display:flex}
+#kbdBuf{position:absolute;left:2px;top:50%;transform:translateY(-50%);font-size:11px;font-family:ui-monospace,monospace;background:rgba(18,35,61,.85);border:1px solid rgba(147,169,201,.5);color:var(--fuji);border-radius:7px;padding:3px 8px;letter-spacing:.1em}
+#kbdBuf.err{animation:shake .3s;border-color:var(--shu);color:var(--sakura)}
+#btnSubmitWord{position:absolute;right:2px;top:50%;transform:translateY(-50%);display:none;align-items:center;gap:4px;background:linear-gradient(140deg,var(--matsu),#4c7a44);color:var(--washi);font-size:12px;font-weight:700;border-radius:99px;padding:7px 13px;box-shadow:0 3px 8px rgba(5,10,20,.4);border:1px solid rgba(246,238,217,.3)}
+#btnSubmitWord.on{display:inline-flex}
+#btnSubmitWord:active{transform:translateY(-50%) scale(.93)}
+#wheelWrap{position:relative;flex:none;touch-action:none;margin:0 auto}
+#wheelPlate{position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 8deg,rgba(60,35,15,.12) 0 5deg,rgba(255,220,170,.05) 5deg 11deg),radial-gradient(circle at 34% 28%,var(--wood3),var(--wood) 45%,var(--wood2));box-shadow:0 12px 30px rgba(5,10,20,.55),inset 0 2px 3px rgba(255,225,180,.4),inset 0 -6px 14px rgba(40,20,5,.5),inset 0 0 0 3px rgba(50,28,10,.35);transition:transform .45s cubic-bezier(.3,1.3,.4,1)}
+#wheelPlate::before{content:"";position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle at 40% 32%,#f9f2df,var(--wdeep) 75%);box-shadow:inset 0 3px 10px rgba(120,95,55,.4),inset 0 0 0 1px var(--wedge),0 1px 2px rgba(255,230,190,.35)}
+#wheelPlate.spin{transform:rotate(24deg)}
+#wheelSvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+#tileLayer{position:absolute;inset:0;z-index:2}
+.tile{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0;background:radial-gradient(circle at 32% 26%,#fdf8ea,var(--wdeep) 78%);box-shadow:0 4px 9px rgba(5,10,20,.45),inset 0 -3px 0 rgba(120,95,55,.3),inset 0 1px 0 rgba(255,252,242,.9);border:1px solid var(--wedge);transition:left .45s cubic-bezier(.35,1.25,.4,1),top .45s cubic-bezier(.35,1.25,.4,1),background .15s,box-shadow .15s;transform:translate(-50%,-50%)}
+.tile .tk-in{font-family:var(--disp);font-weight:700;color:var(--sumi);line-height:1;pointer-events:none;animation:tf 3.6s ease-in-out infinite;transition:color .15s}
+@keyframes tf{50%{transform:translateY(-1.6px)}}
+.tile.sel{background:radial-gradient(circle at 34% 28%,var(--i500),var(--i800) 80%);border-color:var(--kin);box-shadow:0 0 0 2px var(--kin),0 0 20px rgba(226,166,61,.75),0 4px 10px rgba(5,10,20,.5)}
+.tile.sel .tk-in{color:var(--washi);animation:none;transform:scale(1.14);text-shadow:0 0 10px rgba(226,166,61,.8)}
+.tile.small-k .tk-in{font-size:.72em;transform:translateY(2px)}
+#wheelWrap.no-anim .tile,#wheelWrap.no-anim #wheelPlate{transition:none}
+#btnShuffle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;border-radius:50%;background:radial-gradient(circle at 34% 28%,var(--i500),var(--i800) 80%);border:2px solid rgba(226,166,61,.65);color:var(--kin);display:flex;align-items:center;justify-content:center;box-shadow:0 5px 14px rgba(5,10,20,.5),inset 0 1px 0 rgba(246,238,217,.3);transition:transform .15s,box-shadow .2s}
+#btnShuffle:hover{box-shadow:0 0 18px rgba(226,166,61,.6),0 5px 14px rgba(5,10,20,.5)}
+#btnShuffle:active{transform:translate(-50%,-50%) scale(.9)}
+#btnShuffle .ic{transition:transform .45s cubic-bezier(.3,1.3,.4,1)}
+#btnShuffle:hover .ic{transform:rotate(180deg)}
+#coach{position:absolute;left:50%;top:-14px;transform:translateX(-50%);z-index:4;pointer-events:none;background:linear-gradient(140deg,var(--kin),var(--kin2));color:var(--sumi);font-size:12px;font-weight:700;padding:7px 14px;border-radius:99px;white-space:nowrap;box-shadow:0 5px 14px rgba(5,10,20,.45);animation:cb 1.6s ease-in-out infinite}
+#coach::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%) rotate(45deg);width:10px;height:10px;background:var(--kin2)}
+@keyframes cb{50%{transform:translateX(-50%) translateY(-5px)}}
+#actionBar{display:flex;gap:7px;justify-content:center;width:100%;flex:none}
+.abtn{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:58px;padding:7px 8px 6px;border-radius:12px;background:rgba(246,238,217,.08);border:1px solid rgba(246,238,217,.18);color:var(--washi);transition:background .15s,transform .1s}
+.abtn:hover{background:rgba(246,238,217,.16)}
+.abtn:active{transform:scale(.92)}
+.abtn .lb{font-size:9.5px;letter-spacing:.08em;font-weight:700;color:rgba(246,238,217,.8)}
+.abtn .ic{width:19px;height:19px}
+.abtn .badge{position:absolute;top:-6px;right:-4px;background:linear-gradient(140deg,var(--kin),var(--kin2));color:var(--sumi);font-size:9px;font-weight:700;border-radius:99px;padding:1px 6px;box-shadow:0 2px 5px rgba(5,10,20,.4);display:flex;align-items:center;gap:2px}
+.abtn .badge .ic{width:9px;height:9px}
+#btnHint .ic{color:var(--kin)}#btnBonus .ic{color:var(--sakura)}#btnRetry .ic{color:var(--fuji)}#btnKbd .ic{color:var(--fuji)}#btnHelp2 .ic{color:var(--matsu)}
+@media(pointer:coarse){#btnKbd{display:none}}
+#kbdInput{position:absolute;bottom:0;left:0;width:2px;height:2px;opacity:0;border:none;font-size:16px;pointer-events:none}
+#hintPop{position:fixed;z-index:56;width:230px;background:linear-gradient(165deg,#f8f1de,var(--wdeep));color:var(--sumi);border-radius:14px;box-shadow:0 14px 36px rgba(5,10,20,.6),inset 0 0 0 1px var(--wedge);padding:12px;animation:pi .22s cubic-bezier(.3,1.4,.4,1)}
+@keyframes pi{from{transform:translateY(8px) scale(.92);opacity:0}}
+#hintPop h3{font-family:var(--disp);font-size:13px;letter-spacing:.14em;margin-bottom:8px;color:var(--sumi2)}
+.hint-opt{display:flex;align-items:center;gap:9px;width:100%;padding:9px 10px;border-radius:10px;margin-top:6px;background:rgba(36,70,111,.1);border:1px solid rgba(36,70,111,.25);transition:background .15s,transform .1s;text-align:left}
+.hint-opt:hover:not(:disabled){background:rgba(36,70,111,.2)}
+.hint-opt:active:not(:disabled){transform:scale(.97)}
+.hint-opt:disabled{opacity:.45;cursor:not-allowed}
+.hint-opt .ic{color:var(--i700)}
+.hint-opt .tt{flex:1;font-size:12.5px;font-weight:700;color:var(--sumi)}
+.hint-opt .tt small{display:block;font-weight:400;font-size:10px;color:var(--sumi2)}
+.hint-opt .cost{display:flex;align-items:center;gap:3px;font-size:12px;font-weight:700;color:var(--kin2)}
+.hint-opt .cost .ic{width:13px;height:13px;color:var(--kin2)}
+#scrim{position:fixed;inset:0;z-index:50;background:var(--scrim);backdrop-filter:blur(3px);animation:fi .25s}
+@keyframes fi{from{opacity:0}}
+#bonusDrawer{position:fixed;left:50%;bottom:0;transform:translateX(-50%);z-index:55;width:min(520px,100vw);max-height:68dvh;display:flex;flex-direction:column;background:linear-gradient(170deg,#f8f1de,var(--wdeep));color:var(--sumi);border-radius:20px 20px 0 0;box-shadow:0 -12px 40px rgba(5,10,20,.6),inset 0 0 0 1px var(--wedge);animation:su .32s cubic-bezier(.3,1.1,.4,1)}
+@keyframes su{from{transform:translateX(-50%) translateY(60px);opacity:0}}
+.drawer-head{display:flex;align-items:center;gap:9px;padding:15px 16px 10px;border-bottom:1px dashed var(--wdim)}
+.drawer-head h3{font-family:var(--disp);font-size:16px;letter-spacing:.14em;flex:1}
+.drawer-head .cnt{background:linear-gradient(140deg,var(--kin),var(--kin2));color:var(--sumi);font-size:11px;font-weight:700;border-radius:99px;padding:2px 10px}
+.drawer-head .icon-btn{background:rgba(36,70,111,.12);border-color:rgba(36,70,111,.3);color:var(--sumi)}
+#bonusList{flex:1;min-height:0;overflow-y:auto;padding:10px 16px}
+.bonus-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;background:rgba(255,252,242,.6);border:1px solid var(--wedge);margin-bottom:7px;animation:pi .25s}
+.bonus-item .w{font-family:var(--disp);font-weight:700;font-size:18px;flex:1}
+.bonus-item .c{font-size:10.5px;color:var(--sumi2);background:rgba(120,95,55,.12);border-radius:99px;padding:2px 9px}
+.bonus-item .g{display:flex;align-items:center;gap:3px;color:var(--kin2);font-weight:700;font-size:12px}
+.bonus-item .g .ic{width:13px;height:13px}
+#bonusEmpty{padding:26px 20px;text-align:center;color:var(--sumi2);font-size:12.5px;line-height:1.9}
+#bonusEmpty .ic{width:44px;height:44px;color:var(--wdim);margin:0 auto 8px}
+.drawer-foot{padding:10px 16px calc(14px + env(safe-area-inset-bottom));font-size:11px;color:var(--sumi2);text-align:center;border-top:1px dashed var(--wdim)}
+#helpModal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:55;width:min(460px,calc(100vw - 28px));max-height:84dvh;display:flex;flex-direction:column;background:linear-gradient(170deg,#f8f1de,var(--wdeep));color:var(--sumi);border-radius:18px;box-shadow:0 20px 60px rgba(5,10,20,.7),inset 0 0 0 1px var(--wedge);animation:pi .28s cubic-bezier(.3,1.3,.4,1)}
+.help-head{display:flex;align-items:center;padding:15px 16px 10px;border-bottom:1px dashed var(--wdim)}
+.help-head h3{font-family:var(--disp);font-size:17px;letter-spacing:.2em;flex:1}
+.help-head .icon-btn{background:rgba(36,70,111,.12);border-color:rgba(36,70,111,.3);color:var(--sumi)}
+.help-body{flex:1;min-height:0;overflow-y:auto;padding:14px 18px}
+.help-step{display:flex;gap:13px;margin-bottom:15px;align-items:flex-start}
+.help-step .no{flex:none;width:26px;height:26px;border-radius:50%;background:linear-gradient(140deg,var(--i500),var(--i800));color:var(--washi);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;font-family:Georgia,serif}
+.help-step h4{font-size:13.5px;margin-bottom:3px;color:var(--i800)}
+.help-step p{font-size:12px;line-height:1.85;color:var(--sumi2)}
+.help-step p b{color:var(--shu2)}
+.help-fig{flex:none;width:74px;height:74px;background:rgba(36,70,111,.07);border-radius:12px;border:1px solid var(--wedge)}
+.help-keys{background:rgba(36,70,111,.08);border:1px solid rgba(36,70,111,.2);border-radius:12px;padding:11px 13px;margin-bottom:13px}
+.help-keys h4{font-size:12px;color:var(--i800);margin-bottom:7px;letter-spacing:.1em}
+.help-keys table{width:100%;border-collapse:collapse;font-size:11.5px;color:var(--sumi2)}
+.help-keys td{padding:3px 0}
+.help-keys td:first-child{width:118px;font-weight:700;color:var(--sumi)}
+kbd{background:var(--i800);color:var(--washi);border-radius:5px;padding:1px 7px;font-size:10.5px;font-family:ui-monospace,monospace}
+.help-note{font-size:11px;color:var(--sumi2);line-height:1.9;border-top:1px dashed var(--wdim);padding-top:10px}
+.help-foot{padding:11px 16px 15px}
+.help-foot .btn{width:100%}
+#clearBackdrop{position:fixed;inset:0;z-index:60;background:rgba(9,14,25,.72);backdrop-filter:blur(4px);animation:fi .4s}
+#fx{position:fixed;inset:0;z-index:61;pointer-events:none}
+#clearOverlay{position:fixed;inset:0;z-index:62;display:flex;align-items:center;justify-content:center;padding:18px;pointer-events:none}
+#clearPanel{pointer-events:auto;width:min(420px,100%);max-height:88dvh;display:flex;flex-direction:column;background:linear-gradient(168deg,#f9f2e0,var(--washi) 45%,var(--wdeep));color:var(--sumi);border-radius:18px;box-shadow:0 24px 70px rgba(3,6,12,.8),inset 0 0 0 1px var(--wedge),inset 0 0 50px rgba(190,165,115,.25);padding:20px 20px 16px;position:relative;animation:pan .55s cubic-bezier(.25,1.35,.4,1)}
+@keyframes pan{from{transform:translateY(46px) scale(.86);opacity:0}}
+#clrStamp{position:absolute;top:-16px;right:16px;width:52px;height:52px;border-radius:10px;transform:rotate(8deg);background:linear-gradient(140deg,#e05a35,var(--shu2));color:var(--washi);font-family:var(--disp);font-weight:700;font-size:30px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(90,30,10,.5);animation:sti .6s cubic-bezier(.3,1.6,.4,1) .25s backwards}
+@keyframes sti{from{transform:rotate(-30deg) scale(2.6);opacity:0}}
+#clrTitle{font-family:var(--disp);font-size:26px;font-weight:700;letter-spacing:.1em;color:var(--shu2);text-align:center}
+#clrStage{text-align:center;font-size:12px;color:var(--sumi2);letter-spacing:.2em;margin:3px 0 12px}
+#clrAll{display:none;text-align:center;background:linear-gradient(120deg,var(--kin),#f4cf7a,var(--kin));border-radius:12px;padding:10px;font-weight:700;font-size:14px;color:var(--sumi);margin-bottom:11px;box-shadow:0 4px 12px rgba(150,100,20,.35)}
+#clrAll small{display:block;font-size:10.5px;font-weight:400;margin-top:2px}
+#clrWords{flex:1;min-height:52px;max-height:180px;overflow-y:auto;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;padding:10px;background:rgba(36,70,111,.06);border-radius:12px;border:1px solid var(--wedge);margin-bottom:11px}
+.clr-word{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(150deg,var(--i500),var(--i800));color:var(--washi);border-radius:99px;padding:4px 11px;font-family:var(--disp);font-weight:700;font-size:14px;animation:pi .3s backwards}
+.clr-word small{font-family:var(--body);font-weight:400;font-size:10px;opacity:.85}
+.clr-rows{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.clr-row{display:flex;align-items:center;font-size:12.5px;color:var(--sumi2);gap:7px}
+.clr-row .ic{width:15px;height:15px;color:var(--kin2)}
+.clr-row b{margin-left:auto;color:var(--kin2);font-size:14px}
+.clr-row span.hl{color:var(--sumi);font-weight:700}
+#clearBtns{display:flex;flex-direction:column;gap:8px}
+#clearBtns .duo{display:flex;gap:8px}
+#clearBtns .duo .btn{flex:1;padding:11px 8px;font-size:12.5px}
+#btnNext{font-size:16px;padding:14px}
+#toast{position:absolute;top:60px;left:50%;transform:translateX(-50%);z-index:58;display:flex;align-items:center;gap:8px;background:rgba(13,23,38,.92);border:1px solid rgba(246,238,217,.25);color:var(--washi);font-size:12.5px;font-weight:700;border-radius:99px;padding:9px 17px;box-shadow:0 8px 22px rgba(5,10,20,.55);white-space:nowrap;max-width:94%;animation:ti .3s cubic-bezier(.3,1.3,.4,1)}
+#toast .ic{width:16px;height:16px}
+#toast.gold{border-color:rgba(226,166,61,.6)}#toast.gold .ic{color:var(--kin)}
+#toast.err{border-color:rgba(217,72,43,.7)}#toast.err .ic{color:var(--sakura)}
+#toast.info .ic{color:var(--fuji)}
+@keyframes ti{from{transform:translateX(-50%) translateY(-12px);opacity:0}}
+#flyLayer{position:fixed;inset:0;z-index:40;pointer-events:none}
+.fly-wrap{position:fixed;left:0;top:0;will-change:transform}
+.fly-kana{position:absolute;left:0;top:0;transform:translate(-50%,-50%);font-family:var(--disp);font-weight:700;color:var(--kin);text-shadow:0 0 14px rgba(226,166,61,.9),0 2px 4px rgba(5,10,20,.6);line-height:1;white-space:nowrap}
+.fly-coin{position:absolute;left:0;top:0;transform:translate(-50%,-50%);color:var(--kin);filter:drop-shadow(0 0 8px rgba(226,166,61,.9))}
+.fly-coin .ic{width:22px;height:22px}
+@media(orientation:landscape) and (max-height:540px){
+ #app{width:min(100vw,900px)}
+ #gameBody{flex-direction:row}
+ #boardArea{flex:1 1 55%;min-width:0;padding:8px 6px 8px 10px}
+ #playArea{flex:0 0 45%;max-width:400px;justify-content:center;padding:4px 10px 6px 4px;height:100%}
+ #wordStrip{height:46px}#stripChain .wch{font-size:28px}#stripResult .main{font-size:20px}
+ #coach{top:-8px;font-size:11px}.abtn{min-width:50px;padding:5px 6px 4px}
+}
+@media(max-height:640px) and (orientation:portrait){#wordStrip{height:52px}#stripChain .wch{font-size:30px}#gameHeader{height:46px}}
+@media(prefers-reduced-motion:reduce){#bg .petal,#bg .orb,.tile .tk-in,#coach{animation:none}*{transition-duration:.01s!important}}
+</style>
+</head>
+<body data-screen="home">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5M6.5 10v9h11v-9M10 19v-5h4v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/><circle cx="12" cy="12" r="9" fill="none" stroke="rgba(60,40,5,.5)" stroke-width="1.4"/><rect x="9.2" y="9.2" width="5.6" height="5.6" fill="var(--i900)"/><path d="M5.5 8a8 8 0 0 1 3-3" stroke="rgba(255,250,230,.8)" stroke-width="1.4" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="i-snd" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l5 5m0-5l-5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.3-1.5 2.1h-4c0-.8-.7-1.5-1.5-2.1A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 19h4m-3.4 2.5h2.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 7c-4.5 0-5.5-4-3-4.5S12 7 12 7zm0 0c4.5 0 5.5-4 3-4.5S12 7 12 7z" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="i-kbd" viewBox="0 0 24 24"><rect x="3" y="6.5" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M6.5 13h.01M17 13h.01M9 14.5h6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19 12a7 7 0 1 1-2-4.9M17.5 3.5v4h-4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M3 7h3.5c5.5 0 8 10 13.5 10M3 17h3.5c2.2 0 3.8-1.6 5.2-3.5M14.8 10.5C16.2 8.6 17.8 7 20 7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M17.5 4.5 20.5 7l-3 2.5M17.5 14.5l3 2.5-3 2.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h13m-5-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H6m5-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="9" cy="9" r="1.4" fill="currentColor"/><circle cx="15" cy="15" r="1.4" fill="currentColor"/><circle cx="15" cy="9" r="1.4" fill="currentColor"/><circle cx="9" cy="15" r="1.4" fill="currentColor"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-2-1.6-5-1.8-8-1v13c3-.8 6-.6 8 1 2-1.6 5-1.8 8-1V5c-3-.8-6-.6-8 1zm0 0v13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.8 6.2L20 11l-6.2 1.8L12 19l-1.8-6.2L4 11l6.2-1.8z" fill="currentColor"/><circle cx="19" cy="5" r="1.5" fill="currentColor"/><circle cx="5" cy="18" r="1.2" fill="currentColor"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.8v14.4L19 12z" fill="currentColor"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9.4 9.2a2.7 2.7 0 1 1 3.9 2.6c-.9.5-1.3 1-1.3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="17" r="1.15" fill="currentColor"/></symbol>
+</defs></svg>
+
+<div id="bg" aria-hidden="true"><div class="pattern"></div><div class="grain"></div><div class="orb a"></div><div class="orb b"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div>
+<div class="tategaki" id="sideL">ことばをむすぶ、たのしみ。</div>
+<div class="tategaki" id="sideR">ひらがなワードパズル・全百ステージ</div>
+
+<main id="app">
+<section id="screen-home" class="screen scroll">
+ <div id="logoWrap" aria-hidden="true">
+  <svg id="logoSvg" viewBox="0 0 190 190"><defs><linearGradient id="lgLogo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2a63d"/><stop offset="1" stop-color="#d9482b"/></linearGradient><filter id="glowLogo" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="95" cy="95" r="76" fill="none" stroke="rgba(246,238,217,.14)" stroke-width="1.5" stroke-dasharray="3 6"/><polyline class="trace" points="95,26 160,74 135,150" pathLength="100" fill="none" stroke="url(#lgLogo)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#glowLogo)"/></svg>
+  <div class="lt" style="left:95px;top:26px">こ</div><div class="lt" style="left:160px;top:74px;animation-delay:.55s">と</div><div class="lt" style="left:135px;top:150px;animation-delay:1.1s">ば</div><div class="lt" style="left:55px;top:150px;animation-delay:2s">む</div><div class="lt" style="left:30px;top:74px;animation-delay:2.6s">す</div>
+ </div>
+ <h1 class="logo">Word Link<span class="hanko">結</span></h1>
+ <div class="logo-sub">ことば結び</div>
+ <p class="logo-tag">ひらがなをなぞって、ことばをむすぶ。<br>毎回ちがう盤面で、全100ステージの旅に出よう。</p>
+ <div id="homeStats">
+  <div class="stat-chip"><svg class="ic"><use href="#i-check"/></svg>クリア <b id="stClear">0</b>/100</div>
+  <div class="stat-chip"><svg class="ic"><use href="#i-coin"/></svg>コイン <b id="stCoin">30</b></div>
+  <div class="stat-chip"><svg class="ic" style="color:var(--fuji)"><use href="#i-book"/></svg>辞書 <b id="stDict">0</b>語</div>
+ </div>
+ <div id="homeBtns">
+  <button class="btn btn-primary" id="btnContinue"><svg class="ic"><use href="#i-play"/></svg><span id="contLabel">はじめる ・ ステージ 1</span></button>
+  <button class="btn btn-indigo" id="btnSelect"><svg class="ic"><use href="#i-book"/></svg>ステージを えらぶ</button>
+  <button class="btn btn-ghost" id="btnHelp"><svg class="ic"><use href="#i-help"/></svg>あそびかた</button>
+ </div>
+ <div class="home-foot">WORD LINK ― ことば結び ／ 進行は自動保存・オフライン対応</div>
+</section>
+
+<section id="screen-select" class="screen hidden">
+ <div class="sel-head"><button class="icon-btn" id="selBack" aria-label="ホームへ"><svg class="ic"><use href="#i-back"/></svg></button><h2>ステージを えらぶ</h2><div style="display:flex;align-items:center;gap:5px;color:var(--kin);font-weight:700;font-size:13px"><svg class="ic" style="width:16px;height:16px"><use href="#i-coin"/></svg><span id="selCoins">0</span></div></div>
+ <div class="sel-prog"><div class="txt"><span>制覇の あゆみ</span><span><b id="selProgText">0 / 100</b> クリア</span></div><div class="pbar"><i id="selProgFill" style="width:0%"></i></div></div>
+ <div id="selList" class="scroll"></div>
+ <div class="sel-foot"><button class="btn btn-indigo" id="btnRandomSel"><svg class="ic"><use href="#i-dice"/></svg>おまかせで あそぶ</button></div>
+</section>
+
+<section id="screen-game" class="screen hidden">
+ <header id="gameHeader">
+  <button class="icon-btn" id="btnHome" aria-label="ホームへ"><svg class="ic"><use href="#i-home"/></svg></button>
+  <div class="stage-label"><span class="no" id="stageNum">STAGE 1</span><span class="band-chip" id="bandChip">序・はじまり</span></div>
+  <div id="coinBox"><svg class="ic"><use href="#i-coin"/></svg><span id="coinVal">0</span></div>
+  <button class="icon-btn" id="btnSound" aria-label="サウンド切替" aria-pressed="true"><svg class="ic" id="sndOnIc"><use href="#i-snd"/></svg><svg class="ic hidden" id="sndOffIc"><use href="#i-mute"/></svg><span class="st" id="sndState">音</span></button>
+ </header>
+ <div id="gameBody">
+  <div id="boardArea"><div id="boardPanel">
+   <div id="progChip"><span id="progText">0 / 3 語</span><span class="pbar"><i id="progFill" style="width:0%"></i></span></div>
+   <div id="bandStamp">序</div>
+   <div id="targetBanner" class="hidden">開きたいマスを タップ！<button id="btnTargetCancel">やめる</button></div>
+   <div id="boardGrid"></div>
+  </div></div>
+  <div id="playArea">
+   <div id="wordStrip" data-mode="guide">
+    <div id="stripGuide"><span class="dot"></span>ひらがなを なぞって ことばを つくろう<span class="dot" style="animation-delay:.9s"></span></div>
+    <div id="stripChain" aria-live="polite"></div>
+    <div id="stripResult" aria-live="polite"><div class="main"></div><div class="sub"></div></div>
+    <div id="kbdBuf" class="hidden"></div>
+    <button id="btnSubmitWord"><svg class="ic" style="width:13px;height:13px"><use href="#i-check"/></svg>決定</button>
+   </div>
+   <div id="wheelWrap">
+    <div id="wheelPlate"></div>
+    <svg id="wheelSvg" aria-hidden="true"><defs><linearGradient id="lgLine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2a63d"/><stop offset=".6" stop-color="#e0763a"/><stop offset="1" stop-color="#d9482b"/></linearGradient><filter id="glowLine" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glowLine)"><polyline id="lineMain" points="" fill="none" stroke="url(#lgLine)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".92"/><line id="lineLive" x1="0" y1="0" x2="0" y2="0" stroke="url(#lgLine)" stroke-width="12" stroke-linecap="round" opacity=".7" visibility="hidden"/></g><circle id="liveDot" r="7" fill="#f4cf7a" filter="url(#glowLine)" visibility="hidden"/></svg>
+    <div id="tileLayer"></div>
+    <button id="btnShuffle" aria-label="文字をシャッフル"><svg class="ic"><use href="#i-shuffle"/></svg></button>
+    <div id="coach" class="hidden">ひらがなを なぞってみよう！</div>
+   </div>
+   <div id="actionBar">
+    <button class="abtn" id="btnHint"><svg class="ic"><use href="#i-bulb"/></svg><span class="lb">ヒント</span><span class="badge"><svg class="ic"><use href="#i-coin"/></svg>10〜</span></button>
+    <button class="abtn" id="btnBonus"><svg class="ic"><use href="#i-gift"/></svg><span class="lb">ボーナス</span><span class="badge" id="bonusCount">0</span></button>
+    <button class="abtn" id="btnHelp2"><svg class="ic"><use href="#i-help"/></svg><span class="lb">あそびかた</span></button>
+    <button class="abtn" id="btnKbd"><svg class="ic"><use href="#i-kbd"/></svg><span class="lb">キー入力</span></button>
+    <button class="abtn" id="btnRetry"><svg class="ic"><use href="#i-refresh"/></svg><span class="lb">作りかえ</span></button>
+   </div>
+  </div>
+ </div>
+ <input id="kbdInput" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="ひらがな入力">
+</section>
+<div id="toast" class="hidden" role="status"></div>
+</main>
+
+<div id="hintPop" class="hidden"><h3>ヒント ― 1マス開く</h3>
+ <button class="hint-opt" id="btnHintRandom"><svg class="ic"><use href="#i-bulb"/></svg><span class="tt">おまかせ 1マス<small>どこかの空きマスが開く</small></span><span class="cost"><svg class="ic"><use href="#i-coin"/></svg>10</span></button>
+ <button class="hint-opt" id="btnHintPick"><svg class="ic"><use href="#i-target"/></svg><span class="tt">マスを選んで開く<small>開きたいマスを自分でタップ</small></span><span class="cost"><svg class="ic"><use href="#i-coin"/></svg>15</span></button>
+</div>
+<div id="scrim" class="hidden"></div>
+<aside id="bonusDrawer" class="hidden" aria-label="ボーナス単語">
+ <div class="drawer-head"><svg class="ic" style="color:var(--beni)"><use href="#i-gift"/></svg><h3>ボーナス単語</h3><span class="cnt" id="drawerCount">0語</span><button class="icon-btn" id="btnDrawerClose" aria-label="閉じる"><svg class="ic"><use href="#i-x"/></svg></button></div>
+ <div id="bonusList" class="scroll"></div>
+ <div id="bonusEmpty" class="hidden"><svg class="ic"><use href="#i-coin"/></svg>まだ ありません。<br>盤面にない ことばを 見つけると<br><b style="color:var(--kin2)">+2コイン</b> が もらえます！</div>
+ <div class="drawer-foot">このステージで集めたボーナスは保存されます</div>
+</aside>
+<div id="helpModal" class="hidden" role="dialog" aria-label="あそびかた">
+ <div class="help-head"><h3>あそびかた</h3><button class="icon-btn" id="btnHelpClose" aria-label="閉じる"><svg class="ic"><use href="#i-x"/></svg></button></div>
+ <div class="help-body scroll">
+  <div class="help-step"><span class="no">1</span><svg class="help-fig" viewBox="0 0 74 74"><circle cx="37" cy="37" r="28" fill="none" stroke="#8a5a33" stroke-width="5"/><polyline points="37,13 61,44 22,58" fill="none" stroke="#e2a63d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="37" cy="13" r="8" fill="#f6eed9" stroke="#d8c8a4"/><circle cx="61" cy="44" r="8" fill="#24466f"/><circle cx="22" cy="58" r="8" fill="#24466f"/><text x="37" y="17" font-size="9" text-anchor="middle" fill="#372e22" font-weight="bold">か</text><text x="61" y="48" font-size="9" text-anchor="middle" fill="#f6eed9" font-weight="bold">さ</text></svg><div><h4>ホイールを なぞる</h4><p>円形のひらがなを<b>ドラッグ／タッチで一筆書き</b>につなぎます。指を離すと判定！ PCでは<b>クリックで順番に選ぶ</b>・<b>ローマ字／ひらがな入力</b>も使えます。</p></div></div>
+  <div class="help-step"><span class="no">2</span><svg class="help-fig" viewBox="0 0 74 74"><rect x="10" y="14" width="16" height="16" rx="3" fill="#24466f"/><rect x="28" y="14" width="16" height="16" rx="3" fill="#ece0c4" stroke="#d8c8a4"/><rect x="10" y="32" width="16" height="16" rx="3" fill="#ece0c4" stroke="#d8c8a4"/><rect x="10" y="50" width="16" height="16" rx="3" fill="#24466f"/><text x="18" y="26" font-size="10" text-anchor="middle" fill="#f6eed9" font-weight="bold">か</text><text x="18" y="62" font-size="10" text-anchor="middle" fill="#f6eed9" font-weight="bold">い</text></svg><div><h4>クロスワードを 埋める</h4><p>正解のことばは、文字が<b>盤面のマスに飛び込んで</b>埋まります。すべてのことばを埋めると<b>ステージクリア</b>！ 空マスをタップすると、その単語の形が光ってヒントになります。</p></div></div>
+  <div class="help-step"><span class="no">3</span><svg class="help-fig" viewBox="0 0 74 74"><circle cx="30" cy="34" r="15" fill="#e2a63d"/><rect x="25" y="29" width="10" height="10" fill="#16283f"/><circle cx="48" cy="46" r="12" fill="#c68a24"/><rect x="44" y="42" width="8" height="8" fill="#16283f"/><path d="M52 18l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#e8a9b8"/></svg><div><h4>ボーナスと ヒント</h4><p>盤面にない収録語は<b>「ボーナス単語」+2コイン</b>。クリアで<b>+15コイン</b>。コインで<b>ヒント（おまかせ10／指定15）</b>が使えます。ホイール中央で<b>シャッフル</b>！</p></div></div>
+  <div class="help-keys"><h4>キーボード操作（PC）</h4><table>
+   <tr><td>ローマ字 / かな</td><td>そのままタイプ（例: <kbd>r</kbd><kbd>i</kbd><kbd>n</kbd><kbd>g</kbd><kbd>o</kbd> → りんご）</td></tr>
+   <tr><td><kbd>Enter</kbd> / <kbd>Space</kbd></td><td>ことばを決定（末尾の <kbd>n</kbd> は「ん」に変換）</td></tr>
+   <tr><td><kbd>Backspace</kbd></td><td>1文字 もどる</td></tr>
+   <tr><td><kbd>Esc</kbd></td><td>入力・選択をクリア／パネルを閉じる</td></tr>
+  </table></div>
+  <p class="help-note">内蔵辞書：<b id="dictCount">0</b>語（食べ物・動物・自然・乗り物・感情・日用品・季節・動作・学び・仕事・遊び・時間・場所・色ほか、ひらがな2〜5文字）。<br>判定はこの内蔵辞書にもとづきます。<b>実在する言葉でも、辞書に収録されていない場合は成立しないことがあります。</b><br>盤面は毎回ランダム生成。「作りかえ」で新しい単語セットに変わります。進行とコインは端末に自動保存。効果音は右上のスピーカーで消音できます。</p>
+ </div>
+ <div class="help-foot"><button class="btn btn-primary" id="btnHelpOk">わかった！</button></div>
+</div>
+<div id="clearBackdrop" class="hidden"></div>
+<canvas id="fx"></canvas>
+<div id="clearOverlay" class="hidden"><div id="clearPanel">
+ <div id="clrStamp">完</div><div id="clrTitle">ステージクリア！</div><div id="clrStage">STAGE 1 ・ 序</div>
+ <div id="clrAll">🎉 全100ステージ制覇！<small>称号「ことばの達人」を獲得しました</small></div>
+ <div id="clrWords" class="scroll"></div>
+ <div class="clr-rows"><div class="clr-row"><svg class="ic"><use href="#i-coin"/></svg><span class="hl">クリア報酬</span><b>+15</b></div><div class="clr-row"><svg class="ic" style="color:var(--beni)"><use href="#i-gift"/></svg>ボーナス単語（このステージ）<b id="clrBonus">0語</b></div><div class="clr-row"><svg class="ic" style="color:var(--i500)"><use href="#i-bulb"/></svg>ヒント使用<b id="clrHints" style="color:var(--sumi2)">0回</b></div></div>
+ <div id="clearBtns"><button class="btn btn-primary" id="btnNext"><svg class="ic"><use href="#i-next"/></svg><span id="nextLabel">次のステージへ</span></button><div class="duo"><button class="btn btn-ghost" id="btnReplay" style="color:var(--sumi);border-color:var(--wdim)"><svg class="ic"><use href="#i-refresh"/></svg>新しい単語でもう一度</button><button class="btn btn-indigo" id="btnToSelect"><svg class="ic"><use href="#i-book"/></svg>ステージ一覧</button></div></div>
+</div></div>
+<div id="flyLayer" aria-hidden="true"></div>
+<noscript><div style="position:fixed;inset:0;background:#12233d;color:#f6eed9;display:flex;align-items:center;justify-content:center;z-index:99;font-family:sans-serif">JavaScript を有効にしてください</div></noscript>
+
+<script>
+(function(){"use strict";
+const $=id=>document.getElementById(id),clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),pick=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>{const r=a.slice();for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;},wchoice=(arr,w)=>{let t=0;for(const x of w)t+=x;let r=Math.random()*t;for(let i=0;i<arr.length;i++){r-=w[i];if(r<=0)return arr[i];}return arr[arr.length-1];},key=(r,c)=>r+","+c,RM=matchMedia("(prefers-reduced-motion: reduce)").matches,vib=p=>{try{navigator.vibrate&&navigator.vibrate(p);}catch(e){}};
+
+/* ===== 大幅増補ひらがな辞書 ===== */
+const RAW = {
+  "自然": `そら うみ やま かわ いけ たき もり はやし くさ はな つち いし すな ゆき あめ かぜ くも かみなり にじ ひかり かげ ほし つき よる あさ ひる ゆうひ あさひ たいよう ちきゅう ほしぞら あおぞら きたかぜ はるさめ つゆ かすみ きり しも こおり あられ みぞれ たつまき じしん かざん ふんか なみ すなはま かいがん みさき しま たに のはら そうげん さばく さぼてん きのこ たけのこ わらび すぎ まつ けやき さくら うめ もみじ いちょう すいせん あさがお ひまわり ばら ゆり すみれ きく はす つばき ふじ なでしこ ゆうやけ あけぼの たそがれ よぞら こもれび かげろう しずく みなも うずしお あさつゆ はるがすみ あきばれ こさめ にわかあめ ゆうだち そよかぜ やまびこ こだま いずみ わきみず ぬまち みずたまり みかづき まんげつ しんげつ はんげつ ながれぼし ゆうぐも あまぐも いわやま すなやま あかまつ くろまつ やまざくら のばら のあざみ わすれぐさ よもぎ すぎな つくし ぜにこけ みずごけ かいそう もずく てんぐさ ひじき あおさ おがわ せせらぎ とうげ ふもと さんがく へいや ぼんち こうげん はんとう わん どうくつ しょうにゅうどう ひょうざん りゅうひょう おーろら ぎんが うちゅう わくせい いんせき つなみ こうずい たいふう ぼうふう どしゃぶり こなゆき ぼたんゆき ひょう つらら しもばしら ありじごく わかば しんりょく こうよう おちば かれは たんぽぽ ちゅーりっぷ こすもす あじさい はなしょうぶ かきつばた れんげ しゃくなげ つつじ まんじゅしゃげ ひがんばな きんもくせい ぎんもくせい さざんか ぼたん しゃくやく らん あやめ せり なずな ごぎょう はこべら ほとけのざ すずな すずしろ ぜんまい ふきのとう みょうが たらのめ やまぶき まつばら たけやぶ ぞうきばやし みつりん じゃんぐる おあしす ほたるぶくろ おみなえし すすき はぎ くず ききょう なのはな れんげそう しろつめくさ あかつめくさ おおじか さんちょう ちへいせん すいへいせん ゆうなぎ あさなぎ しおかぜ みなみかぜ にしかぜ ひがしかぜ こがらし はるいちばん つむじかぜ うろこぐも いわしぐも ひつじぐも にゅうどうぐも むらさめ しまかぜ いわば かわら かわず ほたる せみ くもす はちのす ありづか きりかぶ ふたば めばえ つぼみ かじつ みのり とうげみち やまみち もりかげ ひなた ひかげ あおぞら そよぎ ゆらぎ さざなみ おおなみ うねり かわむこう たいがん さんがい かりん びわのはな さるすべり ざくろばな つつじばな`,
+
+  "食べ物": `ごはん たまご りんご みかん ぶどう なし かき いちご すいか れもん そば うどん やさい くだもの さかな とうふ みそ しお さとう すし てんぷら おにぎり やきにく ぷりん だんご もち せんべい さらだ みそしる ちゃわん おちゃ こうちゃ むぎ こめ まめ ねぎ なす きゅうり だいこん はくさい きゃべつ じゃがいも さつまいも かぼちゃ おかし ちょこ あめ びすけっと やきそば たこやき のり わかめ こんぶ かつお まぐろ さば あじ いわし たら うなぎ えび かに たこ いか ほたて うに いくら めんたいこ なっとう あずき くり ゆず びわ みるく じゃむ ぱん ぴざ ぞうに おせち ちまき かしわもち さくらもち だいふく ようかん ぜんざい しるこ おしるこ わがし かりんとう ぽてと はむ やきいも やきとり からあげ とんかつ ころっけ ぐらたん おむらいす ぎょうざ しゅうまい ちくわ かまぼこ さつまあげ がんもどき ゆどうふ きなこ あおのり つけもの ぬかづけ たくあん うめぼし ふりかけ おかず べんとう おやつ しょくぱん はちみつ かんづめ しじみ はまぐり あさり しじみじる かきごおり すましじる おすまし にこごり てんぷらそば つきみそば たぬきそば きつねうどん とんこつ みそらーめん みそにこみ かれーらいす はやしらいす どらいかれー ちらしずし いなりずし まきずし てまりずし おこわ せきはん かやくごはん たけごはん まつたけ しめじ えのき えりんぎ なめこ まいたけ しいたけ さんしょう こしょう からし わさび しょうゆ みりん す しおこうじ てんさいとう さんおんとう こくとう しろみつ くろみつ ゆずちゃ しょうがちゃ あまざけ どぶろく おさけ にほんしゅ しょうちゅう うめしゅ ゆずしゅ もも めろん ばなな ぱいなっぷる まんごー きうい さくらんぼ ぶるーべりー らずべりー ざくろ いちじく ぱぱいや あぼかど とまと ぴーまん にんじん たまねぎ ほうれんそう こまつな れたす ぶろっこりー かりふらわー あすぱらがす せろり ぱせり しそ みょうが しょうが にんにく れんこん ごぼう さといも やまいも ながいも えだまめ そらまめ いんげん とうもろこし おくら ずっきーに ごーや とうがん むしぱん あんぱん めろんぱん くりーむぱん じゃむぱん かれーぱん ちょこころね くろわっさん ばげっと ろーるぱん さんどいっち ほっとどっぐ はんばーがー ぱすた すぱげてぃ ぴらふ どりあ りぞっと おむれつ めだまやき ゆでたまご だし巻き ちゃわんむし すきやき しゃぶしゃぶ おでん もつなべ ちゃんこなべ よせなべ ぶたじる とんじる けんちんじる ぽたーじゅ しちゅー はんばーぐ すてーき しょうがやき にくじゃが きんぴらごぼう ひじきに ぽてとさらだ ところてん あんみつ みつまめ くずもち わらびもち まんじゅう どらやき たいやき いまがわやき かすてら ばうむくーへん しふぉんけーき ちーずけーき ろーるけーき しゅーくりーむ えくれあ まくろん くっきー おかき あられ ぽっぷこーん ぐみ ぜりー あいすくりーむ そふとくりーむ ぱふぇ ほっとけーき ぱんけーき わっふる くれーぷ ちょこれーと キャラめる けちゃっぷ まよねーず そーす ばたー まあがりん ちにーず よーぐると とうにゅう こーひー ここあ じゅーす さいだー こーら むぎちゃ りょくちゃ ほうじちゃ げんまいちゃ じゃすみんちゃ まっちゃ みるくてー れもんてー たいやきくん かにかま いかめし まぐろどん かつどん ぎゅうどん おやこどん てんどん かきあげ まるてん ごぼてん いかやき ぶたまん あんまん にくまん ぴざまん ちーずまん おやき ずんだもち きりたんぽ はたはた ししゃも きびなご いさき むつ きんめだい さざえ ほっきがい とりがい まてがい あわび なまこ いかそうめん ちゃづけ ぞうすい おかゆ きなこもち ごまだんご みたらし ずんだ くりきんとん いのししにく かもにく しかにく うさぎにく ひつじにく やぎにく まぐろづけ いくらどん うにどん ねぎとろ かっぱまき てっかまき かんぴょうまき`,
+
+  "動物": `いぬ ねこ とら らいおん ぞう きりん ぱんだ こあら うさぎ りす さる くま きつね たぬき しか うし うま やぎ ひつじ ぶた にわとり ひよこ あひる からす すずめ はと わし ふくろう かめ へび とかげ かえる きんぎょ めだか こい さめ くじら いるか くらげ あり はち かぶとむし くわがた せみ とんぼ ちょう はえ こおろぎ すずむし ほたる だんごむし かたつむり なめくじ わに らくだ さい ごりら ねずみ もぐら こうもり いたち ぺんぎん しまうま おおかみ こじか やもり いもり どじょう ふな たい まだい ひらめ ぶり はまち あゆ ます さんま かじき ふぐ あんこう ちんあなご らっこ あしか あざらし せいうち じゅごん ひょう ちーたー はいえな おっとせい かものはし かわうそ みんく てん おこじょ はくびしん あなぐま らいちょう やまどり うぐいす めじろ ひばり ひよどり つばめ かも がん はくちょう しぎ ちどり みずなぎ さぎ こうのとり とき ぺりかん だちょう えみゅー きうい こんどる はげわし いぬわし くまたか はやぶさ みさご ほととぎす やまがら しじゅうから えなが おなが きつつき あおげら こげら むくどり どばと きじばと やまばと うずら こまどり かば いのしし なまけもの あるまじろ ありくい ばく かんがるー うぉんばっと たらんちゅら さそり むかで げじげじ ばった いなご かまきり てんとうむし かみきりむし たまむし ほたるいか げんごろう たがめ みずすまし あめんぼ やご おたまじゃくし さんしょううお いぐあな かめれおん まんぼう えい しゅもくざめ じんべえざめ しゃち ほっきょくぐま しろくま つきのわぐま ひぐま あらいぐま れっさーぱんだ ちんぱんじー おらんうーたん まんどりる にほんざる いのぶた ろば らま あるぱか となかい へらじか やまね むささび ももんが はりねずみ はむすたー もるもっと ちんちら ふぇれっと みーあきゃっと じゃがー ぴゅーま ゆきのひょう おおさんしょううお あおがえる あまがえる ひきがえる とのさまがえる うみがめ ぞうがめ すっぽん にしきへび あおだいしょう まむし はぶ こぶら いそぎんちゃく さんご ひとで うに なまこ やどかり ざりがに けがに ずわいがに たらばがに くるまえび いせえび しゃこ あさり しじみ かき さざえ あわび ほらがい まいまい おおくわがた へらくれす あげはちょう もんしろちょう もんきちょう くじゃく くじゃくばと いんこ おうむ ぶんちょう かなりあ せきせいいんこ ひよこちゃん こねこ こいぬ こうま こうし こぶた こやぎ こひつじ わにがめ あおうみがめ かなへび やもりくん`,
+
+  "乗り物": `くるま でんしゃ じてんしゃ ふね ひこうき ばす ばいく とらっく ろけっと よっと そり ばしゃ いかだ にぐるま きしゃ りふと ごんどら ちかてつ ものれーる ろーぷうぇい ききゅう せんすいかん ゆうらんせん ろせんばす はしごしゃ きゅうきゅうしゃ しょうぼうしゃ ぱとかー たくしー はいやー でんきじどうしゃ じどうしゃ にりんしゃ さんりんしゃ いちりんしゃ すけーとぼーど すのーぼーど じぇっとき ぷろぺらき へりこぷたー ぐらいだー はんぐらいだー しんかんせん とっきゅう かもつれっしゃ ろめんでんしゃ けーぶるかー ぼーと かぬー かやっく ぺだるぼーと ほばーくらふと くるーざー きゃんぴんぐかー ぽんぷしゃ くれーんしゃ ぶるどーざー しょべるかー だんぷかー みきさーしゃ ふぉーくりふと とらくたー こんばいん じょせつしゃ せいそうしゃ ゆうびんしゃ たくはいしゃ けいじどうしゃ わごんしゃ すぽーつかー おーぷんかー ばぎー べびーかー くるまいす きっくぼーど ろーらーすけーと ひこうせん うちゅうせん たんさき じんこうえいせい ぎょせん かぶとせん たんかー こんてなせん ふぇりー いかだぶね まるきぶね ほかけぶね かいぞくせん すいじょうばす げんつき じょうききかんしゃ けんいんしゃ ぱんたぐらふ しゃりょう へんせい かいそく ふつう かいそくばす こうそくばす みにつく じぷ わんぼっくす せだん ばん とうろくしゃ`,
+
+  "季節": `はる なつ あき ふゆ せつぶん ひなまつり こどものひ おぼん はなみ つきみ ゆきだるま かまくら こたつ さんた おとしだま かどまつ かがみもち ふくわらい えほうまき はつもうで おみくじ えま とりい おてら うちわ ふうりん はなび ゆかた じんべい おめん まつり みこし やたい えんにち わたあめ らむね かきごおり はるやすみ なつやすみ ふゆやすみ たなばた まめまき くりすます しめなわ ひがん ぼたもち おしょうがつ おおみそか としこし おせちりょうり おぞうに おとしだまぶくろ ぽちぶくろ のしぶくろ みずひき かどまつづくり ゆきまつり さくらまつり もみじがり いもほり くだものがり しおひがり はまぐりかり ほたるがり かぶとむしとり せみとり とんぼとり そつぎょうしき にゅうがくしき うんどうかい たいいくさい ぶんかさい がくげいかい えんそく りんかんがっこう かいすいよく ぷーるびらき どようのうしのひ おつきみだんご すすきかざり はろうぃん かぼちゃちょうちん くりすますつりー さんたくろーす となかい じょやのかね はつひので かきぞめ こいのぼり かぶと しょうぶゆ ばれんたいん ほわいとでー えいぷりるふーる ははのひ ちちのひ けいろうのひ ばかばやし ぼんおどり せんこうはなび うちあげはなび ねずみはなび けむりだま むしよけ せんぷうき えあこん すとーぶ だんろ ほっとかーぺっと しゅんぶん しゅうぶん げし とうじ りっしゅん りっか りっしゅう りっとう たいあん ぶつめつ じゅうごや まんげつのよる ゆきぐに はるかぜ なつくさ あきかぜ ふゆぞら おひなさま ぼんぼり ひしもち ちらしずし ちゃつみ かわびらき あゆつり たんざく ほしぞら ゆうすずみ`,
+
+  "日用品": `つくえ いす かばん くつ くつした ぼうし ふく めがね とけい かさ さいふ かぎ でんわ てがみ きって はがき ほん じしょ えんぴつ けしごむ ものさし はさみ ふで かみ らんどせる ふでばこ ざっし てちょう かがみ くし はぶらし せっけん たおる まくら ふとん もうふ でんき ろうそく まど かべ ゆか てんじょう かいだん おふろ じゃぐち ながし れいぞうこ せんたくき そうじき てれび らじお かめら すまほ ぱそこん まうす でんたく ゆのみ こっぷ おさら はし ないふ おわん なべ やかん きゅうす ざる おたま ほうき ぞうきん ばけつ せんざい すぽんじ ぬいぐるみ おもちゃ つみき だるま こま めんこ おはじき ふうせん しゃぼん ぶらんこ すべりだい ふうとう しんぶん けいたい あいろん せんぷうき ゆたんぽ てぶくろ はんかち てぬぐい せんす あまがっぱ かっぱ ながぐつ げた ぞうり わらじ たび おび かんざし ゆびわ ぴあす いと かるた はりがね はり がびょう おしぴん くりっぷ のり せろてーぷ がむてーぷ ほうたい ばんそうこう めんぼう ぬいばり まちばり ぬいもの あみもの あみばり かぎばり むしめがね めがねふき てかがみ かんばん のれん ふすま しょうじ あみど がらすど まどがらす とびら ひきど あきかん びん ぺっとぼとる すいとう みずさし おちゃわん ごはんちゃわん みそしるわん しるわん めいしいれ こものいれ てさげぶくろ えこばっぐ まいばっぐ ぼーるぺん しゃーぷぺんしる まんねんひつ くれよん くれぱす いろえんぴつ えのぐ ぱれっと すけっちぶっく のーと じゆうちょう したじき ほっちきす ぱんち かったー こんぱす ぶんどうき さんかくじょうぎ まぐねっと ふせん しおり ぶっくかばー ほんだな ようふくたんす げたばこ くつばこ ごみばこ ちりとり はたき もっぷ どらいやー ひげそり つめきり みみかき たいじゅうけい たいおんけい ほっかいろ せんたくばさみ はんがー せんたくかご ものほしざお しゃわー ばすたおる ふぇいすたおる ばすまっと といれっとぺーぱー てぃっしゅぺーぱー うえっとてぃっしゅ まないた ほうちょう ふらいぱん どなべ むしき といし しゃもじ さいばし とんぐ ぴーらー おろしき けいりょうかっぷ けいりょうすぷーん らんちぼっくす べんとうばこ たわし ふきん らっぷ あるみほいる くっきんぐしーと じっぷろっく ほぞんようき ちょうみりょういれ こしょういれ しょうゆさし ようじ つまようじ わりばし すぷーん ふぉーく すとろー まぐかっぷ ぐらす ワインぐらす びーるじょっき どびん ちゃこし こうひーみり どらいばー ぺんち とんかち のこぎり やすり じゃっき らんたん じゅうでんき こんせんと えんちょうこーど へっどほん いやほん すぴーかー りもこん ぎたー ぴあの はーもにか りこーだー たいこ すず かすたねっと めざましどけい かべかけどけい うでどけい すとっぷうぉっち さいふいれ きーほるだー ぱすけーす めいしほるだー ずぼん すかーと しゃつ せーたー ぱーかー じゃけっと こーと わいしゃつ ねくたい べると ぱじゃま じーぱん すにーかー さんだる すりっぱ ぶーつ まふらー すかーふ えぷろん かいちゅうでんとう かんでんち`,
+
+  "体・人": `あたま かお くち あし ゆび かた こし せなか おなか からだ ひげ まゆげ ほね ちから いのち こえ なまえ ともだち かぞく あかちゃん おとな こども おとこ おんな ひと あに あね いもうと おとうと そふ そぼ てのひら ゆびさき あしくび ひざ ひじ つまさき まゆ まつげ した はぐき きば おでこ こめかみ えくぼ ほおべに くちびる くちもと はなすじ はなさき みみたぶ うなじ えりあし わきのした ふくらはぎ すね もも ひたい あご むね せすじ せぼね ろっこつ あばらぼね さこつ かんせつ てくび みずかき め はな みみ て は け かみ かみのけ つめ ほっぺ ほお のど くび うで むねもと おしり かかと つちふまず へそ いぶくろ しんぞう はい かんぞう じんぞう ちょう のう けつえき みゃく こきゅう しんぱく たいおん けが きず あざ たんこぶ しわ ほくろ そばかす にきび おや まま ぱぱ ちち はは おじいさん おばあさん おにいさん おねえさん いとこ しんせき せんせい せいと しんゆう せんぱい こうはい どうきゅうせい となりびと おきゃくさん てんいんさん あかご ようじ しょうがくせい ちゅうがくせい こうこうせい だいがくせい わかもの ろうじん じんるい にんげん ひとびと おじさん おばさん おにいちゃん おねえちゃん ぼーい がーる あかぼう わかぞう しゅうしん てあし ゆびわき こぶし げんこつ ひざまくら おんぶ だっこ てつなぎ`,
+
+  "場所": `いえ うち みせ まち むら とかい がっこう こうえん としょかん びょういん えき みなと ゆうえんち おしろ ほんや はなや さかなや ぱんや いざかや きっさてん しょくどう りょかん いなか にわ はたけ かど やね へや だいどころ いま おしいれ とだな たな ちかしつ おくじょう べらんだ えんがわ しょうじ ふすま とこのま ぶつだん かみだな なか そと うえ みぎ ひだり よこ たて となり まえ うしろ ちかく とおく むこう てまえ みぎて ひだりて こうさてん おうだんほどう じてんしゃおきば ちゅうしゃじょう ばすてい えきまえ かいさつぐち でぐち いりぐち ひじょうぐち きたぐち みなみぐち ひがしぐち にしぐち うらぐち おもてぐち げんかん せんろ こうじげんば さぎょうば うんどうじょう きゅうじょう やきゅうじょう すいえいぷーる てにすこーと さっかーじょう りょうりがくこう びじゅつかん はくぶつかん どうぶつえん すいぞくかん しょくぶつえん めいしょ きゅうせき じんじゃ おてら てんしゅかく こうかいどう しやくしょ くやくしょ さいばんしょ けいさつしょ こうばん しょうぼうしょ ゆうびんきょく ぎんこう ほけんしつ ほいくえん ようちえん がくどう じどうかん おんせん せんとう ほてる ぺんしょん みんしゅく きゃんぷじょう すきーじょう ごるふじょう ぼーりんぐじょう えいがかん げきじょう こんさーとほーる らいぶはうす すーぱー こんびに でぱーと しょうてんがい おもちゃや ようふくや ぶんぼうぐや でんきや くすりや やっきょく とこや くりーにんぐや かふぇ れすとらん ふぁみれす らーめんや うどんや そばや すしや やきにくや ぱんこうぼう けーきや わがしや だがしや こうじょう そうこ みなとまち じょうかまち しゅくばまち おんせんがい ほこら とうだいのうえ ふとう さんばし くうこう ひこうじょう へりぽーと ろーたりー とんねる てっきょう ほどうきょう ちかがい ろうか かいだんおどりば よくしつ だついじょ せんめんじょ しょさい しんしつ こどもべや りびんぐ だいにんぐ ものおき しゃこ がれーじ おおどおり ろじうら ほどう しゃどう ほーむ だいば しばふ こうえんない まちかど えきなか こうこう ばしょ ところ まちなか`,
+
+  "感情": `うれしい たのしい かなしい さびしい はずかしい いかる よろこび なみだ えがお わらい すき きらい こわい しんぱい きんちょう ゆうき きぼう あい やさしい くるしい ねむい だるい つらい なつかしい げんき おだやか きもち てれる あこがれ ほこり いかり なごむ うっとり がんこ すなお かなしみ いらいら どきどき わくわく びっくり くるしみ いたみ あいぞう きょうふ ぞうお けいい したしみ なつかしさ いとおしさ うつくしさ たのしさ さびしさ うれしさ こわさ あんしん ふあん まんぞく ふまん こうふん れいせい おどろき あきれ どうじょう そんけい けいべつ しっと ねたみ うらやみ かんしゃ かんげき かんどう ゆううつ せつない むなしい くやしい はがゆい じれったい すっきり ほっとする わだかまり ゆめごこち まちどおしい こころぼそい たのもしい ほほえましい いじらしい けなげ ときめき やすらぎ まんぞくかん よろこびのなみだ かなしみのなみだ わくわくかん どきどきかん ほっこり にこにこ わいわい いきいき げんなり むかっ ぷんぷん じんわり ほろり しくしく わあわあ びくびく そわそわ うきうき しんみり しんぱいしょう びびり やるき こんき ゆかい かいせい ほがらか にこやか わんぱく`,
+
+  "様子": `まるい ながい みじかい たかい ひくい あかるい くらい さむい あつい つめたい すずしい あまい からい にがい すっぱい しょっぱい かたい かるい おもい はやい おそい せまい ひろい ふかい あさい わかい よわい つよい ほしい くろい しろい あかい あおい しかくい さんかく しかく ぼんやり ゆっくり はっきり のんびり ぐっすり しずか にぎやか きれい きたない あたらしい ふるい おおきい ちいさい すてき りっぱ へん ふしぎ だいじ しんせつ ゆうめい ひま たいくつ いそがしい めずらしい おもしろい きびしい むずかしい ふくざつ とくべつ ふつう たしか しかた たるい いみ あぶない うつくしい うまい うるさい えらい おとなしい きつい きよい くさい こい こまかい しつこい しぶい すばらしい ずるい せわしい そっけない ちかい つまらない てごわい とおい とぼしい にくい にぶい ぬるい はかない はげしい ひどい ふとい ほそい まぶしい むなしい もろい やすい やわらかい ゆるい わるい きけん じゆう へいわ たいせつ だいすき とくい にがて じょうず へた むこう ゆうり ふり そん とく まけ かち たいら びみょう てきとう かんぺき さいこう さいあく らく たいへん まじめ ふまじめ ゆうかん おくびょう しょうじき うそ ほんとう まこと げんじつ りそう ゆめ のぞみ ねがい いのり ふこう しあわせ ふしあわせ こうふく まさか たぶん きっと ぜひ なるべく おそらく ひょっと まさしく たしかに ほんらい げんらい とうぜん ついに やっと とうに いまさら さっそく すぐ はやく おそく ぴかぴか きらきら ふわふわ もちもち さらさら ざらざら つるつる べたべた ぬるぬる ぱりぱり さくさく かりかり ほくほく あつあつ ひえひえ ぽかぽか じんわり しっかり ぴったり そっくり ぐったり へろへろ ばてばて のびのび ひろびろ ほそぼそ まるまる ぺちゃんこ ふっくら こんがり まっしろ まっくろ まっか まっさお まっきいろ とうめい はんとうめい ななめ まっすぐ ぐにゃぐにゃ ぎざぎざ とげとげ ぼこぼこ でこぼこ すべすべ かさかさ しっとり じめじめ からから びしょびしょ ぐしょぐしょ すっきり ぱっちり くるくる ぐるぐる ころころ ぴょんぴょん ふわふわっと ぽつぽつ ざわざわ わさわさ もこもこ ちくちく もちっと ぷるぷる ふるふる ぶるぶる`,
+
+  "動作": `はしる あるく およぐ とぶ はねる ねる おきる たべる のむ かむ はなす きく みる よむ かく えがく おどる わらう なく おこる すわる たつ よぶ あそぶ まなぶ おしえる かぞえる はこぶ もつ なげる うける おす ひく まわす とめる あける しめる つくる なおす こわす わる きる ぬう ぬる えらぶ さがす みつける しらべる てつだう はたらく やすむ いそぐ まちがえる おぼえる わすれる かんがえる きめる はじめる おわる つづく はじまる うごく とまる もどる いく くる でる はいる かう うる はらう かりる かす わたる のぼる くだる まがる ふる やむ てらす かがやく ひかる ぬれる かわく こおる とける やく にる むす いためる まぜる きざむ あらう そうじ せんたく かいもの さんぽ りょこう しあい むく しまう かつぐ せおう だく なでる おる かざる かたづける みがく ゆすぐ しぼる ほす のばす ちぢむ まるめる ひろげる かさねる つなぐ むすぶ ほどく からむ もつれる とかす ゆでる あぶる ひやす さます さめる こぼす こぼれる おとす ひろう あつめる あつまる わける くばる わたす うけとる かえす もどす おさめる たしかめる のぞく みあげる みおろす ふりかえる みまわす かぐ さわる にぎる つかむ おさえる はたく ける とびこむ くぐる もぐる はう よじのぼる かけっこ おいかける にげる つかまえる かくれる かくす はなし ためる つめる かためる あまる あたる あびる うかぶ おちる かしぐ かたむく きえる きれる くもる くらす けずる こまる さける しずむ すべる そだつ たおす ちかづく つたう つまる つもる とばす とれる なやむ ぬかす ねがう のこす のこる はさむ はたす はぶく ひっこす ふえる ふとる ふれる へらす ほこる ほれる まいる まよう みえる むかう むける めぐる もえる もやす やぶく やめる ゆれる よごす わかす わかる われる あう あおぐ あかす あきる あせる あばく いどむ いのる いばる うつす うつる うなずく うまる うめる おかす おぎなう おくる おこす おしむ おそう おどかす おもう かさむ かじる かすむ かなう かなしむ かぶる かわる きづく きばる きまる くさる くずす くだける くむ くるう くれる くわえる こがす こごえる こす こする こたえる ことわる こばむ こむ こもる こる さがる さそう さとる さばく さびる しかる しずまる したう しつける しぬ しはらう しぼむ しれる しんじる すくう すてる すねる ずらす せがむ せめる そなえる そまる そめる そろう そろえる たおれる たがやす たてる たのむ たのしむ たまる ためす たもつ たれる ちかう ちがう ちる つかう つくす つける つたえる つどう つながる つねる つのる つぶす つむ つる つれる ともる とりもつ とろける なげく なす なぞる なつく なまる ならう ならぶ ならべる なる なれる にあう にえる にがす にくむ にじむ にせる ぬぐう ぬすむ ねじる ねだる ねばる ねむる のがす のせる のぞむ のびる のべる はえる はかる はげむ はずす はなつ はなれる はまる はやまる はやる はれる ひえる ひねる ひびく ひらく ひろがる ひろめる ふくむ ふさぐ ふざける ふせる へこむ へる ほうる ほえる ほぐす ほめる まかす まける まねく まもる まわる みせる みつかる みとめる みなす みはる みわたす むかえる むせる めざす めしあがる めだつ もうける もたれる もらう もれる やける やすめる やせる やとう やどる やぶる やる ゆがむ ゆずる ゆだねる ゆるす ゆるむ ゆるめる よせる よろこぶ よわまる よわめる わかつ わめく おどろく あわてる うろたえる ためらう なやむ くやむ ほめる しかる たたえる はげます なぐさめる ささえる たすける まもる みにまとう きがえる ぬぐ はく かぶる まく しばる むすぶ ほどく みがく そる かる そめる ゆわく たばねる のぞく つくす ならす こぐ えらぶ さがす まねく ひく 押す まく たく むく むしる むす ほす ひやす かる 刈る 編む 織る 染める 塗る 貼る 折る 切る 割る 削る 磨く 洗う 拭く 掃く 抱く 追う 逃げる 勝つ 負ける 祈る 願う 笑う 泣く 怒る 歌う 踊る 吹く 弾く 叩く 蹴る 投げる 捕る 掴む 置く 上げる 下げる 出す 入れる 閉める 開ける 増やす 減らす 始める 終える 続ける 変わる 直す 壊す 作る 選ぶ 決める 調べる 覚える 忘れる 考える 信じる 迷う 悩む 喜ぶ 悲しむ 楽しむ 苦しむ 慣れる 生きる 死ぬ 眠る 起きる 歩く 走る 飛ぶ 泳ぐ 食べる 飲む 見る 聞く 話す 読む 書く 買う 売る 借りる 貸す 渡す 受け取る 返す 送る 届く 着く 乗る 降りる 登る 降りる 渡る 曲がる 止まる 動く 進む 戻る 帰る 出かける 集まる 集める 分ける 配る 混ぜる 切る 焼く 煮る 炒める 蒸す 茹でる 冷ます 温める 溶かす 固める 作る 植える 育てる 収穫する 刈る 釣る 狩る 飼う 遊ぶ 学ぶ 教える 練習する 試合する 応援する 参加する 優勝する 挑戦する 合格する 卒業する 入学する 準備する 片付ける 掃除する 洗濯する 料理する 買い物する 散歩する 旅行する 休憩する 相談する  약속する 挨拶する 案内する 説明する 質問する 答える 発表する 観察する 実験する 計算する 測定する 記録する 報告する 連絡する 予約する 注文する 支払う 受け取る 交換する 修理する 組み立てる 分解する 調整する 確認する 工夫する 発見する 発明する 作成する 保存する 削除する 検索する 送信する 受信する 再生する 停止する 録音する 撮影する 編集する 印刷する 貼る 剥がす 結ぶ 解く 巻く 伸ばす 縮める 広げる 畳む 並べる 揃える 積む 崩す 押さえる 支える 守る 助ける 襲う 避ける 防ぐ 戦う 勝つ 負ける 引き分ける 降参する 諦める 頑張る 努力する 励ます 慰める 感謝する 謝る 許す 褒める 叱る 誘う 断る 頼む 任せる 引き受ける 預ける 預かる 貸し出す 借りる 返す 取り戻す 失くす 見つける 探す 待つ 急ぐ 遅れる 間に合う 休む 寝坊する 早起きする 散歩する ジョギングする ストレッチする 筋トレする 泳ぐ 潜る 浮く 沈む 流れる 溢れる 乾く 濡れる 凍る 溶ける 燃える 消える 光る 輝く 響く 揺れる 震える 傾く 倒れる 起き上がる 跳ねる 跳ぶ 滑る 転ぶ ぶつかる 挟まる 詰まる 破れる 切れる 折れる 曲がる 歪む 錆びる 腐る 熟す 枯れる 咲く 実る 芽吹く 落ちる 散る 積もる 吹く 降る 晴れる 曇る 荒れる 治まる 始まる 終わる 続く 変わる 移る 巡る 広まる 縮まる 増える 減る 満ちる 欠ける 揃う 乱れる 整う 落ち着く 慌てる 驚く 怯える 怒る 恨む 妬む 羨む 恋する 愛する 敬う 信頼する 疑う 期待する 希望する 安心する 不安になる 緊張する 落ち着く ほっとする わくわくする どきどきする`,
+
+  "色": `あか あお きいろ みどり むらさき しろ くろ ちゃいろ ぴんく おれんじ きんいろ ぎんいろ そらいろ はいいろ ももいろ みずいろ わかばいろ こはくいろ さくらいろ ぶどういろ なすこん こんいろ あいいろ しゅいろ べにいろ ときいろ はだいろ くりいろ こげちゃ うすべに ふかみどり あさぎいろ やまぶきいろ うぐいすいろ もえぎいろ わかくさいろ えめらるど たらこいろ あかねいろ だいだいいろ こがねいろ しろがねいろ すみいろ ねずみいろ ぎんねず あおみどり きみどり あおむらさき あかむらさき しんく くれない ぼたんいろ ふじいろ すみれいろ しょうぶいろ ぞうげいろ くりーむいろ べーじゅ きゃめる ちょこいろ れんがいろ あずきいろ うすむらさき ぱすてる あおじる こんぺき ぐんじょういろ わさびいろ からしいろ まりんぶるー みんとぐりーん ぺぱーみんと らいむいろ うすみどり わすれなぐさいろ ほたるいろ あさぎ こんいろ なでしこいろ さくらもちいろ ももはないろ ぼたんのはな ゆずいろ ゆずはだいろ くりかわいろ きつねいろ たぬきいろ しかいろ うまいRO ぶたいろ かにいろ えびいろ たこいろ いかすみいろ わかめいろ こんぶいろ みそいろ しょうゆいろ きなこいろ あんこいろ みるくいろ そらいろのうみ みどりいろのやま`,
+
+  "学び": `こくご さんすう りか しゃかい おんがく ずこう えいご どうとく がくしゅう べんきょう しゅくだい てすと しけん てんすう ごうかく ふごうかく にっちょく せいと きょうし きょうしつ こくばん きゅうけい ほうかご えんそく ぶんかさい そつぎょう にゅうがく しんがく がっき じかんわり きょうか きょうざい じびき こたえ もんだい れいだい かいとう せいかい ふせいかい まちがい すうがく ぶんしょう かんじ ひらがな ぶんぽう たんご ことば もじ どくしょ しゅうじ けいさん ひっさん ずけい えん ちょくせん きょくせん てん せん めん りったい えんしゅう はんけい ちょっけい たいせき めんせき ながさ おもさ はやさ たかさ ふかさ ひろさ あつさ うすさ かたさ やわらかさ つめたさ あまさ からさ にがさ すっぱさ しょっぱさ かたかな ろーまじ はつおん あくせんと いみ ようれい じてん ずかん ひゃっかじてん じっけん かんさつ けんびきょう むしめがね しけんかん びーかー ふらすこ じしゃく でんち でんきゅう ぷりずむ おりがみ こうさく ねんど ちょうこく ばんしょ ちょーく こくばんけし きょうたく としょしつ ほけんしつ りかしつ おんがくしつ たいいくかん こうてい ぐらんど ぷーる ちず ちきゅうぎ ねんぴょう れきし ちり こうみん けいざい せいじ ほうりつ かがく ぶつり せいぶつ ちがく てんもん うちゅうがく わくわく りかじっけん さんすうドリル こくごじてん えいごのーと じゆうけんきゅう しょうがっこう ちゅうがっこう こうこう だいがく せんもんがっこう しょうがくきん じゅぎょう しょうろんぶん ろんぶん けんきゅう かいせつ ほそく まとめ こうぎ せみなー ずひょう ぐらふ ひょう ぶんすう しょうすう わりざん かけざん たしざん ひきざん かけ算 わり算 せいのすう ぐうすう きすう そすう ばいすう やくすう へいほうこん ぎょうれつ かんすう ずけいのめんせき たいせきひ`,
+
+  "仕事": `いしゃ かんごし はいしゃ やくざいし びょういん けいさつ けいさつかん しょうぼうし うんてんしゅ ぱいろっと きゅうじょし せいびし けんちくし だいく しょくにん りょうりにん ぱてぃしえ ぱんしょくにん さかなや おにくや やおや はなや ほんや めがねや とけいや くつや したてや てんいん てんしゅ れじがかり うけつけ あんないがかり えきいん しゃしょう こうむいん ぎんこういん ゆうびんはいたつ しんぶんはいたつ ごみしゅうしゅう せいそういん きょういくしゃ ほいくし ようちえんきょうゆ だいがくきょうじゅ けんきゅうしゃ はくし がくしゃ さっか しじん えかき ちょうこくか しゃしんか でざいなー えんじにあ ぷろぐらま うんどうせんしゅ やきゅうせんしゅ さっかーせんしゅ すいえいせんしゅ りくじょうせんしゅ すきーせんしゅ すけーとせんしゅ べんごし けんじ さいばんかん ぜいりし かいけいし しゃちょう ぶちょう かちょう かいしゃいん じむいん えいぎょう せんでん こうこく へんしゅうしゃ きしゃ あなうんさー せいゆう はいゆう じょゆう かしゅ さっきょくか さくしか しきしゃ えんそうか まんがか いらすとれーたー あにめーたー げーむくりえいたー びようし りはつし めいくあっぷ もでる すたいりすと じゅういし しいくいん ちょうきょうし せんちょう かいぐん うちゅうひこうし のうか りょうし きこり ぼくし じゅうしょく かんぬし みこ うらないし まじしゃん げいにん おわらい しょうぼうたい けいびいん けいびしゃいん しょうかいしゃ こうほう じんじ けいり そうむ かいはつ けんきゅうかいはつ せけい けんせつ Sagyo ぎじゅつしゃ さいばんしょしょくいん せいきょういん しんようきんこ うんゆ こうくう つうしん ほうそう しゅっぱん こんさる こうし せんせい じゅくこうし けいえいしゃ しょうにん どかた さかん かべぬり かわらや たたみや へいやさん とうふや そばや うどんや ぎょうざや ちょうみりょうや ちゃや くだものや くるまや じてんしゃや ぺっとしょっぷ ほてるまん こんしぇるじゅ ばりすた そむりえ ぶっちゃー べーかりー`,
+
+  "遊び": `おにごっこ かくれんぼ けいどろ だるまさんがころんだ はないちもんめ かごめかごめ じゃんけん あっちむいてほい おしくらまんじゅう しっぽとり めだかすくい きんぎょすくい よーよーつり しゃぼんだま おままごと おえかき ねんどあそび すなばあそび みずあそび ゆきあそび かまくらづくり ゆきがっせん たこあげ こまわし たけうま ぽっくり あやとり おりがみ きりがみ はりえ ぬりえ めいろ まちがいさがし なぞなぞ しりとり かるた じゃんけんぽん あいこでしょ おてだま おはじき めんこ だるまおとし ふくわらい ぶろっく つみき じぐそーぱずる くろすわーど なんぷれ すうじあそび ことばあそび はやぐちことば なぞとき たからさがし すたんぷらりー ぎゃる がーる ぼーどげーむ かーどげーむ とらんぷ ばばぬき しちならべ しんけいすいじゃく だいふごう ぶたのしっぽ うの しょうぎ いご ごもくならべ おせろ ちぇす ばっくぎゃもん じんろうげーむ すごろく じんとり けんけんぱ なわとび おおなわとび ごむとび まりつき けんだま びーだま べーごま わなげ しゃてき せんぼんびき くじびき がちゃがちゃ くれーんげーむ てれびげーむ げーむき こんとろーらー ぱずる あくしょん ろーるぷれいんぐ しゅーてぃんぐ くりっくあそび じゃんけんたいかい おにごっこたいかい どっじぼーる けまり はねつき たこたこあがれ ゆびずもう うでずもう あしずもう げんこつじゃんけん ぐーちょきぱー さいころあそび すごろくあそび とらんぷあそび ぴんぽんだっしゅ かんけり ばななのおに こうりおに ずもうごっこ たいそうごっこ せんせいごっこ おみせやさんごっこ べんきょうごっこ`,
+
+  "時間": `きのう きょう あした あさって まいにち まいあさ まいばん らいねん きょねん ことし さくねん らいげつ こんげつ せんげつ らいしゅう こんしゅう せんしゅう せんせんしゅう さらいしゅう さらいねん ひるま よなか まよなか あけがた ゆうがた ひぐれ ひので ひのいり つきので あさやけ ゆうやけ よあけ まだよい いちにち はんつき ひづけ ようび げつようび かようび すいようび もくようび きんようび どようび にちようび しゅうまつ へいじつ きゅうじつ やすみ はんじかん いちじかん にじかん さんじかん よじかん ごじかん ろくじかん ななじかん はちじかん くじかん じゅうじかん じゅういちじかん じゅうにじかん ぷん びょう いちびょう にびょう さんびょう ごびょう じゅうびょう さんじゅうびょう いっぷん にふん さんぷん ごふん じっぷん にじっぷん さんじっぷん いっしゅうかん にしゅうかん いっかげつ にかげつ はんとし いちねん にねん さんねん ごねん じゅうねん ひゃくねん せんねん せいき じだい むかし いま みらい かこ げんざい しょうらい しゅんかん えいえん いっしゅん ちょくぜん ちょくご さいしょ さいご とちゅう ゆうべ こんや こんばん あす よくじつ ぜんじつ しめきり じこく じかん じはん しょうご れいじ せいかく よあけまえ ゆうぐれどき ひるさがり ゆうはんとき あさごはんとき おやつじかん やすみじかん じゅぎょうちゅう ほうかごじかん しゅうまつよる まいとし まいげつ まいしゅう ひととき ひとばん ひとひ ひと月 ふた月 み月 むいか なのか ようか ここのか とおか はつか`,
+
+  "音楽": `おんがく うた めろでぃ りずむ はーもにー わおん おんかい どれみ ぴあの がっき ぎたー べーす どらむ ばいおりん ちぇろ ふりゅーと くらりねっと とらんぺっと ほるん とろんぼーん ちゅーば はーぷ おるがん あこーでぃおん もっきん てっきん しろほん たいこ わだいこ こだいこ つづみ しゃみせん こと しゃくはち おかりな おんぷ きゅうふ せんりつ ばんそう がっしょう どくしょう おーけすとら すいそうがく ばんど こんさーと らいぶ はっぴょうかい かし さっきょく さくし ろっく ぽっぷす じゃず くらしっく どうよう しょうか こうか おうえんか こもりうた せれなーで こうきょうきょく ぴあにすと ぎたりすと べーしすと どらまー ばいおりにすと ぼーかる じょゆううた しゃんそん ぼっさのば わいるど ばんじょう ゆくれれ びわこ ふえ よこぶえ たてぶえ りこーだーふえ はーもにかふえ ばすどらむ すねあどらむ はいはっと しんばる たいむかぷせる わおんきごう とおんきごう へおんきごう ふてん おんがくしつ そるふぇーじゅ あかぺら じゅうそう こうらす ろんど そなた ばりえーしょん まるちぱーと`,
+
+  "スポーツ": `やきゅう さっかー ばすけっとぼーる ばれーぼーる てにす たっきゅう ばどみんとん ごるふ ぼーりんぐ すいえい りくじょう きょうぎ まらそん えきでん たんきょり ちょうきょり はばとび たかとび ぼうたかとび ほうがんなげ やりなげ たいそう てつぼう とびばこ まっとうんどう へいきんだい じゅうどう けんどう からて すもう あいきどう ぼくしんぐ れすりんぐ すきー すけーと かーりんぐ あいすほっけー らぐびー あめふと ぼーとれーす ようっとれーす さいくりんぐ とらいあすろん すぽーつ せんしゅ かんとく こーち しんぱん しあい たいかい れんしゅう じゅんびうんどう すとれっち きんとれ ゆうしょう じゅんゆうしょう けっしょう じゅんけっしょう ほーむらん ひっと すとらいく ぼーる ぱす しゅーと どりぶる ごーる せーぶ さいん ピッチャー キャッチャー バッター ファースト セカンド サード ショート レフト センター ライト だいだ だいそう ぱりー ろぶ すまっしゅ さーぶ どろっぷ ふぉーる ぱうんどう ぷーる じむ どーじょう こうと ぐらんど たいいくかん せきしょん ちーむ すためん べんち かいかいしき へいかいしき しょうはい どろー ぱーふぇくと ほーむいん ばっくすくりーん たいむあうと ちょうせんしゃ`
+};
+const CAT_EMOJI = {
+  "自然": "🌿",
+  "食べ物": "🍙",
+  "動物": "🐾",
+  "乗り物": "🚃",
+  "季節": "🎐",
+  "日用品": "🧺",
+  "体・人": "🧑",
+  "場所": "🏠",
+  "感情": "💗",
+  "様子": "✨",
+  "動作": "🏃",
+  "色": "🎨",
+  "学び": "📚",
+  "仕事": "💼",
+  "遊び": "🎈",
+  "時間": "🕰",
+  "音楽": "🎵",
+  "スポーツ": "⚽",
+  "その他": "🎲"
+};
+const DICT=[],dictMap=new Map();
+for(const cat of Object.keys(RAW))for(const w of RAW[cat].split(/\s+/)){
+ if(!w||!/^[ぁ-ん]{2,5}$/.test(w))continue;
+ const chars=[...w];if(new Set(chars).size!==chars.length||dictMap.has(w))continue;
+ const e={w,chars,len:chars.length,cat};DICT.push(e);dictMap.set(w,e);
+}
+
+const BANDS=[
+ {id:0,upto:15,kanji:"序",name:"はじまり",letters:[4,5],words:[3,4],lens:[2,3],core:[2,3],maxDim:6,color:"#679a5b",desc:"4〜5文字 ・ 3〜4語（2〜3文字中心）",req:W=>[{min:3,count:1}]},
+ {id:1,upto:45,kanji:"破",name:"ひろがり",letters:[5,6],words:[4,6],lens:[2,3,4],core:[3,4],maxDim:7,color:"#93a9c9",desc:"5〜6文字 ・ 4〜6語（3〜4文字中心）",req:W=>[{min:3,count:2},{min:4,count:1}]},
+ {id:2,upto:75,kanji:"急",name:"ふかまり",letters:[6,7],words:[6,8],lens:[3,4,5],core:[4],maxDim:8,color:"#e2a63d",desc:"6〜7文字 ・ 6〜8語（4文字中心）",req:W=>[{min:4,count:Math.ceil(W/2)}]},
+ {id:3,upto:100,kanji:"結",name:"きわみ",letters:[7,7],words:[7,9],lens:[3,4,5],core:[4,5],maxDim:9,color:"#d9482b",desc:"7文字 ・ 7〜9語（4〜5文字を含む高密度）",req:W=>[{min:5,count:1},{min:4,count:3}]}
+];
+const bandFor=n=>BANDS.find(b=>n<=b.upto)||BANDS[3],POOLS=BANDS.map(b=>DICT.filter(d=>b.lens.includes(d.len)));
+const SAVE_KEY="wordlink.v2";let SV={coins:30,cleared:{},current:1,sound:true,bonus:{},seen:false};
+try{const raw=localStorage.getItem(SAVE_KEY)||localStorage.getItem("wordlink.v1");if(raw){const p=JSON.parse(raw);if(p&&typeof p==="object"){SV.coins=Number.isFinite(p.coins)?Math.max(0,p.coins|0):30;SV.cleared=p.cleared&&typeof p.cleared==="object"?p.cleared:{};SV.current=clamp(p.current|0||1,1,100);SV.sound=p.sound!==false;SV.bonus=p.bonus&&typeof p.bonus==="object"?p.bonus:{};SV.seen=!!p.seen;}}}catch(e){}
+function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(SV));}catch(e){}}
+const clearedCount=()=>Object.keys(SV.cleared).length;
+
+/* ===== サウンド ===== */
+const AU={ctx:null,master:null,noise:null,enabled:SV.sound,
+ init(){if(this.ctx)return;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;this.ctx=new AC();this.master=this.ctx.createGain();this.master.gain.value=this.enabled?.5:0;this.master.connect(this.ctx.destination);const n=this.ctx.sampleRate|0,b=this.ctx.createBuffer(1,n,this.ctx.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;this.noise=b;}catch(e){}},
+ resume(){this.ctx&&this.ctx.state==="suspended"&&this.ctx.resume().catch(()=>{});},
+ tone(f,o){if(!this.ctx||!this.enabled)return;o=o||{};const t=this.ctx.currentTime+(o.t||0),a=o.a||.006,d=o.d||.3,g=o.g||.18,osc=this.ctx.createOscillator();osc.type=o.type||"sine";osc.frequency.setValueAtTime(f,t);o.slide&&osc.frequency.exponentialRampToValueAtTime(o.slide,t+d);const gn=this.ctx.createGain();gn.gain.setValueAtTime(.0001,t);gn.gain.linearRampToValueAtTime(g,t+a);gn.gain.exponentialRampToValueAtTime(.0001,t+a+d);let node=osc;if(o.f){const fl=this.ctx.createBiquadFilter();fl.type="lowpass";fl.frequency.value=o.f;osc.connect(fl);node=fl;}node.connect(gn);gn.connect(this.master);osc.start(t);osc.stop(t+a+d+.06);},
+ noiseHit(d,g,f,t){if(!this.ctx||!this.enabled||!this.noise)return;const now=this.ctx.currentTime+(t||0),src=this.ctx.createBufferSource();src.buffer=this.noise;const fl=this.ctx.createBiquadFilter();fl.type="bandpass";fl.frequency.value=f;fl.Q.value=1.1;const gn=this.ctx.createGain();gn.gain.setValueAtTime(g,now);gn.gain.exponentialRampToValueAtTime(.0001,now+d);src.connect(fl);fl.connect(gn);gn.connect(this.master);src.start(now);src.stop(now+d+.03);},
+ pluck(f,t,g){this.tone(f,{type:"triangle",t:t||0,d:.34,g:g||.22,f:2400});this.tone(f*2,{t:t||0,d:.16,g:(g||.22)*.35,f:3400});},
+ note(i){this.pluck([523.25,587.33,659.25,698.46,783.99,880,987.77][clamp(i,0,6)]);},
+ back(){this.tone(392,{type:"triangle",d:.12,g:.09,f:1500});},
+ tick(){this.tone(880,{d:.06,g:.07});},
+ land(i){this.tone(660+i*90,{d:.09,g:.09,type:"triangle",f:2600});},
+ wood(){this.tone(640,{d:.05,g:.1});this.noiseHit(.035,.06,1900);},
+ miss(){this.tone(392,{d:.14,g:.08,f:1200});this.tone(330,{t:.1,d:.18,g:.07,f:1000});},
+ bad(){this.tone(196,{d:.16,g:.13,f:800});this.tone(147,{t:.09,d:.2,g:.11,f:700});},
+ dup(){this.tone(440,{d:.09,g:.08});this.tone(440,{t:.1,d:.12,g:.06});},
+ chime(){[523.25,659.25,783.99,1046.5].forEach((f,i)=>{this.tone(f,{t:i*.07,d:.5,g:.15});this.tone(f*2.76,{t:i*.07,d:.18,g:.045});});},
+ soft(){this.tone(659.25,{d:.3,g:.1});this.tone(880,{t:.08,d:.35,g:.09});},
+ coin(){this.tone(1318.5,{type:"square",d:.07,g:.055,f:4200});this.tone(1975.5,{t:.07,type:"square",d:.16,g:.055,f:5200});},
+ hint(){this.pluck(659.25,0);this.pluck(987.77,.09);},
+ swish(){this.noiseHit(.22,.1,900);this.wood();},
+ fanfare(){[523.25,587.33,659.25,783.99,880,1046.5,1318.5].forEach((f,i)=>this.pluck(f,i*.09,.2));[523.25,659.25,783.99,1174.66].forEach(f=>this.tone(f,{t:.72,d:1.15,g:.11}));this.tone(98,{t:.7,d:.35,g:.28,slide:55});this.noiseHit(.2,.16,320,.7);},
+ setEnabled(v){this.enabled=v;this.master&&(this.master.gain.value=v?.5:0);}
+};
+
+/* ===== パーティクル ===== */
+const FX={cv:$("fx"),cx:null,parts:[],raf:0,W:0,H:0,dpr:1,
+ resize(){this.dpr=Math.min(devicePixelRatio||1,2);this.W=innerWidth;this.H=innerHeight;this.cv.width=this.W*this.dpr;this.cv.height=this.H*this.dpr;this.cv.style.width=this.W+"px";this.cv.style.height=this.H+"px";this.cx=this.cv.getContext("2d");this.cx.setTransform(this.dpr,0,0,this.dpr,0,0);},
+ add(p){this.parts.length>240&&this.parts.splice(0,this.parts.length-240);this.parts.push(p);this.kick();},
+ spark(x,y,n){n=RM?Math.ceil(n/3):n;for(let i=0;i<n;i++){const a=Math.random()*6.283,s=1+Math.random()*2.6;this.add({type:"spark",x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-1,g:.09,life:1,decay:.03+Math.random()*.02,size:2+Math.random()*3,color:Math.random()<.7?"#e2a63d":"#f4cf7a",rot:Math.random()*6,vr:(Math.random()-.5)*.3});}},
+ celebrate(){const n=RM?26:88,cols=["#d9482b","#e2a63d","#679a5b","#93a9c9","#e8a9b8","#f6eed9","#b93a56"];for(let i=0;i<n;i++){const petal=Math.random()<.42;this.add({type:petal?"petal":"conf",x:Math.random()*this.W,y:-20-Math.random()*this.H*.5,vx:(Math.random()-.5)*1.4,vy:1.2+Math.random()*2.2,g:.012,life:1,decay:.0022+Math.random()*.002,size:petal?7+Math.random()*6:4+Math.random()*5,color:petal?(Math.random()<.5?"#e8a9b8":"#d98ba0"):pick(cols),rot:Math.random()*6,vr:(Math.random()-.5)*.14,ph:Math.random()*6,sway:.6+Math.random()*1.2});}this.spark(this.W/2,this.H*.32,RM?8:26);},
+ kick(){if(this.raf)return;const step=()=>{this.raf=0;const c=this.cx;if(!c)return;c.clearRect(0,0,this.W,this.H);const alive=[];for(const p of this.parts){p.vy+=p.g;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life-=p.decay;if(p.type!=="spark"){p.ph+=.05;p.x+=Math.sin(p.ph)*p.sway*.6;}if(p.life<=0||p.y>this.H+30)continue;c.save();c.globalAlpha=clamp(p.life,0,1);c.translate(p.x,p.y);c.rotate(p.rot);if(p.type==="spark"){c.fillStyle=p.color;c.beginPath();const s=p.size;c.moveTo(0,-s);c.quadraticCurveTo(s*.2,-s*.2,s,0);c.quadraticCurveTo(s*.2,s*.2,0,s);c.quadraticCurveTo(-s*.2,s*.2,-s,0);c.quadraticCurveTo(-s*.2,-s*.2,0,-s);c.fill();}else if(p.type==="petal"){c.fillStyle=p.color;c.beginPath();const s=p.size;c.moveTo(0,-s);c.bezierCurveTo(s*.9,-s*.6,s*.8,s*.5,0,s);c.bezierCurveTo(-s*.8,s*.5,-s*.9,-s*.6,0,-s);c.fill();}else{c.fillStyle=p.color;c.fillRect(-p.size/2,-p.size/3,p.size,p.size*.66);}c.restore();alive.push(p);}this.parts=alive;alive.length?this.raf=requestAnimationFrame(step):c.clearRect(0,0,this.W,this.H);};this.raf=requestAnimationFrame(step);}
+};FX.resize();
+
+const escStack=[];let clearOpen=false;
+function pushEsc(id,fn){escStack.some(e=>e.id===id)||escStack.push({id,fn});}
+function popEsc(id){const i=escStack.findIndex(e=>e.id===id);i>=0&&escStack.splice(i,1);}
+function closeTop(){const e=escStack.pop();e&&e.fn();}
+function syncScrim(){$("scrim").classList.toggle("hidden",!escStack.some(e=>e.id==="drawer"||e.id==="help"));}
+let toastTimer=0;
+function toast(msg,type,icon){const t=$("toast");t.className=type||"info";t.innerHTML='<svg class="ic"><use href="#i-'+(icon||"spark")+'"/></svg><span></span>';t.lastElementChild.textContent=msg;t.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.add("hidden"),1900);}
+let screenName="home";
+function showScreen(name){screenName=name;document.body.dataset.screen=name;$("screen-home").classList.toggle("hidden",name!=="home");$("screen-select").classList.toggle("hidden",name!=="select");$("screen-game").classList.toggle("hidden",name!=="game");name==="home"&&renderHome();name==="select"&&renderSelect();if(name!=="game"){clearTransient();try{$("kbdInput").blur();}catch(e){}}}
+function renderHome(){$("stClear").textContent=clearedCount();$("stCoin").textContent=SV.coins;$("stDict").textContent=DICT.length;$("contLabel").textContent=clearedCount()===0&&SV.current===1?"はじめる ・ ステージ 1":"つづきから ・ ステージ "+SV.current;}
+let selBuilt=false;
+function buildSelect(){const list=$("selList");list.innerHTML="";let start=1;for(const b of BANDS){const sec=document.createElement("div");sec.className="band-sec";const head=document.createElement("div");head.className="band-head";head.innerHTML='<span class="band-kanji" style="background:linear-gradient(140deg,'+b.color+','+b.color+'cc)">'+b.kanji+'</span><span class="nm">'+b.name+'</span><span class="ds">'+start+'〜'+b.upto+' ／ '+b.desc+'</span>';const grid=document.createElement("div");grid.className="stage-grid";for(let n=start;n<=b.upto;n++){const btn=document.createElement("button");btn.className="stage-btn";btn.textContent=n;btn.dataset.stage=n;btn.setAttribute("aria-label","ステージ "+n);grid.appendChild(btn);}sec.appendChild(head);sec.appendChild(grid);list.appendChild(sec);start=b.upto+1;}list.addEventListener("click",e=>{const b=e.target.closest(".stage-btn");if(!b)return;AU.init();AU.resume();AU.wood();startStage(+b.dataset.stage);});selBuilt=true;}
+function renderSelect(){selBuilt||buildSelect();$("selCoins").textContent=SV.coins;$("selProgText").textContent=clearedCount()+" / 100";$("selProgFill").style.width=clearedCount()+"%";for(const b of $("selList").querySelectorAll(".stage-btn")){const n=+b.dataset.stage;b.classList.toggle("cleared",!!SV.cleared[n]);b.classList.toggle("current",n===SV.current);}}
+function randomStage(){const un=[];for(let n=1;n<=100;n++)SV.cleared[n]||un.push(n);return un.length?pick(un):ri(1,100);}
+
+/* ===== ステージ生成 ===== */
+function pickWordSet(b){const L=ri(b.letters[0],b.letters[1]),W=ri(b.words[0],b.words[1]),pool=POOLS[b.id],seeds=pool.filter(d=>b.core.includes(d.len)),seed=pick(seeds.length?seeds:pool),S=new Set(seed.chars),kept=[seed];let guard=0;
+ while(S.size<L&&guard++<24){const rem=L-S.size,cands=[],wts=[];for(const d of pool){if(kept.includes(d))continue;let add=0,shared=0;for(const c of d.chars)S.has(c)?shared++:add++;if(add===0||shared===0||add>Math.min(2,rem))continue;cands.push(d);wts.push(1+shared*2+(b.core.includes(d.len)?2:0)+(add===Math.min(2,rem)?1:0));}if(!cands.length)return null;const d=wchoice(cands,wts);kept.push(d);for(const c of d.chars)S.add(c);}
+ if(S.size!==L)return null;const closure=DICT.filter(d=>d.chars.every(c=>S.has(c))),boardPool=closure.filter(d=>b.lens.includes(d.len)),chosen=kept.slice(),inC=new Set(chosen.map(d=>d.w));
+ for(const rq of b.req(W)){let have=chosen.filter(d=>d.len>=rq.min).length;while(have<rq.count){const opts=boardPool.filter(d=>!inC.has(d.w)&&d.len>=rq.min);if(!opts.length)return null;const d=pick(opts);chosen.push(d);inC.add(d.w);have++;}}
+ while(chosen.length<W){const opts=boardPool.filter(d=>!inC.has(d.w));if(!opts.length)break;const d=wchoice(opts,opts.map(d=>1+(b.core.includes(d.len)?3:0)+d.len));chosen.push(d);inC.add(d.w);}
+ if(chosen.length!==W||closure.length<W+2)return null;return{words:shuffle(chosen),letters:shuffle([...S])};}
+function canPlace(grid,w,r,c,dir){const dr=dir==="V"?1:0,dc=dir==="H"?1:0,bit=dir==="H"?1:2;if(grid.has(key(r-dr,c-dc))||grid.has(key(r+dr*w.length,c+dc*w.length)))return 0;let cross=0;for(let i=0;i<w.length;i++){const rr=r+dr*i,cc=c+dc*i,cur=grid.get(key(rr,cc));if(cur){if(cur.ch!==w[i]||cur.mask&bit)return 0;cross++;}else if(grid.has(key(rr+dc,cc+dr))||grid.has(key(rr-dc,cc-dr)))return 0;}return cross;}
+function putWord(grid,placed,w,r,c,dir){const dr=dir==="V"?1:0,dc=dir==="H"?1:0,bit=dir==="H"?1:2;for(let i=0;i<w.length;i++){const k=key(r+dr*i,c+dc*i),cur=grid.get(k);cur?cur.mask|=bit:grid.set(k,{ch:w[i],mask:bit});}placed.push({w,r,c,dir});}
+function gridBounds(grid){let a=1/0,b=1/0,c=-1/0,d=-1/0;for(const k of grid.keys()){const p=k.split(","),r=+p[0],cc=+p[1];r<a&&(a=r);cc<b&&(b=cc);r>c&&(c=r);cc>d&&(d=cc);}return{minR:a,minC:b,maxR:c,maxC:d};}
+function tryLayout(wordStrs,maxDim,restarts){for(let t=0;t<restarts;t++){const order=wordStrs.slice().sort((a,b)=>b.length-a.length);for(let i=0;i<order.length;){let j=i;while(j<order.length&&order[j].length===order[i].length)j++;const seg=shuffle(order.slice(i,j));for(let k=i;k<j;k++)order[k]=seg[k-i];i=j;}const grid=new Map(),placed=[];putWord(grid,placed,order[0],0,0,Math.random()<.5?"H":"V");let ok=true;
+ for(let i=1;i<order.length;i++){const w=order[i],opts=[],seen=new Set();for(const p of placed)for(let j=0;j<p.w.length;j++){const cr=p.dir==="H"?p.r:p.r+j,cc=p.dir==="H"?p.c+j:p.c;for(let k=0;k<w.length;k++){if(p.w[j]!==w[k])continue;const dir=p.dir==="H"?"V":"H",sr=dir==="V"?cr-k:cr,sc=dir==="H"?cc-k:cc,kk=sr+","+sc+","+dir;if(seen.has(kk))continue;seen.add(kk);const cross=canPlace(grid,w,sr,sc,dir);cross>0&&opts.push({sr,sc,dir,cross});}}
+ if(!opts.length){ok=false;break;}const b=gridBounds(grid),live=[];for(const o of opts){const er=o.sr+(o.dir==="V"?w.length-1:0),ec=o.sc+(o.dir==="H"?w.length-1:0),rows=Math.max(b.maxR,er)-Math.min(b.minR,o.sr)+1,cols=Math.max(b.maxC,ec)-Math.min(b.minC,o.sc)+1;if(rows>maxDim||cols>maxDim)continue;o.score=o.cross*12-(rows+cols)*2-rows*cols*.15+Math.random()*4;live.push(o);}if(!live.length){ok=false;break;}live.sort((a,b)=>b.score-a.score);const o=pick(live.slice(0,3));putWord(grid,placed,w,o.sr,o.sc,o.dir);}
+ if(ok){const b=gridBounds(grid),words=placed.map(p=>({w:p.w,dir:p.dir,r:p.r-b.minR,c:p.c-b.minC,cells:[...p.w].map((ch,i)=>key(p.r-b.minR+(p.dir==="V"?i:0),p.c-b.minC+(p.dir==="H"?i:0)))})),cells=new Map();for(const[k,v]of grid){const p=k.split(","),r=+p[0]-b.minR,c=+p[1]-b.minC;cells.set(key(r,c),{ch:v.ch,r,c,words:[]});}words.forEach((wd,wi)=>wd.cells.forEach(k=>cells.get(k).words.push(wi)));return{rows:b.maxR-b.minR+1,cols:b.maxC-b.minC+1,words,cells};}}return null;}
+function generateStage(n,avoidKey){const band=bandFor(n),t0=performance.now();let result=null;for(let pass=0;pass<2&&!result;pass++){const b=pass===0?band:BANDS[0],deadline=t0+(pass===0?900:1800);while(performance.now()<deadline){const set=pickWordSet(b);if(!set)continue;const k=set.words.map(d=>d.w).sort().join("|");if(k===avoidKey)continue;const layout=tryLayout(set.words.map(d=>d.w),b.maxDim,14);if(layout){result={set,layout,key:k,band:b};break;}}}
+ if(!result){const ws=["かさ","しか","いし"].map(w=>dictMap.get(w)),layout=tryLayout(ws.map(d=>d.w),6,30)||{rows:2,cols:3,words:[{w:"いし",dir:"H",r:0,c:0,cells:["0,0","0,1"]},{w:"しか",dir:"V",r:0,c:1,cells:["0,1","1,1"]},{w:"かさ",dir:"H",r:1,c:1,cells:["1,1","1,2"]}],cells:new Map([["0,0",{ch:"い",r:0,c:0,words:[0]}],["0,1",{ch:"し",r:0,c:1,words:[0,1]}],["1,1",{ch:"か",r:1,c:1,words:[1,2]}],["1,2",{ch:"さ",r:1,c:2,words:[2]}]])};result={set:{words:ws,letters:shuffle(["か","さ","し","い"])},layout,key:"fallback",band:BANDS[0]};}return result;}
+
+/* ===== 状態 ===== */
+const HINT_COST=10,PICK_COST=15,BONUS_COIN=2,CLEAR_COIN=15;
+const state={attempt:0,stage:1,band:BANDS[0],letters:[],order:[],pos:[],tileEls:[],tileSize:56,wheelSize:300,cellSize:40,words:[],cells:new Map(),rows:0,cols:0,chain:[],pmode:"idle",activePointer:null,moved:false,submitPending:false,downPos:null,lastPointer:null,wrapRect:null,shuffling:false,targeting:false,completed:false,hintsUsed:0,bonusSet:new Set(),lastKey:{},stripTimer:0,completeTimer:0,flights:[]};
+function clearTransient(){for(const f of state.flights){try{f.anim.cancel();}catch(e){}f.el.remove();}state.flights=[];clearTimeout(state.stripTimer);clearTimeout(state.completeTimer);state.chain=[];state.pmode="idle";state.activePointer=null;state.submitPending=false;state.targeting=false;$("targetBanner").classList.add("hidden");closeHintPop();setStrip("guide");$("btnSubmitWord").classList.remove("on");$("lineMain").setAttribute("points","");$("lineLive").setAttribute("visibility","hidden");$("liveDot").setAttribute("visibility","hidden");$("kbdBuf").classList.add("hidden");kbdBuffer="";}
+function startStage(n){n=clamp(n,1,100);clearTransient();closeDrawer();closeHelp();hideClear();state.attempt++;const gen=generateStage(n,state.lastKey[n]);state.lastKey[n]=gen.key;state.stage=n;state.band=gen.band;state.letters=gen.set.letters;state.order=state.letters.map((_,i)=>i);state.rows=gen.layout.rows;state.cols=gen.layout.cols;state.words=gen.layout.words.map(w=>({w:w.w,cat:(dictMap.get(w.w)||{cat:"様子"}).cat,dir:w.dir,r:w.r,c:w.c,cells:w.cells,found:false}));state.cells=new Map();for(const[k,v]of gen.layout.cells)state.cells.set(k,{ch:v.ch,r:v.r,c:v.c,words:v.words,revealed:false,hint:false,el:null});state.completed=false;state.hintsUsed=0;state.bonusSet=new Set(Array.isArray(SV.bonus[n])?SV.bonus[n]:[]);
+ const revealN=state.band.id===0?1:Math.random()<(state.band.id===1?.5:.35)?1:0,cand=[...state.cells.entries()].filter(([k,c])=>c.words.some(wi=>state.words[wi].w.length>=3));for(let i=0;i<revealN&&cand.length;i++){const[k]=cand.splice(Math.floor(Math.random()*cand.length),1)[0],c=state.cells.get(k);c.revealed=true;c.hint=true;}
+ for(const wd of state.words)wd.cells.every(k=>state.cells.get(k).revealed)&&(wd.found=true);
+ SV.current=n;save();buildBoardDOM();buildWheelDOM();updateHUD();updateProgress();updateBonusBadge();$("stageNum").textContent="STAGE "+n;const b=state.band;$("bandChip").textContent=b.kanji+"・"+b.name;$("bandChip").style.background="linear-gradient(140deg,"+b.color+","+b.color+"bb)";$("bandStamp").textContent=b.kanji;$("coach").classList.toggle("hidden",SV.seen);showScreen("game");requestAnimationFrame(sizeAll);}
+function buildBoardDOM(){const g=$("boardGrid");g.innerHTML="";for(const[k,c]of state.cells){const el=document.createElement("button");el.type="button";el.className="cell";el.dataset.key=k;el.setAttribute("aria-label","マス");const sp=document.createElement("span");sp.className="ch";el.appendChild(sp);if(c.revealed){el.classList.add("revealed");sp.textContent=c.ch;c.hint&&el.classList.add("hintmark");}c.el=el;g.appendChild(el);}}
+function sizeBoard(){const panel=$("boardPanel"),g=$("boardGrid"),pw=panel.clientWidth-24,ph=panel.clientHeight-42;if(pw<=0||ph<=0||!state.cols)return;const cell=clamp(Math.floor(Math.min(pw/state.cols,ph/state.rows,52)),18,52);state.cellSize=cell;g.style.width=state.cols*cell+"px";g.style.height=state.rows*cell+"px";for(const c of state.cells.values()){c.el.style.left=c.c*cell+1+"px";c.el.style.top=c.r*cell+1+"px";c.el.style.width=cell-2+"px";c.el.style.height=cell-2+"px";c.el.style.fontSize=Math.round(cell*.52)+"px";}}
+function buildWheelDOM(){const layer=$("tileLayer");layer.innerHTML="";state.tileEls=state.letters.map((ch,i)=>{const el=document.createElement("button");el.type="button";el.className="tile"+("ゃゅょっぁぃぅぇぉ".includes(ch)?" small-k":"");el.dataset.idx=i;el.setAttribute("aria-label",ch);const sp=document.createElement("span");sp.className="tk-in";sp.textContent=ch;sp.style.animationDelay=i*.35+"s";el.appendChild(sp);layer.appendChild(el);return el;});}
+function layoutWheel(){const size=state.wheelSize,n=state.letters.length,tile=clamp(Math.round(size*.2),42,64);state.tileSize=tile;const rad=size/2-tile/2-7;state.pos=[];state.order.forEach((li,slot)=>{const a=-Math.PI/2+slot*6.283/n,x=size/2+Math.cos(a)*rad,y=size/2+Math.sin(a)*rad;state.pos[li]={x,y};const el=state.tileEls[li];el.style.left=x+"px";el.style.top=y+"px";el.style.width=tile+"px";el.style.height=tile+"px";el.style.fontSize=Math.round(tile*.5)+"px";});$("wheelSvg").setAttribute("viewBox","0 0 "+size+" "+size);const lw=Math.max(9,Math.round(tile*.2));$("lineMain").setAttribute("stroke-width",lw);$("lineLive").setAttribute("stroke-width",lw);$("liveDot").setAttribute("r",Math.round(lw*.55));const sh=$("btnShuffle"),sd=Math.round(size*.24);sh.style.width=sd+"px";sh.style.height=sd+"px";sh.querySelector(".ic").style.width=Math.round(sd*.44)+"px";sh.querySelector(".ic").style.height=Math.round(sd*.44)+"px";updateChainVisual();}
+function sizeAll(){FX.resize();if(screenName!=="game")return;const app=$("app"),play=$("playArea"),landscape=matchMedia("(orientation: landscape) and (max-height: 540px)").matches,stripH=$("wordStrip").offsetHeight,barH=$("actionBar").offsetHeight;let maxH=landscape?play.clientHeight-stripH-barH-16:app.clientHeight-$("gameHeader").offsetHeight-stripH-barH-176;const size=clamp(Math.min(play.clientWidth-18,maxH,340),176,340);state.wheelSize=size;const wrap=$("wheelWrap");wrap.classList.add("no-anim");wrap.style.width=size+"px";wrap.style.height=size+"px";layoutWheel();sizeBoard();requestAnimationFrame(()=>wrap.classList.remove("no-anim"));state.wrapRect=wrap.getBoundingClientRect();}
+let resizeRaf=0;addEventListener("resize",()=>{cancelAnimationFrame(resizeRaf);resizeRaf=requestAnimationFrame(sizeAll);});
+function updateHUD(){$("coinVal").textContent=SV.coins;updateSoundUI();}
+function updateProgress(){const f=state.words.filter(w=>w.found).length,t=state.words.length;$("progText").textContent=f+" / "+t+" 語";$("progFill").style.width=Math.round(f/t*100)+"%";}
+function updateBonusBadge(){$("bonusCount").textContent=state.bonusSet.size;}
+function bumpCoins(gain){$("coinVal").textContent=SV.coins;const box=$("coinBox");box.classList.remove("bump","shake");void box.offsetWidth;box.classList.add(gain?"bump":"shake");}
+function setStrip(mode){$("wordStrip").dataset.mode=mode;}
+function renderChainStrip(){const sc=$("stripChain");sc.innerHTML="";for(const i of state.chain){const sp=document.createElement("span");sp.className="wch";sp.textContent=state.letters[i];sc.appendChild(sp);}clearTimeout(state.stripTimer);setStrip(state.chain.length?"chain":"guide");$("btnSubmitWord").classList.toggle("on",state.chain.length>=2&&state.pmode!=="drag");}
+function stripResult(kind,main,sub){const r=$("stripResult");r.className=kind;r.querySelector(".main").textContent=main;r.querySelector(".sub").textContent=sub;setStrip("result");$("btnSubmitWord").classList.remove("on");clearTimeout(state.stripTimer);state.stripTimer=setTimeout(()=>{state.chain.length||setStrip("guide");},1400);}
+const PRAISE=["いいね！","すばらしい！","その調子！","ナイス！","見事！"];
+/* 実在語の可能性に配慮した、断定しないメッセージ */
+const HEDGE=["収録語に 含まれていない ことばです","この辞書には 未収録の ことばです","収録語リストに 見つかりません","内蔵辞書の 収録外の ことばです"];
+function captureStripRects(){return[...$("stripChain").querySelectorAll(".wch")].map(sp=>{const r=sp.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2,size:parseFloat(getComputedStyle(sp).fontSize)||34};});}
+function cellCenter(k){const c=state.cells.get(k),r=c.el.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2,size:state.cellSize*.52};}
+function submitChain(){const word=state.chain.map(i=>state.letters[i]).join(""),rects=captureStripRects();resetChain();if(word.length<2){word.length===1&&stripResult("miss",word,"2文字以上で つないでね");return;}const bw=state.words.find(x=>x.w===word);if(bw&&!bw.found){foundWord(bw,rects);return;}if(bw&&bw.found){AU.dup();stripResult("dup",word,"もう 見つけたことばだよ");return;}const entry=dictMap.get(word);if(entry){if(state.bonusSet.has(word)){AU.dup();stripResult("dup",word,"ボーナス登録ずみだよ");return;}bonusWord(word,entry,rects);return;}AU.miss();stripResult("miss",word,pick(HEDGE));}
+function foundWord(bw,rects){bw.found=true;updateProgress();AU.chime();vib([15,30,15]);stripResult("good",bw.w+" ✓",CAT_EMOJI[bw.cat]+" "+bw.cat+" ・ "+pick(PRAISE));if(!SV.seen){SV.seen=true;save();$("coach").classList.add("hidden");}const myA=state.attempt,wc=$("wheelWrap").getBoundingClientRect();let pending=0,done=0;bw.cells.forEach((k,i)=>{const c=state.cells.get(k);if(c.revealed){flashCell(k);return;}pending++;const to=cellCenter(k),from=rects&&rects[i]?rects[i]:{x:wc.left+wc.width/2,y:wc.top+wc.height/2,size:30};flyChar(bw.w[i],from,to,i*60,RM?130:470,()=>{if(state.attempt!==myA)return;revealCell(k,false);AU.land(i);++done===pending&&afterReveal();});});pending===0&&afterReveal();}
+function bonusWord(word,entry,rects){state.bonusSet.add(word);Array.isArray(SV.bonus[state.stage])||(SV.bonus[state.stage]=[]);SV.bonus[state.stage].push(word);SV.coins+=BONUS_COIN;save();updateBonusBadge();bumpCoins(true);AU.coin();vib([10,20,10]);stripResult("bonus","ボーナス単語！ "+word,CAT_EMOJI[entry.cat]+" "+entry.cat+" ・ +"+BONUS_COIN+"コイン");const from=rects&&rects[0]?rects[0]:{x:innerWidth/2,y:innerHeight/2,size:26},cb=$("coinBox").getBoundingClientRect(),to={x:cb.left+cb.width/2,y:cb.top+cb.height/2,size:18};flyCoin(from,to,0);flyCoin(from,to,110);$("bonusDrawer").classList.contains("hidden")||renderBonusList();}
+function revealCell(k,hint){const c=state.cells.get(k);if(c.revealed&&!hint)return;c.revealed=true;hint&&(c.hint=true);c.el.classList.add("revealed","pop");c.hint&&c.el.classList.add("hintmark");c.el.querySelector(".ch").textContent=c.ch;c.el.classList.remove("targetable");setTimeout(()=>c.el&&c.el.classList.remove("pop"),520);const r=c.el.getBoundingClientRect();FX.spark(r.left+r.width/2,r.top+r.height/2,hint?10:5);}
+function flashCell(k){const c=state.cells.get(k);if(!c||!c.el)return;c.el.classList.remove("flash");void c.el.offsetWidth;c.el.classList.add("flash");}
+function afterReveal(){for(const wd of state.words)if(!wd.found&&wd.cells.every(k=>state.cells.get(k).revealed)){wd.found=true;updateProgress();wd.cells.forEach(flashCell);AU.soft();toast("『"+wd.w+"』が そろった！","gold","check");}updateProgress();checkComplete();}
+function checkComplete(){if(state.completed||!state.words.every(w=>w.found))return;state.completed=true;const myA=state.attempt;clearTimeout(state.completeTimer);state.completeTimer=setTimeout(()=>{state.attempt===myA&&screenName==="game"&&showClear();},RM?250:700);}
+function flyChar(ch,from,to,delay,dur,onDone){const wrap=document.createElement("div");wrap.className="fly-wrap";wrap.style.left=from.x+"px";wrap.style.top=from.y+"px";const sp=document.createElement("span");sp.className="fly-kana";sp.textContent=ch;sp.style.fontSize=from.size+"px";wrap.appendChild(sp);$("flyLayer").appendChild(wrap);const dx=to.x-from.x,dy=to.y-from.y,s=clamp(to.size/from.size,.3,1.4),ease="cubic-bezier(.35,.1,.25,1)",anim=wrap.animate([{transform:"translate(0px,0px)"},{transform:"translate("+dx*.5+"px,"+(dy*.5-(RM?0:44))+"px)",offset:.55},{transform:"translate("+dx+"px,"+dy+"px)"}],{duration:dur,delay,easing:ease,fill:"forwards"});sp.animate([{transform:"translate(-50%,-50%) scale(1)"},{transform:"translate(-50%,-50%) scale("+s+")"}],{duration:dur,delay,easing:ease,fill:"forwards"});const rec={el:wrap,anim};state.flights.push(rec);anim.onfinish=()=>{wrap.remove();const i=state.flights.indexOf(rec);i>=0&&state.flights.splice(i,1);onDone&&onDone();};}
+function flyCoin(from,to,delay){const wrap=document.createElement("div");wrap.className="fly-wrap";wrap.style.left=from.x+"px";wrap.style.top=from.y+"px";wrap.innerHTML='<span class="fly-coin"><svg class="ic"><use href="#i-coin"/></svg></span>';$("flyLayer").appendChild(wrap);const dx=to.x-from.x,dy=to.y-from.y,anim=wrap.animate([{transform:"translate(0px,0px) scale(1)",opacity:1},{transform:"translate("+dx*.4+"px,"+(dy*.5-60)+"px) scale(1.25)",opacity:1,offset:.5},{transform:"translate("+dx+"px,"+dy+"px) scale(.6)",opacity:.9}],{duration:RM?150:620,delay,easing:"cubic-bezier(.3,.2,.3,1)",fill:"forwards"});anim.onfinish=()=>{wrap.remove();bumpCoins(true);AU.tick();};}
+function spend(n){if(SV.coins<n){bumpCoins(false);AU.bad();toast("コインが足りないよ（ボーナス単語で貯めよう）","err","coin");return false;}SV.coins-=n;save();$("coinVal").textContent=SV.coins;return true;}
+function emptyCells(){return[...state.cells.entries()].filter(([k,c])=>!c.revealed);}
+function openHintPop(){const pop=$("hintPop");if(!pop.classList.contains("hidden")){closeHintPop();return;}const empty=emptyCells().length>0;$("btnHintRandom").disabled=!empty||SV.coins<HINT_COST;$("btnHintPick").disabled=!empty||SV.coins<PICK_COST;pop.classList.remove("hidden");const btn=$("btnHint").getBoundingClientRect();pop.style.left=clamp(btn.left+btn.width/2-115,8,innerWidth-238)+"px";pop.style.top="auto";pop.style.bottom=innerHeight-btn.top+8+"px";pushEsc("hint",closeHintPop);AU.wood();}
+function closeHintPop(){$("hintPop").classList.add("hidden");popEsc("hint");}
+function doRandomHint(){closeHintPop();const ec=emptyCells();if(!ec.length){toast("開けるマスがないよ","info","bulb");return;}if(!spend(HINT_COST))return;state.hintsUsed++;const[k]=pick(ec);AU.hint();revealCell(k,true);toast("ヒントで 1マス開いた！","gold","bulb");afterReveal();}
+function enterTargeting(){closeHintPop();if(!emptyCells().length){toast("開けるマスがないよ","info","bulb");return;}if(SV.coins<PICK_COST){bumpCoins(false);AU.bad();toast("コインが足りないよ（指定ヒントは15コイン）","err","coin");return;}state.targeting=true;$("targetBanner").classList.remove("hidden");for(const c of state.cells.values())c.revealed||c.el.classList.add("targetable");AU.wood();}
+function exitTargeting(){state.targeting=false;$("targetBanner").classList.add("hidden");for(const c of state.cells.values())c.el.classList.remove("targetable");}
+$("boardGrid").addEventListener("click",e=>{const btn=e.target.closest(".cell");if(!btn)return;const k=btn.dataset.key,c=state.cells.get(k);if(!c)return;AU.init();AU.resume();if(state.targeting){if(c.revealed)return;if(!spend(PICK_COST)){exitTargeting();return;}state.hintsUsed++;AU.hint();revealCell(k,true);exitTargeting();afterReveal();return;}if(c.revealed){flashCell(k);AU.tick();return;}c.words.forEach(wi=>state.words[wi].cells.forEach(flashCell));AU.tick();});
+function renderBonusList(){const list=$("bonusList"),words=[...state.bonusSet];$("drawerCount").textContent=words.length+"語";list.innerHTML="";$("bonusEmpty").classList.toggle("hidden",words.length>0);list.classList.toggle("hidden",words.length===0);words.forEach((w,i)=>{const e=dictMap.get(w)||{cat:"様子"},div=document.createElement("div");div.className="bonus-item";div.style.animationDelay=i*.03+"s";div.innerHTML='<span class="w"></span><span class="c">'+CAT_EMOJI[e.cat]+" "+e.cat+'</span><span class="g"><svg class="ic"><use href="#i-coin"/></svg>+2</span>';div.querySelector(".w").textContent=w;list.appendChild(div);});}
+function openDrawer(){closeHintPop();closeHelp();renderBonusList();$("bonusDrawer").classList.remove("hidden");syncScrim();pushEsc("drawer",closeDrawer);$("btnDrawerClose").focus();AU.wood();}
+function closeDrawer(){$("bonusDrawer").classList.add("hidden");popEsc("drawer");syncScrim();}
+function openHelp(){closeHintPop();closeDrawer();$("dictCount").textContent=DICT.length;$("helpModal").classList.remove("hidden");syncScrim();pushEsc("help",closeHelp);$("btnHelpClose").focus();AU.wood();}
+function closeHelp(){$("helpModal").classList.add("hidden");popEsc("help");syncScrim();}
+function showClear(){clearTransient();closeDrawer();closeHelp();closeHintPop();const n=state.stage;SV.cleared[n]=true;SV.coins+=CLEAR_COIN;save();$("coinVal").textContent=SV.coins;$("clrStage").textContent="STAGE "+n+" ・ "+state.band.kanji+" "+state.band.name;const wc=$("clrWords");wc.innerHTML="";state.words.forEach((wd,i)=>{const sp=document.createElement("span");sp.className="clr-word";sp.style.animationDelay=.15+i*.06+"s";sp.innerHTML="<span></span><small>"+CAT_EMOJI[wd.cat]+"</small>";sp.firstElementChild.textContent=wd.w;wc.appendChild(sp);});$("clrBonus").textContent=state.bonusSet.size+"語";$("clrHints").textContent=state.hintsUsed+"回";const all=clearedCount()>=100;$("clrAll").style.display=all?"block":"none";$("clrTitle").textContent=all?"全ステージ制覇！":"ステージクリア！";$("nextLabel").textContent=n<100?"次のステージへ":"ステージ一覧へ";$("clearBackdrop").classList.remove("hidden");$("clearOverlay").classList.remove("hidden");clearOpen=true;AU.fanfare();vib([20,40,20,40,60]);FX.celebrate();all&&setTimeout(()=>FX.celebrate(),900);$("btnNext").focus();}
+function hideClear(){$("clearBackdrop").classList.add("hidden");$("clearOverlay").classList.add("hidden");clearOpen=false;}
+
+/* ===== ポインター入力 ===== */
+const wrap=$("wheelWrap");
+wrap.addEventListener("contextmenu",e=>e.preventDefault());
+function localPos(e){const r=state.wrapRect||wrap.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+function hitLetter(p){const R=state.tileSize*.62;let best=-1,bd=R*R;state.pos.forEach((pos,i)=>{if(!pos)return;const dx=p.x-pos.x,dy=p.y-pos.y,d=dx*dx+dy*dy;d<bd&&(bd=d,best=i);});return best;}
+function updateChainVisual(){state.tileEls.forEach((el,i)=>el.classList.toggle("sel",state.chain.includes(i)));$("lineMain").setAttribute("points",state.chain.map(i=>state.pos[i]?state.pos[i].x+","+state.pos[i].y:"").join(" "));renderChainStrip();}
+function pushChain(idx){if(state.chain.includes(idx))return;state.chain.push(idx);AU.note(state.chain.length-1);vib(8);SV.seen||$("coach").classList.add("hidden");updateChainVisual();}
+function popChain(){if(!state.chain.length)return;state.chain.pop();AU.back();updateChainVisual();}
+function resetChain(){state.chain=[];state.pmode="idle";state.submitPending=false;$("lineLive").setAttribute("visibility","hidden");$("liveDot").setAttribute("visibility","hidden");updateChainVisual();}
+function updateLive(){const live=$("lineLive"),dot=$("liveDot");if(state.pmode==="drag"&&state.chain.length&&state.lastPointer){const p=state.pos[state.chain[state.chain.length-1]];live.setAttribute("x1",p.x);live.setAttribute("y1",p.y);live.setAttribute("x2",state.lastPointer.x);live.setAttribute("y2",state.lastPointer.y);live.setAttribute("visibility","visible");dot.setAttribute("cx",state.lastPointer.x);dot.setAttribute("cy",state.lastPointer.y);dot.setAttribute("visibility","visible");}else{live.setAttribute("visibility","hidden");dot.setAttribute("visibility","hidden");}}
+wrap.addEventListener("pointerdown",e=>{AU.init();AU.resume();if(e.target.closest("#btnShuffle")||state.shuffling||state.activePointer!==null||e.button!==undefined&&e.button!==0)return;state.wrapRect=wrap.getBoundingClientRect();const p=localPos(e),idx=hitLetter(p);if(idx<0){state.pmode==="click"&&state.chain.length>=2&&submitChain();return;}e.preventDefault();try{wrap.setPointerCapture(e.pointerId);}catch(err){}state.activePointer=e.pointerId;state.downPos=p;state.lastPointer=p;state.moved=false;if(state.pmode==="click"){const last=state.chain[state.chain.length-1];if(state.chain.length&&last===idx)state.submitPending=true;else if(state.chain.includes(idx)){state.chain=state.chain.slice(0,state.chain.indexOf(idx)+1);AU.back();updateChainVisual();}else pushChain(idx);state.pmode="clickpress";}else{state.chain.length&&resetChain();pushChain(idx);state.pmode="press";}updateLive();});
+wrap.addEventListener("pointermove",e=>{if(state.activePointer!==e.pointerId)return;const p=localPos(e);if(state.downPos){const dx=p.x-state.downPos.x,dy=p.y-state.downPos.y;dx*dx+dy*dy>100&&(state.moved=true);}if((state.pmode==="press"||state.pmode==="clickpress")&&state.moved){state.pmode="drag";$("btnSubmitWord").classList.remove("on");}if(state.pmode==="drag"){const idx=hitLetter(p);if(idx>=0){const L=state.chain.length;L>=2&&state.chain[L-2]===idx?popChain():state.chain.includes(idx)||pushChain(idx);}state.lastPointer=p;updateLive();}});
+function endPointer(e){if(state.activePointer!==e.pointerId)return;try{wrap.releasePointerCapture(e.pointerId);}catch(err){}state.activePointer=null;const wasDrag=state.pmode==="drag",pend=state.submitPending;state.submitPending=false;if(wasDrag){state.pmode="idle";updateLive();submitChain();}else if(state.pmode==="press"){state.pmode="click";updateChainVisual();}else if(state.pmode==="clickpress"){if(pend){state.pmode="idle";submitChain();}else{state.pmode="click";updateChainVisual();}}updateLive();}
+wrap.addEventListener("pointerup",endPointer);
+wrap.addEventListener("pointercancel",e=>{if(state.activePointer!==e.pointerId)return;state.activePointer=null;resetChain();});
+$("tileLayer").addEventListener("click",e=>{if(e.detail!==0)return;const t=e.target.closest(".tile");if(!t)return;const idx=+t.dataset.idx;state.chain.length&&state.chain[state.chain.length-1]===idx?submitChain():state.chain.includes(idx)||pushChain(idx);});
+$("btnSubmitWord").addEventListener("click",()=>{AU.init();AU.resume();submitChain();});
+function doShuffle(){if(state.shuffling)return;resetChain();const prev=state.order.join(",");let next;for(let i=0;i<6;i++){next=shuffle(state.order);if(next.join(",")!==prev)break;}state.order=next;state.shuffling=true;layoutWheel();const plate=$("wheelPlate");plate.classList.remove("spin");void plate.offsetWidth;plate.classList.add("spin");setTimeout(()=>plate.classList.remove("spin"),480);AU.init();AU.resume();AU.swish();vib(12);setTimeout(()=>state.shuffling=false,RM?60:460);}
+$("btnShuffle").addEventListener("click",doShuffle);
+
+/* ===== キーボード入力 ===== */
+const ROMAJI={a:"あ",i:"い",u:"う",e:"え",o:"お",ka:"か",ki:"き",ku:"く",ke:"け",ko:"こ",sa:"さ",shi:"し",si:"し",su:"す",se:"せ",so:"そ",ta:"た",chi:"ち",ti:"ち",tsu:"つ",tu:"つ",te:"て",to:"と",na:"な",ni:"に",nu:"ぬ",ne:"ね",no:"の",ha:"は",hi:"ひ",fu:"ふ",hu:"ふ",he:"へ",ho:"ほ",ma:"ま",mi:"み",mu:"む",me:"め",mo:"も",ya:"や",yu:"ゆ",yo:"よ",ra:"ら",ri:"り",ru:"る",re:"れ",ro:"ろ",wa:"わ",wo:"を",nn:"ん",ga:"が",gi:"ぎ",gu:"ぐ",ge:"げ",go:"ご",za:"ざ",ji:"じ",zi:"じ",zu:"ず",ze:"ぜ",zo:"ぞ",da:"だ",di:"ぢ",du:"づ",de:"で",do:"ど",ba:"ば",bi:"び",bu:"ぶ",be:"べ",bo:"ぼ",pa:"ぱ",pi:"ぴ",pu:"ぷ",pe:"ぺ",po:"ぽ",kya:"きゃ",kyu:"きゅ",kyo:"きょ",sha:"しゃ",shu:"しゅ",sho:"しょ",sya:"しゃ",syu:"しゅ",syo:"しょ",cha:"ちゃ",chu:"ちゅ",cho:"ちょ",tya:"ちゃ",tyu:"ちゅ",tyo:"ちょ",nya:"にゃ",nyu:"にゅ",nyo:"にょ",hya:"ひゃ",hyu:"ひゅ",hyo:"ひょ",mya:"みゃ",myu:"みゅ",myo:"みょ",rya:"りゃ",ryu:"りゅ",ryo:"りょ",gya:"ぎゃ",gyu:"ぎゅ",gyo:"ぎょ",ja:"じゃ",ju:"じゅ",jo:"じょ",jya:"じゃ",jyu:"じゅ",jyo:"じょ",bya:"びゃ",byu:"びゅ",byo:"びょ",pya:"ぴゃ",pyu:"ぴゅ",pyo:"ぴょ",fa:"ふぁ",fi:"ふぃ",fe:"ふぇ",fo:"ふぉ",xa:"ぁ",la:"ぁ",xi:"ぃ",li:"ぃ",xu:"ぅ",lu:"ぅ",xe:"ぇ",le:"ぇ",xo:"ぉ",lo:"ぉ",xya:"ゃ",lya:"ゃ",xyu:"ゅ",lyu:"ゅ",xyo:"ょ",lyo:"ょ",xtu:"っ",ltu:"っ",xtsu:"っ",wi:"うぃ",we:"うぇ",she:"しぇ",che:"ちぇ",je:"じぇ"};
+const PREFIX=new Set();for(const k of Object.keys(ROMAJI))for(let i=1;i<=k.length;i++)PREFIX.add(k.slice(0,i));
+let kbdBuffer="",composing=false;const kbdInput=$("kbdInput");
+function kbdFlash(){const el=$("kbdBuf");el.classList.remove("err");void el.offsetWidth;el.classList.add("err");AU.back();}
+function handleKana(ch){const idx=state.letters.indexOf(ch);if(idx<0){kbdFlash();return;}if(state.chain.includes(idx)){AU.tick();return;}pushChain(idx);}
+function updateKbdPreview(){const el=$("kbdBuf");el.classList.toggle("hidden",!kbdBuffer);el.textContent=kbdBuffer;}
+function drainBuffer(){let guard=0;while(kbdBuffer&&guard++<24){if(kbdBuffer[0]==="n"){if(kbdBuffer.length===1)break;const nx=kbdBuffer[1];if(nx==="n"){handleKana("ん");kbdBuffer=kbdBuffer.slice(2);continue;}if(!"aiueoy".includes(nx)){handleKana("ん");kbdBuffer=kbdBuffer.slice(1);continue;}}if(kbdBuffer.length>=2&&kbdBuffer[0]===kbdBuffer[1]&&!"aiueon".includes(kbdBuffer[0])){handleKana("っ");kbdBuffer=kbdBuffer.slice(1);continue;}let matched=false;for(const len of[4,3,2,1]){if(kbdBuffer.length<len)continue;const seg=kbdBuffer.slice(0,len);if(ROMAJI[seg]){if(len<4&&kbdBuffer.length>len&&PREFIX.has(kbdBuffer.slice(0,len+1)))break;for(const ch of ROMAJI[seg])handleKana(ch);kbdBuffer=kbdBuffer.slice(len);matched=true;break;}}if(matched)continue;if(PREFIX.has(kbdBuffer))break;kbdFlash();kbdBuffer=kbdBuffer.slice(1);}updateKbdPreview();}
+function flushPendingN(){if(kbdBuffer==="n"||kbdBuffer==="n'"){handleKana("ん");kbdBuffer="";updateKbdPreview();}}
+function kbdSubmit(){flushPendingN();kbdBuffer="";updateKbdPreview();submitChain();}
+function kbdBack(){kbdBuffer?(kbdBuffer=kbdBuffer.slice(0,-1),updateKbdPreview()):popChain();}
+function kbdClear(){kbdBuffer="";updateKbdPreview();resetChain();}
+function processTyped(str){for(const ch of str){if(/[ぁ-ん]/.test(ch))handleKana(ch);else if(/[a-zA-Z]/.test(ch)){kbdBuffer+=ch.toLowerCase();drainBuffer();}else if(ch===" "||ch==="\n")kbdSubmit();}}
+kbdInput.addEventListener("compositionstart",()=>composing=true);
+kbdInput.addEventListener("compositionend",()=>{composing=false;const v=kbdInput.value;kbdInput.value="";processTyped(v);});
+kbdInput.addEventListener("input",()=>{if(composing)return;const v=kbdInput.value;kbdInput.value="";processTyped(v);});
+kbdInput.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();kbdSubmit();}else if(e.key==="Backspace"){e.preventDefault();kbdBack();}else if(e.key==="Escape"){e.preventDefault();kbdClear();}e.stopPropagation();});
+function gameKeysActive(){return screenName==="game"&&!clearOpen&&escStack.length===0;}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(escStack.length){e.preventDefault();closeTop();return;}if(gameKeysActive()){if(state.targeting){exitTargeting();return;}if(state.chain.length||kbdBuffer){kbdClear();return;}}return;}if(!gameKeysActive()||e.target===kbdInput||e.ctrlKey||e.metaKey||e.altKey)return;if(e.key==="Enter"){e.preventDefault();AU.init();AU.resume();kbdSubmit();return;}if(e.key==="Backspace"){e.preventDefault();kbdBack();return;}if(e.key.length===1&&/[a-zA-Z]/.test(e.key)){e.preventDefault();AU.init();AU.resume();try{kbdInput.focus({preventScroll:true});}catch(err){}kbdBuffer+=e.key.toLowerCase();drainBuffer();}});
+
+/* ===== ボタン ===== */
+function bindBtn(id,fn){$(id).addEventListener("click",e=>{AU.init();AU.resume();fn(e);});}
+bindBtn("btnContinue",()=>{AU.wood();startStage(SV.current);});
+bindBtn("btnSelect",()=>{AU.wood();showScreen("select");});
+bindBtn("btnHelp",openHelp);bindBtn("btnHelp2",openHelp);bindBtn("btnHelpClose",closeHelp);
+bindBtn("btnHelpOk",()=>{closeHelp();AU.wood();});
+bindBtn("selBack",()=>{AU.wood();showScreen("home");});
+bindBtn("btnRandomSel",()=>{AU.swish();startStage(randomStage());});
+bindBtn("btnHome",()=>{AU.wood();showScreen("home");});
+bindBtn("btnHint",openHintPop);bindBtn("btnHintRandom",doRandomHint);bindBtn("btnHintPick",enterTargeting);
+bindBtn("btnTargetCancel",()=>{exitTargeting();AU.wood();});
+bindBtn("btnBonus",openDrawer);bindBtn("btnDrawerClose",closeDrawer);
+bindBtn("btnKbd",()=>{try{kbdInput.focus({preventScroll:true});}catch(err){}toast("ローマ字・ひらがなで入力 → Enterで決定","info","kbd");});
+bindBtn("btnRetry",()=>{AU.swish();startStage(state.stage);toast("新しい単語セットを 作りました","info","refresh");});
+bindBtn("btnNext",()=>{AU.wood();const n=state.stage;hideClear();n<100?startStage(n+1):showScreen("select");});
+bindBtn("btnReplay",()=>{AU.swish();const n=state.stage;hideClear();startStage(n);});
+bindBtn("btnToSelect",()=>{AU.wood();hideClear();showScreen("select");});
+bindBtn("btnSound",()=>{SV.sound=!SV.sound;save();AU.setEnabled(SV.sound);updateSoundUI();SV.sound&&AU.wood();});
+function updateSoundUI(){const b=$("btnSound");b.classList.toggle("muted",!SV.sound);b.setAttribute("aria-pressed",String(SV.sound));$("sndOnIc").classList.toggle("hidden",!SV.sound);$("sndOffIc").classList.toggle("hidden",SV.sound);$("sndState").textContent=SV.sound?"音":"消音";}
+$("scrim").addEventListener("click",closeTop);
+document.addEventListener("pointerdown",e=>{AU.init();AU.resume();$("hintPop").classList.contains("hidden")||e.target.closest("#hintPop")||e.target.closest("#btnHint")||closeHintPop();},true);
+AU.setEnabled(SV.sound);updateSoundUI();renderHome();buildSelect();showScreen("home");
+addEventListener("orientationchange",()=>setTimeout(sizeAll,120));
+document.fonts&&document.fonts.ready.then(()=>{screenName==="game"&&sizeAll();});
+})();
+</script>
+</body>
+</html>
