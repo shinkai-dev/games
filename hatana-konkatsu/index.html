@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>ハタノの婚活見極め！〜その発言、地雷じゃないですか？〜</title>
+<style>
+:root{
+  --bg0:#150a1b; --bg1:#241226; --surface:#2c1730; --surface2:#3a2140;
+  --cream:#f6e7cd; --cream2:#e8d2b0; --ink:#2a1626; --dim:#c9aebe;
+  --pink:#ff4f9a; --pink2:#ff7ab8; --magenta:#c2247f;
+  --amber:#ffb347; --gold:#ffd166; --red:#ff3b4e; --red2:#c81e3c;
+  --green:#2fe08c; --green2:#0c8a4e; --cyan:#3fd6ff; --blue:#5a8cff;
+  --wood:#b0763f; --wine:#8a2a4a;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{position:fixed;inset:0;overflow:hidden;overscroll-behavior:none;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg0); color:var(--cream);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Meiryo",system-ui,sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:manipulation;
+}
+.disp{font-family:"Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;font-weight:900}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;pointer-events:none}
+.blob.b1{width:46vmax;height:46vmax;left:-12vmax;top:-14vmax;background:radial-gradient(circle,#7a1a52,transparent 70%);animation:drift1 26s ease-in-out infinite alternate}
+.blob.b2{width:40vmax;height:40vmax;right:-10vmax;bottom:-12vmax;background:radial-gradient(circle,#7a4a12,transparent 70%);animation:drift2 31s ease-in-out infinite alternate}
+.blob.b3{width:30vmax;height:30vmax;right:6vmax;top:-8vmax;background:radial-gradient(circle,#0f4a66,transparent 70%);animation:drift1 22s ease-in-out infinite alternate-reverse}
+@keyframes drift1{from{transform:translate(0,0) scale(1)}to{transform:translate(6vmax,4vmax) scale(1.15)}}
+@keyframes drift2{from{transform:translate(0,0) scale(1.1)}to{transform:translate(-5vmax,-5vmax) scale(.95)}}
+#pageNoise{position:absolute;inset:0;opacity:.07;pointer-events:none}
+#frame{
+  position:relative;height:100vh;height:100dvh;width:min(100vw,calc(100vh * .5625));width:min(100vw,calc(100dvh * .5625));
+  background:var(--bg1);overflow:hidden;border-radius:22px;
+  border:1px solid rgba(255,179,71,.28);
+  box-shadow:0 0 0 1px rgba(0,0,0,.6),0 24px 80px rgba(0,0,0,.7),0 0 90px rgba(255,79,154,.14),0 0 40px rgba(255,179,71,.10);
+}
+@media (max-width:640px){#frame{border-radius:0;border:none;box-shadow:none}}
+#grain{position:absolute;inset:-40px;opacity:.06;pointer-events:none;z-index:2;animation:grain 1.2s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-12px,8px)}50%{transform:translate(10px,-10px)}75%{transform:translate(-6px,-14px)}100%{transform:translate(0,0)}}
+#scene{position:absolute;inset:0;z-index:1;display:block}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+svg{display:block}
+.scrolly{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;scrollbar-width:thin;scrollbar-color:#c2247f rgba(255,209,102,.08)}
+.scrolly::-webkit-scrollbar{width:8px}
+.scrolly::-webkit-scrollbar-track{background:rgba(255,209,102,.07);border-radius:8px}
+.scrolly::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--pink),var(--amber));border-radius:8px;border:2px solid rgba(21,10,27,.6)}
+.scrolly::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,var(--pink2),var(--gold))}
+#hud{position:absolute;top:0;left:0;right:0;z-index:12;display:flex;align-items:center;gap:.5em;
+  padding:calc(.45em + env(safe-area-inset-top)) .6em .45em;
+  background:linear-gradient(180deg,rgba(18,8,22,.94),rgba(18,8,22,.72) 70%,rgba(18,8,22,0));
+  border-bottom:1px solid rgba(255,179,71,.18)}
+.ibtn{width:2.15em;height:2.15em;border-radius:.6em;display:flex;align-items:center;justify-content:center;flex:none;
+  background:linear-gradient(160deg,var(--surface2),var(--surface));border:1px solid rgba(255,179,71,.35);color:var(--gold);
+  box-shadow:0 2px 0 rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .08s}
+.ibtn:active{transform:scale(.92)}
+.ibtn svg{width:1.15em;height:1.15em}
+#hudMid{flex:1;min-width:0;text-align:center;line-height:1.15}
+#hudStage{font-size:.68em;color:var(--amber);letter-spacing:.12em}
+#hudName{font-size:.95em;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#hudRight{text-align:right;line-height:1.2;flex:none}
+#hudScore{font-size:1.02em;font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums;text-shadow:0 0 12px rgba(255,209,102,.45)}
+#hudAcc{font-size:.62em;color:var(--dim)}
+#streakChip{display:none;font-size:.62em;font-weight:800;color:#ffb0a0;background:rgba(255,59,78,.16);border:1px solid rgba(255,59,78,.5);border-radius:1em;padding:.1em .55em;margin-top:.15em}
+#streakChip.on{display:inline-block;animation:pop .3s}
+.bubble{position:absolute;z-index:6;background:#fff6e6;color:var(--ink);border:2px solid rgba(42,22,38,.9);
+  border-radius:1em;padding:.55em .75em;font-size:.92em;line-height:1.5;font-weight:600;
+  box-shadow:0 4px 0 rgba(0,0,0,.3);opacity:0;transform:scale(.85);transform-origin:20% 100%;transition:opacity .18s,transform .18s;pointer-events:none}
+.bubble.show{opacity:1;transform:scale(1)}
+.bubble .tag{position:absolute;top:-1.15em;left:.6em;font-size:.68em;font-weight:800;color:#fff;background:var(--magenta);
+  padding:.12em .6em;border-radius:1em;border:1.5px solid rgba(42,22,38,.85);letter-spacing:.05em}
+#bubbleW{top:calc(5.2em + env(safe-area-inset-top) + 10px);left:2.4%;max-width:48%}
+#bubbleW::after{content:"";position:absolute;right:-.55em;top:42%;width:.9em;height:.9em;background:#fff6e6;
+  border-right:2px solid rgba(42,22,38,.9);border-top:2px solid rgba(42,22,38,.9);transform:rotate(45deg)}
+#bubbleW.wait{font-size:.78em;color:#7a5a6a;font-weight:600}
+#bubbleH{left:1.8%;bottom:20.5%;max-width:38%;background:#3d2c14;color:var(--gold);border-color:rgba(255,209,102,.75);
+  font-size:.78em;box-shadow:0 4px 0 rgba(0,0,0,.35),0 0 18px rgba(255,209,102,.12);transform-origin:80% 100%}
+#bubbleH .tag{background:#7a5a1a;color:var(--gold);border-color:rgba(255,209,102,.7)}
+#bubbleH::after{content:"";position:absolute;right:-.5em;top:52%;width:.8em;height:.8em;background:#3d2c14;
+  border-right:2px solid rgba(255,209,102,.75);border-top:2px solid rgba(255,209,102,.75);transform:rotate(45deg)}
+.txt.typing::after{content:"▍";animation:caret .5s steps(1) infinite;color:var(--magenta)}
+#bubbleH .txt.typing::after{color:var(--gold)}
+@keyframes caret{50%{opacity:0}}
+#log{position:absolute;left:2.4%;right:2.4%;top:42%;height:27%;z-index:5;display:flex;flex-direction:column;
+  background:rgba(24,12,28,.82);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);
+  border:1px solid rgba(255,179,71,.3);border-radius:1em;box-shadow:0 10px 30px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+#logHead{display:flex;align-items:center;gap:.5em;padding:.4em .7em;border-bottom:1px solid rgba(255,179,71,.2);flex:none}
+#logTitle{font-size:.72em;font-weight:800;color:var(--amber);letter-spacing:.08em;display:flex;align-items:center;gap:.35em;white-space:nowrap}
+#logTitle svg{width:1.1em;height:1.1em}
+#pips{display:flex;gap:.3em;flex:1;justify-content:center}
+.pip{width:.62em;height:.62em;border-radius:50%;background:rgba(255,209,102,.14);border:1px solid rgba(255,209,102,.4);transition:all .25s}
+.pip.done{background:var(--amber);box-shadow:0 0 8px rgba(255,179,71,.7)}
+.pip.judge{animation:pipPulse 1s ease-in-out infinite}
+@keyframes pipPulse{50%{box-shadow:0 0 14px rgba(255,79,154,.9);background:var(--pink)}}
+#filterChip{font-size:.62em;font-weight:800;padding:.28em .7em;border-radius:1em;border:1px solid rgba(255,209,102,.4);color:var(--dim);white-space:nowrap;transition:all .15s}
+#filterChip.on{background:linear-gradient(135deg,var(--gold),var(--amber));color:#4a2a08;border-color:var(--gold);box-shadow:0 0 12px rgba(255,209,102,.4)}
+#logHelp{width:1.7em;height:1.7em;font-size:.85em}
+#logScroll{flex:1;padding:.55em .7em;display:flex;flex-direction:column;gap:.45em}
+.entry{display:flex;gap:.5em;align-items:flex-start;animation:entryIn .3s ease-out}
+@keyframes entryIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.entry .body{font-size:.8em;line-height:1.5;padding:.4em .65em;border-radius:.7em;max-width:88%}
+.entry.w .body{background:rgba(255,79,154,.12);border-left:3px solid var(--pink);color:#ffe6f1}
+.entry.h{justify-content:flex-end}
+.entry.h .body{background:rgba(255,209,102,.09);border-right:3px solid var(--gold);color:#f0dcae;font-size:.72em}
+.entry .num{flex:none;width:1.5em;height:1.5em;border-radius:50%;background:var(--magenta);color:#fff;font-size:.68em;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.2em;box-shadow:0 0 8px rgba(255,79,154,.5)}
+.entry .who{flex:none;font-size:.6em;color:var(--gold);font-weight:800;margin-top:.5em;opacity:.85}
+#logScroll.womenOnly .entry.h{display:none}
+#jumpChip{position:absolute;right:.9em;bottom:.6em;z-index:2;font-size:.66em;font-weight:800;color:#3a1a08;
+  background:linear-gradient(135deg,var(--gold),var(--amber));padding:.35em .8em;border-radius:1em;box-shadow:0 3px 10px rgba(0,0,0,.5);display:none;animation:pop .25s}
+#jumpChip.on{display:block}
+#judgePrompt{position:absolute;left:50%;bottom:13.2%;transform:translateX(-50%);z-index:7;display:none;
+  font-size:.8em;font-weight:900;color:#fff;letter-spacing:.06em;white-space:nowrap;
+  background:linear-gradient(135deg,rgba(194,36,127,.95),rgba(122,26,82,.95));border:1px solid var(--pink2);
+  padding:.5em 1.2em;border-radius:2em;box-shadow:0 0 24px rgba(255,79,154,.5);animation:promptPulse 1.1s ease-in-out infinite}
+#judgePrompt.on{display:block}
+@keyframes promptPulse{50%{box-shadow:0 0 40px rgba(255,79,154,.85);transform:translateX(-50%) scale(1.04)}}
+#actionBar{position:absolute;left:0;right:0;bottom:0;z-index:10;padding:.9em .7em calc(.7em + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(14,7,18,0),rgba(14,7,18,.86) 42%,rgba(10,5,14,.96))}
+.actRow{display:flex;gap:.6em}
+.btn{position:relative;border-radius:.9em;font-weight:900;letter-spacing:.04em;color:#fff;
+  padding:.72em .8em;font-size:1em;line-height:1.25;border:1px solid rgba(255,255,255,.28);
+  box-shadow:0 4px 0 rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.28);transition:transform .08s,filter .15s;text-align:center}
+.btn:active{transform:translateY(3px) scale(.98);box-shadow:0 1px 0 rgba(0,0,0,.45)}
+.btn:disabled{filter:grayscale(.6) brightness(.6);pointer-events:none}
+.btn.primary{background:linear-gradient(150deg,var(--pink),var(--magenta));text-shadow:0 1px 2px rgba(90,10,50,.6)}
+.btn.gold{background:linear-gradient(150deg,var(--gold),#d98a2a);color:#4a2a08;text-shadow:none}
+.btn.danger{background:linear-gradient(150deg,var(--red),var(--red2));text-shadow:0 1px 2px rgba(70,5,15,.7)}
+.btn.safe{background:linear-gradient(150deg,#25c97c,var(--green2));text-shadow:0 1px 2px rgba(5,50,25,.7)}
+.btn.ghost{background:rgba(246,231,205,.07);border:1px solid rgba(246,231,205,.4);color:var(--cream);box-shadow:none;font-weight:700}
+.btn .sub{display:block;font-size:.6em;font-weight:700;opacity:.9;letter-spacing:.1em}
+.btn .kbd{position:absolute;top:.3em;right:.45em;font-size:.55em;font-weight:800;opacity:.75;border:1px solid rgba(255,255,255,.5);border-radius:.35em;padding:.05em .4em}
+@media (hover:none){.btn .kbd{display:none}}
+#aizuchiBtn{flex:0 0 37%;font-size:.88em}
+#aizBadge{position:absolute;top:-.5em;right:-.3em;background:var(--gold);color:#4a2a08;font-size:.62em;font-weight:900;border-radius:1em;padding:.1em .5em;border:1.5px solid #1a0e20;display:none}
+#aizBadge.on{display:block;animation:pop .25s}
+#advanceBtn{flex:1;font-size:1.05em}
+#advanceBtn.tojudge{animation:judgeGlowG 1.3s ease-in-out infinite}
+#actJudge .btn{flex:1;font-size:1.12em;padding:.6em .5em}
+#actJudge .btn.danger{animation:judgeGlowR 1.4s ease-in-out infinite}
+#actJudge .btn.safe{animation:judgeGlowG 1.4s ease-in-out infinite}
+@keyframes judgeGlowR{50%{box-shadow:0 4px 0 rgba(0,0,0,.45),0 0 26px rgba(255,59,78,.65)}}
+@keyframes judgeGlowG{50%{box-shadow:0 4px 0 rgba(0,0,0,.45),0 0 26px rgba(47,224,140,.6)}}
+#nextBtn{flex:1;font-size:1.05em}
+#hintLine{text-align:center;font-size:.6em;color:var(--dim);margin-top:.5em;letter-spacing:.06em}
+.pcHint{display:none}@media (hover:hover){.pcHint{display:inline}.spHint{display:none}}
+.hidden{display:none!important}
+#resultPanel{position:absolute;left:3%;right:3%;top:36.5%;height:34%;z-index:8;display:none;flex-direction:column;
+  background:rgba(22,11,26,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(255,79,154,.4);border-radius:1.1em;box-shadow:0 16px 50px rgba(0,0,0,.6),0 0 40px rgba(255,79,154,.12);overflow:hidden}
+#resultPanel.show{display:flex;animation:panelIn .35s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes panelIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
+#resultPanel.bad{border-color:rgba(255,59,78,.6);box-shadow:0 16px 50px rgba(0,0,0,.8),0 0 50px rgba(200,30,60,.3)}
+#resultScroll{flex:1;padding:.8em .9em}
+.verdict{display:flex;align-items:center;gap:.6em;margin-bottom:.55em}
+.verdict .vic{flex:none;width:2.4em;height:2.4em;border-radius:.7em;display:flex;align-items:center;justify-content:center}
+.verdict .vic svg{width:1.5em;height:1.5em}
+.verdict h3{font-size:1.25em;line-height:1.15}
+.verdict .vsub{font-size:.66em;color:var(--dim);font-weight:600}
+.deltaChip{margin-left:auto;flex:none;font-size:1em;font-weight:900;font-variant-numeric:tabular-nums;padding:.2em .6em;border-radius:.6em}
+.deltaChip.plus{color:#7dffb8;background:rgba(47,224,140,.12);border:1px solid rgba(47,224,140,.5);text-shadow:0 0 10px rgba(47,224,140,.6)}
+.deltaChip.zero{color:#9ab8ff;background:rgba(90,140,255,.12);border:1px solid rgba(90,140,255,.5)}
+.deltaChip.minus{color:#ff9aa5;background:rgba(255,59,78,.14);border:1px solid rgba(255,59,78,.55)}
+.quote{font-size:.8em;line-height:1.55;padding:.5em .75em;border-radius:.7em;margin-bottom:.6em;font-weight:600}
+.quote .ql{display:block;font-size:.72em;font-weight:800;letter-spacing:.1em;margin-bottom:.2em;opacity:.9}
+.quote.qAngry{background:rgba(255,59,78,.13);border-left:3px solid var(--red);color:#ffd4d8}
+.quote.qCry{background:rgba(90,140,255,.12);border-left:3px solid var(--blue);color:#d4e0ff}
+.quote.qHappy{background:rgba(47,224,140,.1);border-left:3px solid var(--green);color:#d8ffe9}
+.quote.qDark{background:rgba(194,36,127,.14);border-left:3px solid var(--magenta);color:#ffc4de}
+.evHead{font-size:.72em;font-weight:900;color:var(--amber);letter-spacing:.1em;margin:.2em 0 .4em;display:flex;align-items:center;gap:.4em}
+.evHead::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,179,71,.5),transparent)}
+.rc{display:flex;gap:.5em;align-items:flex-start;font-size:.72em;line-height:1.5;padding:.32em .5em;border-radius:.55em;margin-bottom:.28em;background:rgba(246,231,205,.045);color:#e8d8e2}
+.rc b{flex:none;color:var(--pink2);font-size:1.05em}
+.rc.hot{background:rgba(255,59,78,.16);border:1px solid rgba(255,59,78,.6);color:#ffe0e3;box-shadow:0 0 12px rgba(255,59,78,.25)}
+.rc.hot b{color:#ff8a95}
+.rc.cool{background:rgba(63,214,255,.09);border:1px solid rgba(63,214,255,.4);color:#dcf6ff}
+.rc.cool b{color:var(--cyan)}
+.rc.good{background:rgba(47,224,140,.07);border:1px solid rgba(47,224,140,.3)}
+.rc.good b{color:var(--green)}
+.explain{font-size:.76em;line-height:1.65;color:#f0e2d2;margin:.55em 0 .7em;padding:.55em .7em;background:rgba(255,179,71,.07);border-radius:.6em;border:1px dashed rgba(255,179,71,.35)}
+.hcomment{display:flex;gap:.55em;align-items:flex-start;margin-bottom:.4em}
+.hcomment canvas{flex:none;width:2.4em;height:2.4em;border-radius:.6em;border:1px solid rgba(255,209,102,.4)}
+.hcomment .hb{flex:1;background:#3d2c14;border:1px solid rgba(255,209,102,.55);border-radius:.7em;padding:.45em .7em}
+.hcomment .hb .hl{font-size:.6em;font-weight:800;color:var(--amber);letter-spacing:.1em;display:block;margin-bottom:.15em}
+.hcomment .hb .ht{font-size:.82em;font-weight:700;color:var(--gold);line-height:1.5}
+.epilogue{font-size:.74em;line-height:1.7;color:#e8b8c2;background:rgba(10,4,12,.7);border:1px solid rgba(255,59,78,.35);border-radius:.6em;padding:.6em .75em;margin-top:.5em}
+.epilogue .el{display:block;font-size:.72em;font-weight:900;color:var(--red);letter-spacing:.2em;margin-bottom:.25em}
+.overlay{position:absolute;inset:0;z-index:30;display:none;align-items:center;justify-content:center;flex-direction:column}
+.overlay.show{display:flex}
+#ovIntro,#ovHow,#ovConfirm,#ovJudgeConfirm{background:rgba(12,6,16,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.card{width:88%;max-width:26em;background:linear-gradient(165deg,var(--surface2),var(--surface) 60%,#221026);
+  border:1px solid rgba(255,79,154,.45);border-radius:1.2em;padding:1.1em 1.2em;
+  box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 50px rgba(255,79,154,.15),inset 0 1px 0 rgba(255,255,255,.1);
+  animation:panelIn .35s cubic-bezier(.2,.9,.3,1.2)}
+#introStageNo{font-size:.7em;font-weight:900;color:var(--amber);letter-spacing:.25em;text-align:center}
+#introTop{display:flex;gap:.9em;align-items:center;margin:.7em 0 .6em}
+#introPortrait{flex:none;width:6.6em;height:6.6em;border-radius:50%;border:2px solid var(--gold);box-shadow:0 0 20px rgba(255,209,102,.35)}
+#introName{font-size:1.45em;line-height:1.2}
+#introMeta{font-size:.7em;color:var(--dim);font-weight:600;margin-top:.2em}
+#introDiff{font-size:.66em;color:var(--amber);margin-top:.3em;letter-spacing:.08em}
+#introProf{font-size:.8em;line-height:1.6;color:#f0dce8;background:rgba(255,79,154,.09);border-left:3px solid var(--pink);border-radius:.5em;padding:.5em .7em;margin-bottom:.7em}
+#introOutfit{display:flex;align-items:center;gap:.7em;background:rgba(255,209,102,.07);border:1px dashed rgba(255,209,102,.4);border-radius:.7em;padding:.5em .7em;margin-bottom:.9em}
+#outfitIcon{flex:none;width:3em;height:3em}
+#outfitLabel{font-size:.62em;color:var(--amber);font-weight:800;letter-spacing:.1em;display:block}
+#outfitName{font-size:.78em;font-weight:700;color:var(--cream);line-height:1.4}
+.card .btn{width:100%;font-size:1.02em}
+#howCard{max-height:82%;display:flex;flex-direction:column}
+#howCard h2{font-size:1.15em;color:var(--gold);text-align:center;margin-bottom:.6em;letter-spacing:.1em}
+#howScroll{flex:1;padding-right:.4em;margin-bottom:.8em}
+.howSec{margin-bottom:.85em}
+.howSec h4{font-size:.82em;color:var(--pink2);margin-bottom:.3em;display:flex;align-items:center;gap:.4em}
+.howSec p,.howSec li{font-size:.72em;line-height:1.7;color:#ecdce6}
+.howSec ul{list-style:none}
+.howSec li{padding-left:1em;position:relative}
+.howSec li::before{content:"▸";position:absolute;left:0;color:var(--amber)}
+.howEx{font-size:.68em;line-height:1.6;background:rgba(255,59,78,.09);border:1px dashed rgba(255,59,78,.4);border-radius:.5em;padding:.45em .6em;margin-top:.3em;color:#ffd8dc}
+.howEx.g{background:rgba(47,224,140,.07);border-color:rgba(47,224,140,.4);color:#d8ffe9}
+#confirmCard{text-align:center}
+#confirmCard p{font-size:.85em;line-height:1.7;margin-bottom:1em}
+#confirmCard .actRow .btn{flex:1}
+#jcCard{text-align:center;max-width:22em}
+#jcTitle{font-size:1.35em;color:var(--gold);margin-bottom:.35em;letter-spacing:.06em}
+#jcWoman{font-size:.72em;color:var(--dim);margin-bottom:.5em}
+#jcChoice{font-size:1.5em;margin:.2em 0 .6em;padding:.4em;border-radius:.7em;font-weight:900}
+#jcChoice.mine{background:rgba(255,59,78,.15);border:1px solid rgba(255,59,78,.6);color:#ff9aa5}
+#jcChoice.safe{background:rgba(47,224,140,.12);border:1px solid rgba(47,224,140,.5);color:#7dffb8}
+#jcHatano{display:flex;gap:.5em;align-items:center;background:#3d2c14;border:1px solid rgba(255,209,102,.5);border-radius:.7em;padding:.45em .7em;margin-bottom:.6em;text-align:left}
+#jcHatano canvas{width:2.2em;height:2.2em;flex:none;border-radius:.5em}
+#jcHatano span{font-size:.78em;color:var(--gold);font-weight:700;line-height:1.4}
+#jcNote{font-size:.7em;color:var(--dim);margin-bottom:.9em;line-height:1.6}
+#jcCard .actRow .btn{flex:1}
+#ovTitle{background:linear-gradient(180deg,rgba(16,8,20,.95) 0%,rgba(16,8,20,.8) 20%,rgba(16,8,20,.1) 36%,rgba(16,8,20,.04) 50%,rgba(16,8,20,.88) 66%,rgba(14,7,18,.97) 100%);justify-content:flex-start}
+#titleMute{position:absolute;top:calc(.6em + env(safe-area-inset-top));right:.7em}
+#logoBlock{margin-top:8%;text-align:center;position:relative;padding:0 .5em}
+#logoPre{font-size:.95em;font-weight:900;color:var(--gold);letter-spacing:.35em;text-shadow:0 0 14px rgba(255,209,102,.6)}
+#logoMain{font-size:2.55em;line-height:1.12;letter-spacing:.02em;transform:rotate(-2deg);margin:.1em 0 .18em;
+  background:linear-gradient(105deg,#ff7ab8 5%,#ff4f9a 30%,#ffb347 65%,#ffd166 95%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 0 rgba(60,10,40,.9)) drop-shadow(0 0 22px rgba(255,79,154,.45))}
+#logoSub{display:inline-block;font-size:.78em;font-weight:700;color:var(--cream);background:rgba(42,22,38,.85);border:1px solid rgba(255,179,71,.45);padding:.3em .9em;border-radius:2em;letter-spacing:.04em}
+#logoTag{font-size:.55em;color:var(--cyan);letter-spacing:.4em;margin-top:.7em;opacity:.85}
+#titleBomb{position:absolute;right:6%;top:-14%;width:2.6em;height:2.6em;color:var(--red);animation:bombBlink 1.1s ease-in-out infinite;filter:drop-shadow(0 0 12px rgba(255,59,78,.7))}
+@keyframes bombBlink{50%{transform:scale(1.12) rotate(8deg);filter:drop-shadow(0 0 22px rgba(255,59,78,1))}}
+#titleBtns{position:absolute;left:8%;right:8%;bottom:21.5%;display:flex;flex-direction:column;gap:.6em}
+#startBtn{font-size:1.3em;padding:.75em;animation:startGlow 1.6s ease-in-out infinite}
+@keyframes startGlow{50%{box-shadow:0 4px 0 rgba(0,0,0,.45),0 0 34px rgba(255,79,154,.8)}}
+#titleRecords{position:absolute;left:6%;right:6%;bottom:8.5%;display:flex;gap:.5em}
+.recChip{flex:1;text-align:center;background:rgba(246,231,205,.06);border:1px solid rgba(255,179,71,.3);border-radius:.8em;padding:.5em .3em}
+.recChip .rl{font-size:.55em;color:var(--amber);font-weight:800;letter-spacing:.12em;display:block}
+.recChip .rv{font-size:.95em;font-weight:900;color:var(--gold);font-variant-numeric:tabular-nums}
+#titleFoot{position:absolute;bottom:calc(2.2% + env(safe-area-inset-bottom));left:0;right:0;text-align:center;font-size:.58em;color:var(--dim);letter-spacing:.1em}
+#ovFinal{background:linear-gradient(170deg,rgba(30,12,34,.97),rgba(16,8,20,.98)),radial-gradient(circle at 30% 20%,rgba(255,79,154,.2),transparent 60%)}
+#finalMute{position:absolute;top:calc(.6em + env(safe-area-inset-top));right:.7em}
+#finalWrap{width:90%;max-width:27em;max-height:92%;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
+#finalHead{text-align:center;font-size:.7em;font-weight:900;color:var(--amber);letter-spacing:.3em;margin-bottom:.5em}
+#rankBlock{text-align:center;margin-bottom:.7em;position:relative}
+#rankStamp{display:inline-flex;align-items:center;justify-content:center;width:2.2em;height:2.2em;font-size:2.6em;border-radius:50%;
+  border:3px solid var(--gold);color:var(--gold);text-shadow:0 0 20px rgba(255,209,102,.8);box-shadow:0 0 30px rgba(255,209,102,.35),inset 0 0 20px rgba(255,209,102,.15);
+  animation:stampIn .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes stampIn{from{transform:scale(2.4) rotate(-18deg);opacity:0}to{transform:none;opacity:1}}
+#rankTitle{font-size:1.05em;font-weight:900;color:var(--pink2);margin-top:.35em;letter-spacing:.1em}
+#newRecord{display:none;font-size:.62em;font-weight:900;color:#4a2a08;background:linear-gradient(135deg,var(--gold),var(--amber));padding:.25em .9em;border-radius:1em;margin-top:.35em;animation:pop .4s}
+#newRecord.on{display:inline-block}
+#finalStats{display:grid;grid-template-columns:repeat(3,1fr);gap:.45em;margin-bottom:.6em}
+.fstat{background:rgba(246,231,205,.06);border:1px solid rgba(255,179,71,.3);border-radius:.7em;padding:.45em .3em;text-align:center}
+.fstat .fl{font-size:.55em;color:var(--amber);font-weight:800;letter-spacing:.08em;display:block}
+.fstat .fv{font-size:1em;font-weight:900;color:var(--cream);font-variant-numeric:tabular-nums}
+#finalQuip{display:flex;gap:.5em;align-items:center;background:#3d2c14;border:1px solid rgba(255,209,102,.5);border-radius:.7em;padding:.45em .7em;margin-bottom:.6em}
+#finalQuip canvas{width:2.2em;height:2.2em;flex:none;border-radius:.5em}
+#finalQuip span{font-size:.78em;font-weight:700;color:var(--gold);line-height:1.4}
+#finalList{flex:1;min-height:5em;max-height:11.5em;margin-bottom:.7em;padding-right:.3em}
+.frow{display:flex;align-items:center;gap:.5em;font-size:.7em;padding:.34em .55em;border-radius:.5em;margin-bottom:.25em;background:rgba(246,231,205,.045)}
+.frow .fn{flex:1;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frow .ft{flex:none;font-size:.9em}
+.frow .fo{flex:none;font-size:.85em;font-weight:900;padding:.1em .55em;border-radius:1em}
+.fo.catch{color:#7dffb8;background:rgba(47,224,140,.13);border:1px solid rgba(47,224,140,.45)}
+.fo.approve{color:#7dffb8;background:rgba(47,224,140,.13);border:1px solid rgba(47,224,140,.45)}
+.fo.false{color:#9ab8ff;background:rgba(90,140,255,.13);border:1px solid rgba(90,140,255,.45)}
+.fo.bad{color:#ff9aa5;background:rgba(255,59,78,.15);border:1px solid rgba(255,59,78,.5)}
+#finalBtns{display:flex;gap:.6em;padding-bottom:env(safe-area-inset-bottom)}
+#finalBtns .btn{flex:1}
+#toasts{position:absolute;top:16%;right:4%;z-index:40;display:flex;flex-direction:column;align-items:flex-end;gap:.4em;pointer-events:none}
+.toast{font-size:1.05em;font-weight:900;padding:.3em .8em;border-radius:.7em;animation:toastUp 1.6s ease-out forwards;font-variant-numeric:tabular-nums}
+.toast.gold{color:#4a2a08;background:linear-gradient(135deg,var(--gold),var(--amber));box-shadow:0 0 20px rgba(255,209,102,.6)}
+.toast.red{color:#fff;background:linear-gradient(135deg,var(--red),var(--red2));box-shadow:0 0 20px rgba(255,59,78,.6)}
+.toast.fire{color:#fff;background:linear-gradient(135deg,#ff8a3f,#c81e3c);font-size:.85em}
+@keyframes toastUp{0%{opacity:0;transform:translateY(12px) scale(.7)}12%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-22px)}}
+@keyframes pop{0%{transform:scale(.5)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.mode-title #hud,.mode-title #log,.mode-title #bubbleW,.mode-title #bubbleH,.mode-title #actionBar,.mode-title #judgePrompt,.mode-title #resultPanel{display:none!important}
+@media (prefers-reduced-motion:reduce){#grain,.blob{animation:none}}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+  <div id="pageNoise"></div>
+  <div id="frame" class="mode-title">
+    <canvas id="scene"></canvas>
+    <div id="grain"></div>
+
+    <div id="hud">
+      <button class="ibtn" id="homeBtn" aria-label="タイトルへ"></button>
+      <button class="ibtn muteBtn" aria-label="サウンド切替"></button>
+      <div id="hudMid">
+        <div id="hudStage">出会い 1 / 50</div>
+        <div id="hudName" class="disp">キララ</div>
+      </div>
+      <div id="hudRight">
+        <div id="hudScore">0</div>
+        <div id="hudAcc">見極め率 —</div>
+        <span id="streakChip">🔥×2</span>
+      </div>
+    </div>
+
+    <div class="bubble" id="bubbleW"><span class="tag" id="bubbleWTag">キララ</span><span class="txt" id="bubbleWTxt"></span></div>
+    <div class="bubble" id="bubbleH"><span class="tag">ハタノ</span><span class="txt" id="bubbleHTxt"></span></div>
+
+    <div id="log">
+      <div id="logHead">
+        <span id="logTitle"></span>
+        <div id="pips"></div>
+        <button id="filterChip">発言のみ</button>
+        <button class="ibtn" id="logHelp" aria-label="遊び方">?</button>
+      </div>
+      <div id="logScroll" class="scrolly" role="log" aria-live="polite"></div>
+      <button id="jumpChip">↓ 最新へ</button>
+    </div>
+
+    <div id="judgePrompt">⚖ 判定タイム！ ログを見返して見極めて</div>
+
+    <div id="resultPanel"><div id="resultScroll" class="scrolly"></div></div>
+
+    <div id="actionBar">
+      <div class="actRow" id="actTalk">
+        <button class="btn gold" id="aizuchiBtn">相槌 💬<span id="aizBadge">×0</span></button>
+        <button class="btn primary" id="advanceBtn">次の発言 ▶</button>
+      </div>
+      <div class="actRow hidden" id="actJudge">
+        <button class="btn danger" id="judgeMine">💣 地雷だ！<span class="sub">要注意</span><span class="kbd">1</span></button>
+        <button class="btn safe" id="judgeSafe">💚 セーフ！<span class="sub">いい感じ</span><span class="kbd">2</span></button>
+      </div>
+      <div class="actRow hidden" id="actResult">
+        <button class="btn primary" id="nextBtn">次の出会いへ ▶</button>
+      </div>
+      <div id="hintLine"><span class="spHint">画面タップで会話送り ・ 履歴はスワイプで見返し</span><span class="pcHint">Space/クリック:会話送り ・ A:相槌 ・ 1:地雷 2:セーフ ・ M:消音</span></div>
+    </div>
+
+    <div class="overlay show" id="ovTitle">
+      <button class="ibtn muteBtn" id="titleMute" aria-label="サウンド切替"></button>
+      <div id="logoBlock">
+        <svg id="titleBomb" viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 5.5l1.6-1.6 1.4 1.4-1.6 1.6A7.5 7.5 0 1 1 14.5 5.5zM12 8a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm7.6-5.2l1 .6-.9 1.1-1-.6zm2.6 2.5l.6 1-1.3.4-.6-1zM19.9 2l1.1.2-.2 1.3-1.1-.2z"/></svg>
+        <div id="logoPre">ハタノの</div>
+        <div id="logoMain" class="disp">婚活見極め！</div>
+        <div id="logoSub">〜その発言、地雷じゃないですか？〜</div>
+        <div id="logoTag">MY-PACE DEDUCTION COMEDY</div>
+      </div>
+      <div id="titleBtns">
+        <button class="btn primary disp" id="startBtn">▶ ゲームスタート</button>
+        <button class="btn ghost" id="howBtn">📖 遊び方・見極めのコツ</button>
+      </div>
+      <div id="titleRecords">
+        <div class="recChip"><span class="rl">最高スコア</span><span class="rv" id="recScore">0</span></div>
+        <div class="recChip"><span class="rl">最高見極め率</span><span class="rv" id="recAcc">—</span></div>
+        <div class="recChip"><span class="rl">累計正解</span><span class="rv" id="recTotal">0</span></div>
+      </div>
+      <div id="titleFoot">全50人の出会い ・ 会話10ターン → 判定へボタン → 確認して確定 ・ サウンドON</div>
+    </div>
+
+    <div class="overlay" id="ovIntro">
+      <div class="card">
+        <div id="introStageNo">出会い 1 / 50</div>
+        <div id="introTop">
+          <canvas id="introPortrait" width="132" height="132"></canvas>
+          <div>
+            <div id="introName" class="disp">キララ</div>
+            <div id="introMeta">27歳 ・ ネイリスト</div>
+            <div id="introDiff">微妙さ ★☆☆</div>
+          </div>
+        </div>
+        <div id="introProf">「かわいいものが人生です♪」</div>
+        <div id="introOutfit">
+          <canvas id="outfitIcon" width="60" height="60"></canvas>
+          <div><span id="outfitLabel">本日のハタノさん（左胸ワンポイント）</span><span id="outfitName">白ポロ × 熊</span></div>
+        </div>
+        <button class="btn primary disp" id="talkStartBtn">会話を始める ▶</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="ovHow">
+      <div class="card" id="howCard">
+        <h2 class="disp">📖 遊び方・見極めのコツ</h2>
+        <div id="howScroll" class="scrolly">
+          <div class="howSec"><h4>🗣 1. 会話を聞く</h4><p>女性が基本10ターンの発言をします。タップ／Space／「次の発言▶」で進行。ハタノさんは後ろ姿でマイペースに相槌を打ちます。「相槌💬」ボタン（Aキー）でいつでも追加の相槌をどうぞ（判定には影響しません）。</p></div>
+          <div class="howSec"><h4>🔍 2. 地雷には2種類ある</h4>
+            <ul>
+              <li><b style="color:var(--red)">組み合わせ地雷</b>：単体では無難なアピール同士が矛盾する。</li>
+              <li><b style="color:var(--red)">単体地雷</b>：その一言が出た時点で確定する強烈ワード。</li>
+              <li><b style="color:var(--green)">セーフ</b>：クセがあっても筋が通っている・誠実な人。</li>
+            </ul>
+            <div class="howEx">例①「超インドアで家から出ない」×「毎週末は海外フェスとクラブで朝まで」→ 矛盾！<br>例②「誘われたらなるべく顔を出したい」×「男女共に友達がたくさん」→ 優しさの射程が広すぎる…！<br>例③「次の予定どうしましょう？」→「熟成肉のお店にしませんか？」のように、自然な流れで価値観が見えることも。</div>
+            <div class="howEx g">逆に「インドア×月1の銭湯×正直な告白」のように筋が通っていればセーフ。見た目やクセの強さは地雷の証拠になりません。</div>
+          </div>
+          <div class="howSec"><h4>⚖ 3. 判定タイム</h4><p>10ターン終了後、自動では進みません。「判定へ⚖」ボタンを押して判定タイムへ。💣地雷だ！ か 💚セーフ！ を選ぶと「本当にいい？」の確認が入ります。ログはスワイプ／ホイールで見返せ、「発言のみ」フィルタでハタノさんの迷言を非表示にできます。</p>
+            <ul>
+              <li>地雷を看破 → 彼女は激怒 💢（+100点〜）</li>
+              <li>セーフを承認 → ご機嫌 ☺（+100点〜）</li>
+              <li>誠実な人を地雷扱い → 泣かれる 😢（0点）</li>
+              <li>地雷をスルー → 暗転…BAD END 💀（−50点）</li>
+            </ul>
+          </div>
+          <div class="howSec"><h4>🏆 4. 記録に挑む</h4><p>連続正解でストリークボーナス。全50人の出会いが終わるとランク（S〜D）と見極め率が集計され、ベスト記録が保存されます。</p></div>
+          <div class="howSec"><h4>⌨ キー操作（PC）</h4><p>Space/Enter/→:会話送り ・ A:相槌 ・ 1/←:地雷 ・ 2/→:セーフ ・ 確認画面はEnterで確定/Escで取消 ・ L:発言フィルタ ・ M:消音 ・ Esc:タイトルへ</p></div>
+        </div>
+        <button class="btn ghost" id="howClose">閉じる</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="ovConfirm">
+      <div class="card" id="confirmCard">
+        <p>タイトルに戻りますか？<br><span style="font-size:.8em;color:var(--dim)">進行中の出会いはリセットされます</span></p>
+        <div class="actRow">
+          <button class="btn ghost" id="confirmNo">続ける</button>
+          <button class="btn danger" id="confirmYes">戻る</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="ovJudgeConfirm">
+      <div class="card" id="jcCard">
+        <div id="jcTitle" class="disp">本当にいい？</div>
+        <div id="jcWoman"></div>
+        <div id="jcChoice" class="mine disp">💣 地雷だ！</div>
+        <div id="jcHatano"><canvas id="jcHatanoIcon" width="44" height="44"></canvas><span>「ちょっと待ってくださいよ」</span></div>
+        <div id="jcNote">一度確定すると撤回できません。<br>ログをもう一度見返すなら「考え直す」へ。</div>
+        <div class="actRow">
+          <button class="btn ghost" id="jcNo">↩ 考え直す</button>
+          <button class="btn danger" id="jcYes">はい、見極めた ✔</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="ovFinal">
+      <button class="ibtn muteBtn" id="finalMute" aria-label="サウンド切替"></button>
+      <div id="finalWrap">
+        <div id="finalHead">— 全50人の出会い 終了 —</div>
+        <div id="rankBlock">
+          <div id="rankStamp" class="disp">S</div>
+          <div id="rankTitle" class="disp">見極めの神</div>
+          <span id="newRecord">✨ NEW RECORD!</span>
+        </div>
+        <div id="finalStats"></div>
+        <div id="finalQuip"><canvas id="finalHatano" width="44" height="44"></canvas><span id="finalQuipTxt"></span></div>
+        <div id="finalList" class="scrolly"></div>
+        <div id="finalBtns">
+          <button class="btn ghost" id="finalTitleBtn">タイトルへ</button>
+          <button class="btn primary disp" id="againBtn">もう一度見極める ▶</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toasts"></div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const TAU=Math.PI*2;
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const rnd=(a=1,b)=>b===undefined?Math.random()*a:a+Math.random()*(b-a);
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const REDUCED=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function rr(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
+function ell(c,x,y,rx,ry){c.beginPath();c.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,TAU);}
+function lg(c,x0,y0,x1,y1,st){if(![x0,y0,x1,y1].every(Number.isFinite))return st[0][1];const g=c.createLinearGradient(x0,y0,x1,y1);for(const s of st)g.addColorStop(s[0],s[1]);return g;}
+function rg(c,x,y,r0,r1,st){if(![x,y,r0,r1].every(Number.isFinite)||r0<0||r1<0)return st[0][1];const g=c.createRadialGradient(x,y,r0,x,y,r1);for(const s of st)g.addColorStop(s[0],s[1]);return g;}
+const NUM=["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩"];
+const ICONS={
+home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>',
+sound:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path d="M16 8.5a5 5 0 0 1 0 7"/><path d="M18.5 6a8.5 8.5 0 0 1 0 12"/></svg>',
+mute:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path d="M16.5 9.5l5 5m0-5l-5 5"/></svg>',
+scroll:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>',
+bomb:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.5 5.5l1.6-1.6 1.4 1.4-1.6 1.6A7.5 7.5 0 1 1 14.5 5.5zM12 8a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm7.6-5.2l1 .6-.9 1.1-1-.6zm2.6 2.5l.6 1-1.3.4-.6-1zM19.9 2l1.1.2-.2 1.3-1.1-.2z"/></svg>',
+heart:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-8.5-5.3-10-10C1 7.5 3 4.5 6.5 4.5c2.2 0 3.9 1.3 5.5 3.4 1.6-2.1 3.3-3.4 5.5-3.4C21 4.5 23 7.5 22 11c-1.5 4.7-10 10-10 10z"/></svg>',
+skull:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9 9 0 0 0-9 9c0 3.6 2.1 6.6 5 8v3h2v-2h2v2h2v-2h2v2h2v-3c2.9-1.4 5-4.4 5-8a9 9 0 0 0-9-9zM8.5 13.5A2 2 0 1 1 8.5 9.5a2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM12 14l1.5 3h-3L12 14z"/></svg>',
+cry:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C8 8 5.5 11.2 5.5 14.5a6.5 6.5 0 0 0 13 0C18.5 11.2 16 8 12 3z"/></svg>'};
+
+const AIZUCHI=["大丈夫ですか？","任せてください","仕様通りです","勘弁してくださいよ","すみません痛風が・・・","自分元アメフト部なんで","やっぱりミカンは三ケ日みかんですよ","新作のシティハンター見ました？","異世界転生は非常に興味深いですね","カープ！カープ！カープ！","しんかいさん最低ですよ","進捗は順調です","ちょっと待ってくださいよ","プロレスを八百長って言っちゃうのは浅いですね","（自分の前で男の話しないで欲しいな・・・ マイナス1億点）","（かわいい・・・）","池袋なら任せてください","髪？伸ばさないですよ","あれ見てます？2期始まってますよ","深夜番組のラップバトルってついつい見ちゃいますよね～","姪が可愛いんですよ～","ランチどうします？","もすもすこすもす","江古田のあそこ、江古田の！","自分あーいうタイプちょっと苦手です","やばいっすね","ちょ、やめてくださいよ（笑）","サブウェイは行きづらいっす","添い寝はしました","自分彼女の深い悩みとか聞いてるんで","なんで自分の進捗会議を開催してるんですか","いや、言わないですよ","へへっ","う～～～ん"];
+const OUTFITS=[
+ {name:"白ポロ × 熊のワンポイント",col:"#f5f0e6",col2:"#d9cdb8",kind:"polo",emblem:"bear"},
+ {name:"紺ポロ × 白ドット",col:"#2b3a67",col2:"#1c2748",kind:"polo",emblem:"dots"},
+ {name:"グレー半袖シャツ × ロボット",col:"#9aa0a8",col2:"#767c86",kind:"crew",emblem:"robot"}];
+const WOMEN=[
+{name:"キララ",age:27,job:"ネイリスト",prof:"「かわいいものが人生です♪」",diff:1,mine:true,
+ look:{hair:"wavy",hc:"#e9c46a",hc2:"#c99a3f",skin:"#f6d7bd",eye:"#d46a9a",top:"#ff6fae",top2:"#e04a8c",style:"blouse",acc:"pin",voice:460},
+ lines:[{t:"はじめまして♪ ネイリストのキララです！",m:"sm"},{t:"かわいいもの大好きで、お部屋はピンク尽くしです☆",m:"ex"},{t:"そういえば、次回のデートは熟成肉どうですか？",m:"sly"},{t:"犬派なんです〜。いつかコーギー飼いたくて",m:"sm"},{t:"気が合ったら、旅行とかも行きたいですね♪",m:"sm"}],
+ ev:[2],evTitle:"単体地雷：「熟成肉どうですか？」",
+ explain:"初対面で繰り出す高単価テストの代表例。「熟成肉」の一言が出た時点で地雷確定。ピンクのお部屋もコーギーの夢も、ただの擬態でした。",
+ ok:"やっぱりミカンは三ケ日みかんですよ",ng:"すみません痛風が・・・",
+ angry:"はぁ？！ アンタこそ地雷なんですけど！ マジありえない、ブロック案件！",
+ badLine:"♡じゃあ次は和牛のコースね。お店は私が選ぶから♡",
+ badEnd:"半年後——ハタノさんは「焼肉財布3号」と改名されていた。濃厚な食事続きで、痛風が本格稼働した。"},
+{name:"ほのか",age:31,job:"図書館司書",prof:"「本と静かな時間が好きです」",diff:1,mine:false,
+ look:{hair:"bob",hc:"#3a2e44",hc2:"#241a2e",skin:"#f3d6c0",eye:"#5a7a9a",top:"#2fa8a0",top2:"#1f7a74",style:"knit",acc:"glasses",voice:330},
+ lines:[{t:"ほのかです。図書館で司書をしています。",m:"soft"},{t:"休日は家で本を読むことが多いです。かなりインドアで",m:"sm"},{t:"でも隣の町の書店には歩いて行きます。片道40分くらい",m:"n"},{t:"人混みは疲れるので、静かなカフェだと嬉しいです",m:"soft"},{t:"よかったら、ゆっくりお互いを知っていけたら",m:"sm"}],
+ ev:[1,2,3],evTitle:"一貫性のチェック",
+ explain:"インドア × 徒歩40分の書店 × 静かなカフェ。すべての嗜好が同じ方向を向いています。静かな人は地雷ではなく、ただの静かな人。",
+ ok:"新作のシティハンター見ました？",ng:"勘弁してくださいよ",
+ cry:"ひっく…わたし、ただ…ゆっくり知り合いたくて…",
+ happy:"よかった…今度、一緒に書店まで歩きませんか？"},
+{name:"ミレイ",age:26,job:"ヨガインストラクター",prof:"「マインドフルネスが大事です☆」",diff:1,mine:true,
+ look:{hair:"pony",hc:"#8a5a33",hc2:"#6a4020",skin:"#eec29a",eye:"#3f9a5a",top:"#ff8a3f",top2:"#d96a1f",style:"jacket",acc:"band",voice:420},
+ lines:[{t:"超インドアで、家から一歩も出ないんです！",m:"ex"},{t:"ヨガをやってるので、マインドフルネス重視で",m:"sm"},{t:"毎週末は海外フェスとクラブで朝まで踊ってます♪",m:"ex"},{t:"渡航先は年に12カ国くらいですかね？",m:"sm"},{t:"だから週末は、私と一緒におうち時間してね？♡",m:"sly"}],
+ ev:[0,2],evTitle:"組み合わせ地雷：「家から出ない」×「毎週末海外フェス」",
+ explain:"家から一歩も出ない人類が、毎週末海外で朝まで踊っている。物理法則が崩壊しています。仕上げの「おうち時間してね？」で拘束まで確定。",
+ ok:"勘弁してくださいよ",ng:"自分元アメフト部なんで",
+ angry:"はぁ？！ これってグローバルって言うの！ ちっさ！ アンタ器ちっさ！",
+ badLine:"♡来週末はイビサね。荷物は全部アンタ持ちだから♡",
+ badEnd:"1年後——ハタノさんは海外フェスの荷物運搬専属係になっていた。アメフト部の経歴が、初めて婚活で役立った。"},
+{name:"ツバキ",age:34,job:"漫画家",prof:"「連載中です。読んでください」",diff:2,mine:false,
+ look:{hair:"messy",hc:"#6b5f72",hc2:"#4a4052",skin:"#f0d2bc",eye:"#8a6a4a",top:"#d9a13f",top2:"#b07a26",style:"knit",acc:"pin",tired:true,voice:300},
+ lines:[{t:"ツバキです。漫画を描いてます。基本ずっと部屋です",m:"n"},{t:"すみません、3徹で…ゾンビみたいな顔してますよね",m:"soft"},{t:"月1で銭湯にだけは行きます。それが全ての外出です",m:"n"},{t:"恋愛漫画が専門なのに実体験ゼロで。だから研究熱心に",m:"sm"},{t:"在宅の仕事だけどよければ…嬉しいです",m:"soft"}],
+ ev:[0,2,3],evTitle:"筋の通ったインドア",
+ explain:"3徹 × 月1銭湯 × 実体験ゼロの告白。全部の辻褄が合い、しかも正直。疲れたインドアは地雷ではなく、締切に追われるプロフェッショナルです。",
+ ok:"異世界転生は非常に興味深いですね",ng:"大丈夫ですか？",
+ cry:"ぐす…ゾンビってとこが…ひっく…引っかかりました…？",
+ happy:"ふぅ…よかった。今度、ネーム読んでもらえませんか…"},
+{name:"ユヅキ",age:28,job:"広報PR",prof:"「人とのつながりが財産です♪」",diff:2,mine:true,
+ look:{hair:"updo",hc:"#4a2334",hc2:"#2e1420",skin:"#f4d4bc",eye:"#a04a6a",top:"#a02a52",top2:"#7a1a3a",style:"dress",acc:"pendant",voice:390},
+ lines:[{t:"誘われたらなるべく顔を出したいし、人とのつながりはすごく大切にしています",m:"sm"},{t:"男女共に友達がたくさんいるんです♪",m:"ex"},{t:"「いつでも捕まる子」って皆に言われます☆",m:"sm"},{t:"スマホの通知、1日300件くらいでかわいいんです",m:"sly"},{t:"あなたもいつでも誘っていいですよ？ 今すぐでも♡",m:"sly"}],
+ ev:[0,1,2],evTitle:"組み合わせ地雷：「つながり大事」×「男女共に友達がたくさん」",
+ explain:"親切 × 誰にでも捕まる × 通知300件。単体なら社交的、揃うと「つながり」の射程が無限大に。あなたは特別な一人ではなく、数百人の一人になります。",
+ ok:"しんかいさん最低ですよ",ng:"任せてください",
+ angry:"なにそれ？！ 人気者が悪いの？！ こっちこそお断りなんですけど！",
+ badLine:"♡あ、通知来た。ちょっと待ってて——あれ、あなた誰だっけ♡",
+ badEnd:"3ヶ月後——ハタノさんは彼女のスマホに「カープの人（仮）」と登録されていた。彼女からの通知は、永遠にゼロのまま。"},
+{name:"ルリコ",age:30,job:"会社役員（自称）",prof:"「美は投資です」",diff:2,mine:true,
+ look:{hair:"hime",hc:"#221a2a",hc2:"#120c18",skin:"#f2d0b8",eye:"#7a3fa0",top:"#7a3fa0",top2:"#5a2a7a",style:"dress",acc:"rose",voice:350},
+ lines:[{t:"ルリコです。会社を経営…正確には役員ですけど",m:"smug"},{t:"趣味は香水集め。200本くらい持っています",m:"sm"},{t:"ホットヨガで体型維持してます。美は投資ですから",m:"smug"},{t:"ところで、年収ってどれくらい？ ざっくりでいいので",m:"sly"},{t:"私に見合うライフスタイルの方を探していて♡",m:"smug"}],
+ ev:[3],evTitle:"単体地雷：「年収ってどれくらい？」",
+ explain:"初対面、前菜より先に提示される査定表。香水200本もホットヨガも、この一言のための前置きでした。一発アウト。",
+ ok:"仕様通りです",ng:"任せてください",
+ angry:"失礼ね？！ 私の時間単価、いくらか知ってるの？！",
+ badLine:"♡安心してください。お給料の管理は私がしてあげる♡",
+ badEnd:"半年後——ハタノさんの給料は全額彼女の口座に直行していた。カープの遠征は、もう贅沢品になった。"},
+{name:"アカネ",age:32,job:"ジムトレーナー",prof:"「カープ命！」",diff:2,mine:false,
+ look:{hair:"pixie",hc:"#c4502e",hc2:"#9a3418",skin:"#e8b98f",eye:"#c46a2a",top:"#d92a3c",top2:"#a01a28",style:"jacket",acc:"band",voice:440},
+ lines:[{t:"アカネです！ ジムでトレーナーやってます！",m:"ex"},{t:"実はカープの大ファンで。シーズンシート外野なんです",m:"ex"},{t:"遠征は夜行バスで行きます。宿代浮きますしね",m:"sm"},{t:"試合だと声が大きくなるの、苦手ならごめんなさい…",m:"soft"},{t:"野球好きな人だと、すごく嬉しいなと思って",m:"sm"}],
+ ev:[1,2,3],evTitle:"熱量に予算と礼儀あり",
+ explain:"シーズンシート × 夜行バス × 相手への気遣い。情熱の方向が揃っていて、節約も律儀。いい人です。ハタノさんの相槌熱量は最大に達しました。",
+ ok:"カープ！カープ！カープ！",ng:"大丈夫ですか？",
+ cry:"ひっく…カープのとこが…うわぁん…",
+ happy:"やった！！ 今度一緒に球場行きましょう！！"},
+{name:"ココミ",age:25,job:"カフェ店員",prof:"「手作り弁当が得意です♪」",diff:2,mine:true,
+ look:{hair:"twin",hc:"#b07a4a",hc2:"#8a5a30",skin:"#f6d7bd",eye:"#d4788a",top:"#ff9ac0",top2:"#e07a9e",style:"apron",acc:"ribbon",voice:480},
+ lines:[{t:"料理が得意で家庭的なんです♪ 手作り弁当とか！",m:"ex"},{t:"キッチンは一度も使ったことなくて観賞用です☆",m:"sm"},{t:"弁当？ コンビニのを盛り付け直すだけですけど♪",m:"sly"},{t:"インスタのご飯写真、めっちゃいいねつくんです",m:"ex"},{t:"これからは毎日、あなたが作ってくれるんですよね？♡",m:"sly"}],
+ ev:[0,1,2],evTitle:"組み合わせ地雷：「家庭的・手作り」×「観賞用キッチン」",
+ explain:"一度も使っていないキッチンから手作り弁当は生まれない。正体はコンビニの盛り直し。それでも毎日あなたに作らせる気は満々です。",
+ ok:"仕様通りです",ng:"すみません痛風が・・・",
+ angry:"はぁ？！ 盛り直しも料理のうちなんですけど！ 無理解がすぎる！",
+ badLine:"♡今夜のリクエスト、手作りパスタね。市販のソースでいいから♡",
+ badEnd:"1年後——ハタノさんは観賞用キッチンの専属料理長になっていた。痛風薬の服用スケジュールも、レシピの一部になった。"},
+{name:"サツキ",age:35,job:"ファイナンシャルプランナー",prof:"「堅実な人生設計を一緒に」",diff:3,mine:false,
+ look:{hair:"lowbun",hc:"#2a2438",hc2:"#181424",skin:"#f0d0b8",eye:"#4a6a8a",top:"#2a3a6a",top2:"#1a2a4a",style:"suit",acc:"pearl",voice:320},
+ lines:[{t:"サツキです。ファイナンシャルプランナーをしています",m:"n"},{t:"収入が安定した方が理想です。私も稼いでるので対等が大事で",m:"n"},{t:"家計簿はつけてます。デート代は割り勘が希望です",m:"sm"},{t:"すみません、面接みたいな話し方で…職業病です",m:"soft"},{t:"贅沢は望みません。一緒に設計図を描ける人がいい",m:"sm"}],
+ ev:[1,2,4],evTitle:"お金の話に双方向性あり",
+ explain:"安定を求めるが、自分の収入・対等・割り勘をセットで提示。どこぞの「年収ざっくり？」氏との決定的な差は、要求が双方向であること。これは誠実です。",
+ ok:"任せてください",ng:"勘弁してくださいよ",
+ cry:"ひっく…ただ…堅実に生きたいだけで…ぐす…",
+ happy:"ありがとうございます…では、人生の設計図を一緒に"},
+{name:"ノノカ",age:29,job:"オーガニックカフェ経営",prof:"「シンプルイズベスト」",diff:3,mine:true,
+ look:{hair:"wavy",hc:"#8a9a6a",hc2:"#6a7a4a",skin:"#f2d4bc",eye:"#6a8a4a",top:"#a8b08a",top2:"#8a946a",style:"dress",acc:"beads",voice:340},
+ lines:[{t:"ブランドとか派手なもの、全然興味ないんです。シンプルが一番",m:"soft"},{t:"うちのカフェは有機野菜だけ。正直利益はしんどいです",m:"n"},{t:"そういえば誕生日は3年連続で星付きレストランでした♪",m:"sm"},{t:"プレゼントとかいらない。お金で買えない体験がほしいな",m:"sly"},{t:"センスのいい、質素な暮らしが夢なんです",m:"soft"}],
+ ev:[0,2,3],evTitle:"組み合わせ地雷：「シンプルが一番」×「3年連続星付き誕生日」",
+ explain:"ブランドに興味はないのに、誕生日は星付き、「お金で買えない体験」が必須。彼女の「質素」は月額制のプレミアムプランでした。",
+ ok:"大丈夫ですか？",ng:"異世界転生は非常に興味深いですね",
+ angry:"はぁ？！ これぞ取捨選択って言うの！ センスないなあ！",
+ badLine:"♡来年の誕生日は京都の星付きね。質素でしょ？♡",
+ badEnd:"2年後——ハタノさんの「質素な暮らし」には3つ星レストランの会員権が必要だった。痛風は、もう高級品として扱われている。"},
+{name:"シオリ",age:30,job:"葬儀社スタッフ",prof:"「人生は短いのです」",diff:3,mine:false,
+ look:{hair:"hime",hc:"#241a2e",hc2:"#140e1c",skin:"#f4ddd0",eye:"#5a4a7a",top:"#3a2444",top2:"#241630",style:"lace",acc:"cross",voice:290},
+ lines:[{t:"シオリです。葬儀社で働いています",m:"n"},{t:"変わった仕事ですよね…でも最後のお見送りを大切にしたい",m:"soft"},{t:"趣味は墓地巡りです。墓碑銘を読むと落ち着くんです",m:"n"},{t:"変なとこで笑っちゃうんです、すみません…緊張すると",m:"soft"},{t:"日常を大切にしたいです。人生は短いので",m:"sm"}],
+ ev:[0,2,4],evTitle:"不気味さに一貫性あり",
+ explain:"葬儀社 × 墓地巡り ×「人生は短い」。テーマが真っ直ぐ通り、根は優しい。不気味さは美学であって、地雷ではありません。",
+ ok:"すみません痛風が・・・",ng:"しんかいさん最低ですよ",
+ cry:"ぐす…やっぱり…この仕事、怖がられますよね…ひっく",
+ happy:"ありがとうございます…今度、いいお墓を見に行きませんか"},
+{name:"マナミ",age:27,job:"看護師",prof:"「面倒を見るのが好きなんです♪」",diff:3,mine:true,
+ look:{hair:"braid",hc:"#a8766a",hc2:"#8a5a50",skin:"#f6d7bd",eye:"#b06a6a",top:"#f5f0ea",top2:"#ddd4c8",style:"knit",acc:"none",voice:370},
+ lines:[{t:"マナミです。看護師してます。面倒を見るのが好きで♪",m:"sm"},{t:"束縛とか全然しないタイプです。自由にしていてほしい",m:"soft"},{t:"あ、位置情報は24時間共有オンで。安心のためなので♡",m:"sm"},{t:"女友達？ 全然気にしないです。名前は全員覚えますけど♪",m:"sly"},{t:"あなたの全部を知りたいんです。大切にしたいから",m:"sly"}],
+ ev:[1,2,3],evTitle:"組み合わせ地雷：「自由でいて」×「24時間位置情報共有」",
+ explain:"束縛しない × 位置情報常時監視 × 女友達全員の名前暗記。自由は体験版でした。一番怖いのは、全部「大切にしたいから」の顔をしていることです。",
+ ok:"しんかいさん最低ですよ",ng:"すみません痛風が・・・",
+ angry:"はぁ？！ これは愛なんですけど！ わかんないんですね！",
+ badLine:"♡今どこにいるの？ ……あっ、見えてるけど♡",
+ badEnd:"3ヶ月後——ハタノさんの位置情報は親族14人と共有されていた。カープ球場は「危険区域」に指定された。"},
+{name:"ミナミ",age:26,job:"深夜ラーメン屋店員",prof:"「深夜のラーメン屋、やってます」",diff:2,mine:false,
+ look:{hair:"pixie",hc:"#2a2430",hc2:"#181420",skin:"#f0d0b8",eye:"#c44a5a",top:"#3a3a4a",top2:"#26262f",style:"jacket",acc:"band",voice:350},
+ lines:[{t:"ミナミです。深夜のラーメン屋で働いてます",m:"n"},{t:"生活は完全夜行性で。朝の6時に寝て夕方に起きます",m:"n"},{t:"休みも店の賄い食べて寝るだけ。インドアです",m:"sm"},{t:"デートは昼の明るい時間が苦手…夕方の散歩なら",m:"soft"},{t:"変な時間割ですけど、合わせてもらえたら嬉しい",m:"sm"}],
+ ev:[1,2,3],evTitle:"夜行性に一貫性あり",
+ explain:"深夜勤務 × 朝6時就寝 × 夕方の散歩。生活リズムが全部同じ方向を向いています。変な時間割は地雷ではなく、シフトです。",
+ ok:"深夜番組のラップバトルってついつい見ちゃいますよね～",ng:"ちょっと待ってくださいよ",
+ cry:"ひっく…夜勤って…そんなに変わってますか…？",
+ happy:"よかった…今度、明けの夕方一緒に散歩しません？"},
+{name:"カオリ",age:33,job:"外資系コンサル（自称）",prof:"「英語はネイティブレベルです」",diff:2,mine:true,
+ look:{hair:"updo",hc:"#3a2a20",hc2:"#241a12",skin:"#f2d4bc",eye:"#4a6a9a",top:"#1a4a6a",top2:"#0f3450",style:"suit",acc:"pearl",voice:360},
+ lines:[{t:"カオリです。外資系コンサルで、英語はネイティブレベルです",m:"smug"},{t:"毎年のようにNYとロンドンを行き来してます",m:"sm"},{t:"あ、パスポートは持ってないです。作ってない",m:"sly"},{t:"海外は全部オンラインで完結させる主義で",m:"sm"},{t:"あなたも英語できないと困りますよね？♡",m:"sly"}],
+ ev:[0,1,2],evTitle:"組み合わせ地雷：「NY・ロンドン行き来」×「パスポート未取得」",
+ explain:"毎年海外を行き来する国際派が、パスポートを作っていない。物理法則が崩壊しています。仕上げの「英語できないと困る」でマウントまで確定。",
+ ok:"進捗は順調です",ng:"勘弁してくださいよ",
+ angry:"はぁ？！ パスポートとかいう物理的な話、今してる？ 思考が古！",
+ badLine:"♡来月はNYね。あなたはオンラインで参加して♡",
+ badEnd:"1年後——ハタノさんは一度も海外に行けていないのに、NY出張費だけを毎月振り込んでいた。進捗は、順調です。"},
+{name:"ハルカ",age:29,job:"保護猫カフェ店員",prof:"「保護猫が3匹います♪」",diff:2,mine:false,
+ look:{hair:"bob",hc:"#a06a3a",hc2:"#7a4a24",skin:"#f6d7bd",eye:"#6a9a4a",top:"#7ab06a",top2:"#5a8a4a",style:"apron",acc:"none",voice:430},
+ lines:[{t:"ハルカです。保護猫カフェで働いてます",m:"sm"},{t:"家にも保護猫が3匹いて。医療費がけっこうかかる",m:"n"},{t:"だからデートは割り勘か、公園ピクニックが助かる",m:"soft"},{t:"猫の話ばかりでごめんなさい…楽しいんです",m:"sm"},{t:"動物が好きな人だと、すごく安心します",m:"sm"}],
+ ev:[1,2,3],evTitle:"保護猫への愛に筋が通る",
+ explain:"保護猫3匹 × 医療費 × 割り勘ピクニック。愛情もお金も正直で、相手への気遣いがある。猫好きは地雷ではありません。",
+ ok:"姪が可愛いんですよ～",ng:"大丈夫ですか？",
+ cry:"ぐす…猫医療費のとこが…ひっく…重かったです…？",
+ happy:"やった…！ 今度、保護猫カフェに一緒に来てくれます？"},
+{name:"レオナ",age:31,job:"ミニマリスト講師",prof:"「持ち物は100個以下です」",diff:3,mine:true,
+ look:{hair:"lowbun",hc:"#8a8a92",hc2:"#6a6a72",skin:"#f0d2c0",eye:"#7a7a8a",top:"#c9c4ba",top2:"#a8a49a",style:"knit",acc:"pin",voice:310},
+ lines:[{t:"レオナです。ミニマリストとして本も出してます",m:"sm"},{t:"家はほぼ無印で、持ち物は100個以下です",m:"sm"},{t:"別に倉庫を3つ借りてて、段ボール200箱あります",m:"sly"},{t:"あれは全部『いつか使う』大切な物なんです",m:"sm"},{t:"あなたのお家も、私が片付けてあげますね♡",m:"sly"}],
+ ev:[0,1,2],evTitle:"組み合わせ地雷：「持ち物100個以下」×「倉庫3つ・段ボール200」",
+ explain:"ミニマリストを名乗る講師が、倉庫3つに200箱。ミニマルの定義が崩壊しています。仕上げの「あなたのお家も片付ける」で侵略まで確定。",
+ ok:"仕様通りです",ng:"髪？伸ばさないですよ",
+ angry:"はぁ？！ 倉庫はミニマルの一部なんですけど！ 無理解がすぎる！",
+ badLine:"♡あなたのお家、明日から全部『いつか使う』箱にするね♡",
+ badEnd:"2年後——ハタノさんの部屋は段ボール200箱で埋まり、立つ場所がなくなった。ミニマリズムの講師料は、彼女に入っていた。"},
+{name:"ツグミ",age:28,job:"農家",prof:"「野菜作ってます」",diff:2,mine:false,
+ look:{hair:"braid",hc:"#6a4a2a",hc2:"#4a3018",skin:"#e8c49a",eye:"#8a6a3a",top:"#b0763f",top2:"#8a5a2a",style:"blouse",acc:"beads",voice:380},
+ lines:[{t:"ツグミです。実家が農家で、私も野菜作ってます",m:"sm"},{t:"都会のキラキラした生活には憧れますけど",m:"soft"},{t:"畑があるので、週5で地元に帰ってます",m:"n"},{t:"贈り物は採れたて野菜でいいですか？高い物は無理で",m:"sm"},{t:"土地と家族を大切にできる人がいいです",m:"sm"}],
+ ev:[2,3,4],evTitle:"土地と家族への一貫性",
+ explain:"農家 × 週5で地元 × 採れたて野菜。暮らしの軸が真っ直ぐ通っています。素朴さは地雷ではなく、誠実さです。",
+ ok:"やっぱりミカンは三ケ日みかんですよ",ng:"ランチどうします？",
+ cry:"ひっく…野菜じゃ…だめでしたか…ぐす",
+ happy:"ありがとうございます…今度、採れたて持っていきますね"},
+{name:"マユ",age:34,job:"占い師",prof:"「タロット、引きますよ」",diff:3,mine:false,
+ look:{hair:"wavy",hc:"#5a3a6a",hc2:"#3a2448",skin:"#f2d8c8",eye:"#9a5ab0",top:"#6a3a8a",top2:"#4a2668",style:"lace",acc:"pendant",voice:300},
+ lines:[{t:"マユです。占いを仕事にしてます。タロットがメイン",m:"n"},{t:"占いは統計と演出で、絶対に当たるとは言わないんです",m:"n"},{t:"高額な壺とかブレスレットは売りません。うちは時間制",m:"sm"},{t:"悩みを聞くのが仕事で、最後は本人の決定を尊重します",m:"soft"},{t:"信じなくても大丈夫です。一緒に考えるだけで",m:"sm"}],
+ ev:[1,2,3],evTitle:"占いに誠実な線引き",
+ explain:"統計と演出 × 当たると言わない × 高額グッズなし × 本人の決定を尊重。線引きが明確で、誠実。占い師であることは地雷ではありません。",
+ ok:"異世界転生は非常に興味深いですね",ng:"しんかいさん最低ですよ",
+ cry:"ぐす…占いってだけで…ひっく…怖がられますよね…",
+ happy:"よかった…では、あなたの悩みを一緒に整理しましょ"},
+{name:"ジゼル",age:30,job:"輸入雑貨バイヤー",prof:"「蚤の市が仕事です♪」",diff:2,mine:true,
+ look:{hair:"wavy",hc:"#d9a86a",hc2:"#b08040",skin:"#f4d4bc",eye:"#b08a4a",top:"#c25a3a",top2:"#9a3a24",style:"dress",acc:"rose",voice:400},
+ lines:[{t:"ジゼルです。輸入雑貨のバイヤーをしてます",m:"sm"},{t:"ヨーロッパの蚤の市を回るのが仕事です",m:"sm"},{t:"あ、元カレの借金300万、結婚したら半分持ちますよね？",m:"sly"},{t:"愛し合えばお金も一緒ですよね♡",m:"sm"},{t:"安心してください、私は逃げませんから",m:"sly"}],
+ ev:[2],evTitle:"単体地雷：「元カレの借金、半分持ちますよね？」",
+ explain:"初対面で元カレの借金300万を分担させる気満々。輸入雑貨も蚤の市も、この一言のための前置き。一発アウト。",
+ ok:"自分あーいうタイプちょっと苦手です",ng:"すみません痛風が・・・",
+ angry:"はぁ？！ 愛し合えばお金も一緒でしょ？！ 器ちっさ！",
+ badLine:"♡安心してください。借金も愛も、半分こです♡",
+ badEnd:"半年後——ハタノさんの口座から元カレの借金300万が消えていた。愛は、半分このはずだった。"},
+{name:"ノゾミ",age:27,job:"介護士",prof:"「時間には厳しいです」",diff:3,mine:true,
+ look:{hair:"pony",hc:"#7a5a4a",hc2:"#5a3a2a",skin:"#f6d7bd",eye:"#6a8a9a",top:"#8ab0c9",top2:"#6a90a9",style:"knit",acc:"none",voice:370},
+ lines:[{t:"ノゾミです。介護士してます。時間には厳しい仕事です",m:"n"},{t:"私は几帳面으로、約束は1分も遅れないタイプです",m:"sm"},{t:"あ、デートは毎回2時間くらい遅れます。寝坊で",m:"sly"},{t:"待たせた分、優しくしてくれますよね？♡",m:"sly"},{t:"時間は愛ですから。待てる人が好きです",m:"sly"}],
+ ev:[1,2],evTitle:"組み合わせ地雷：「1分も遅れない」×「毎回2時間遅刻」",
+ explain:"几帳面を名乗る介護士が、毎回2時間寝坊。時間の定義が崩壊しています。仕上げの「時間は愛」で待たせる正当化まで確定。",
+ ok:"もすもすこすもす",ng:"江古田のあそこ、江古田の！",
+ angry:"はぁ？！ 待てるのが愛なんですけど！ わかんないんですね！",
+ badLine:"♡今日も2時間遅れるね。待てるってことは、愛してるってこと♡",
+ badEnd:"3年後——ハタノさんは待ち合わせ場所に累計400時間立っていた。もすもすこすもす。"} ];
+// 追加30人。既存キャラクターの会話・判定データを引き継ぎ、プロフィールと外見を個別化。
+const EXTRA_WOMEN=[
+ ["アオイ",26,"保育士"],["ユリ",33,"編集者"],["ナツミ",29,"管理栄養士"],["ミサキ",31,"看護師"],["エリ",28,"Webデザイナー"],
+ ["カナ",35,"税理士"],["リサ",27,"美容師"],["チヒロ",30,"研究員"],["マドカ",32,"公務員"],["サクラ",25,"パティシエ"],
+ ["ユカリ",34,"建築士"],["アヤカ",28,"薬剤師"],["ミホ",31,"旅行会社勤務"],["ナナ",26,"ダンサー"],["レイ",33,"弁護士"],
+ ["フミ",30,"書店員"],["マリ",29,"広報"],["カエデ",27,"獣医師"],["トモミ",36,"大学講師"],["アスカ",25,"アパレル店員"],
+ ["ヒナ",28,"映像ディレクター"],["メグミ",34,"社会福祉士"],["セリナ",29,"フローリスト"],["コトネ",26,"声優"],["アイ",32,"人事担当"],
+ ["マオ",30,"料理研究家"],["チカ",27,"イラストレーター"],["ノア",31,"翻訳家"],["リオ",28,"イベントプランナー"],["ハナ",35,"図書館司書"]
+];
+const EXTRA_COLORS=["#d9789a","#6a9ac4","#8aab72","#c28a54","#9a78b8","#d06a62","#4eaaa0","#b08a9a"];
+for(let i=0;i<EXTRA_WOMEN.length;i++){
+ const [name,age,job]=EXTRA_WOMEN[i];
+ const w=JSON.parse(JSON.stringify(WOMEN[i%WOMEN.length]));
+ w.name=name;w.age=age;w.job=job;w.prof=`「${job}をしています」`;
+ w.look.hc=EXTRA_COLORS[i%EXTRA_COLORS.length];
+ w.look.hc2=EXTRA_COLORS[(i+3)%EXTRA_COLORS.length];
+ w.look.top=EXTRA_COLORS[(i+5)%EXTRA_COLORS.length];
+ w.look.top2=EXTRA_COLORS[(i+2)%EXTRA_COLORS.length];
+ WOMEN.push(w);
+}
+
+// === 完成版：50人の個別プロフィール・10ターン会話 ===
+const FINAL_ROSTER=[{"name":"キララ","age":27,"job":"ネイリスト","mine":true,"diff":1,"theme":"高級店・デート費用","lines":["はじめまして、キララです。ネイリストをしています","休日は友達と食事に行ったり、家でゆっくりしたりします","初めての食事なら、雰囲気のいいお店がいいですよね","この前行ったコース料理がすごくよくて","一人2万円くらいなら普通かなって思うんです","お店を選ぶとき、相手の予算はあまり聞かないかも","せっかくなら毎回いいお店に連れて行ってほしいです","割り勘だと、ちょっと大切にされてない気がして","次は熟成肉のお店にしませんか？","予約はコースでお願いしたいな。もちろんごちそうしてくれますよね？"]},{"name":"ほのか","age":31,"job":"図書館司書","mine":false,"diff":1,"theme":"読書と散歩","lines":["休日は本を読むことが多いです","気分転換に隣町の書店まで歩くんですよ","最近は短編集を読んでいて、少しずつ読むのが好きです","気に入った一節を手帳に書き留めたりします","おすすめを交換できたら楽しそうですね","静かな喫茶店で感想を話すのもいいな","でも相手の好きな場所にも行ってみたいです","知らないジャンルを教えてもらうのも好きです","無理に趣味を合わせなくてもいいと思っています","お互いの好きな時間を大切にできたら嬉しいです"]},{"name":"ミレイ","age":26,"job":"ヨガインストラクター","mine":true,"diff":2,"theme":"自己啓発講座","lines":["はじめまして、ミレイです。ヨガインストラクターをしています","休日は友達と食事に行ったり、家でゆっくりしたりします","休日はヨガと散歩でリフレッシュしています","体を整えると気持ちも前向きになるんですよ","最近、先生から食生活も学ぶといいって教わって","その先生のオンラインコミュニティがすごく素敵で","参加している人たちもみんな前向きなんです","私も講座を始めてから考え方が変わりました","月3万円なんですけど、自分への投資だと思えば","将来のパートナーとも学びを共有できたら理想です"]},{"name":"ツバキ","age":34,"job":"漫画家","mine":false,"diff":2,"theme":"漫画と締切","lines":["漫画を描く仕事をしています。今は連載の準備中です","締切前は部屋にこもりがちなんです","忙しい日は簡単なご飯で済ませることもあります","でも月に一度は銭湯に行ってリセットします","恋愛漫画を描くのに、恋愛の話はまだ勉強中で","読者の感想を読むのが一番の励みです","仕事が忙しいときは先に相談するようにしています","相手の予定も大切にしたいです","今度、好きな漫画を教えてもらえませんか","ゆっくりお互いのことを知れたら嬉しいです"]},{"name":"ユヅキ","age":28,"job":"広報PR","mine":true,"diff":2,"theme":"異性の友人と境界線","lines":["はじめまして、ユヅキです。広報PRをしています","休日は友達と食事に行ったり、家でゆっくりしたりします","友達とはよくご飯に行きます。男女関係なく仲良しです","長く付き合っている男友達も何人かいて","二人きりで飲みに行くことも普通にあります","恋人ができても友達付き合いは変えたくないですね","連絡も毎日するし、旅行に行くこともあります","相手に不安がられると、少し窮屈に感じちゃう","でも自分が誰と会うかは自由だと思うんです","恋人にも同じくらい自由でいてほしいです"]},{"name":"ルリコ","age":30,"job":"一般事務","mine":true,"diff":2,"theme":"美容課金","lines":["はじめまして、ルリコです。一般事務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","美容や身だしなみには気を使っています","月に一度はサロンでメンテナンスしていて","最近は肌管理のコースも始めたんです","分割にすると月々はそんなに高くないんですよ","美容代は月に15万円くらいかな","結婚しても今のケアは続けたいです","生活費とは別に美容費は確保したくて","パートナーなら応援してくれると思うんです"]},{"name":"アカネ","age":32,"job":"ジムトレーナー","mine":false,"diff":1,"theme":"運動と地元スポーツ","lines":["休みの日は軽く走ったりジムに行ったりします","体を動かすと気分がすっきりするんです","でも運動が苦手な人に無理強いはしません","スポーツ観戦も好きで、地元チームを応援しています","試合の日は友達と盛り上がることもあります","家でのんびり過ごす休日も好きですよ","相手の趣味の話を聞くのも楽しいです","一緒にやるなら散歩くらいからがいいかな","勝ち負けより、楽しく過ごせるのが一番です","お互いのペースを大事にしたいですね"]},{"name":"ココミ","age":25,"job":"カフェ店員","mine":true,"diff":2,"theme":"家事の外注と分担","lines":["はじめまして、ココミです。カフェ店員をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","料理は好きで、休みの日に作り置きするんです","でも平日は仕事で疲れるから、家事は効率重視です","掃除や洗濯は外注するのもありだと思っていて","結婚したら家事は得意な方がやればいいですよね","私は料理以外はあまり得意じゃないんです","相手が掃除や洗濯を担当してくれたら助かるな","費用も家計から出せばいいと思うんです","家事分担って、無理のない形が一番ですよね"]},{"name":"サツキ","age":35,"job":"一般企業・経理","mine":false,"diff":1,"theme":"家計管理","lines":["経理の仕事をしているので、家計簿をつけるのが習慣です","毎月少しずつ貯金しています","でも旅行やおいしいものにはちゃんと使います","最近は近場の温泉に行きました","計画を立てるのは好きだけど、予定変更も平気です","お金のことは隠さず相談できると安心ですね","相手の趣味に使うお金も大切だと思います","全部を細かく管理したいわけではないんです","一緒に目標を決めて貯めるのも楽しそう","無理なく続けられる暮らしが理想です"]},{"name":"ノノカ","age":29,"job":"フリーター・カフェ勤務","mine":true,"diff":2,"theme":"仕事を続ける意思がない","lines":["はじめまして、ノノカです。フリーター・カフェ勤務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","今はカフェで働いています。シフトは週に数日です","仕事は嫌いじゃないけど、ずっと続けるかは迷っていて","できれば好きなことだけして暮らしたいんですよね","結婚したら働き方を変えてもいいかなって","家賃や生活費って一人だと大変じゃないですか","二人なら収入が安定している方が支えればいいと思うんです","私は家で過ごす時間を大切にしたくて","相手の仕事を応援するのも家庭の役割ですよね"]},{"name":"シオリ","age":30,"job":"葬儀社スタッフ","mine":false,"diff":1,"theme":"仕事への向き合い方","lines":["葬儀の仕事をしています。人の話を聞くことが多いです","大変な日もありますが、誰かの支えになれたらと思って","休日は気持ちを切り替えて散歩しています","最近は小さな植物を育て始めました","毎日少しずつ変化するのを見るのが楽しいです","仕事の話は相手が聞きたいときに話すようにしています","無理に明るくしなくてもいい関係が理想です","疲れた日はお互いに休めるといいですね","好きなことを一つずつ共有できたら嬉しいです","焦らず自然に仲良くなれたらと思います"]},{"name":"マナミ","age":27,"job":"看護師","mine":true,"diff":2,"theme":"過干渉と世話焼き","lines":["はじめまして、マナミです。看護師をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","人のことを心配するタイプで、つい世話を焼いちゃいます","相手の体調や帰宅時間は把握しておきたいんです","前の恋人にも毎日予定を聞いていました","連絡が遅いと事故に遭ったのかと不安になるので","スマホの位置情報は共有した方が安心ですよね","友達と出かけるときも誰とどこへ行くか知りたいです","隠し事がなければ困らないと思うんです","愛情があるから気になるだけなんですよ"]},{"name":"ミナミ","age":26,"job":"飲食店アルバイト","mine":false,"diff":1,"theme":"夜型生活","lines":["飲食店で遅番に入ることが多いんです","帰宅は夜中になるので、朝はゆっくりです","休みの日は昼過ぎに起きて洗濯をします","店のまかないを食べることもあります","昼間の予定は前もって決めてもらえると助かります","夜の散歩や遅めのカフェは好きです","生活リズムが違っても相談できれば大丈夫です","相手の朝型生活を無理に変えてほしくないです","お互いに負担のない時間を見つけたいですね","まずは都合のいい日にお茶でもどうですか"]},{"name":"カオリ","age":33,"job":"派遣社員","mine":true,"diff":2,"theme":"経歴の誇張","lines":["はじめまして、カオリです。派遣社員をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","仕事では海外の人とやりとりすることもあります","英語はかなり得意で、ほぼネイティブみたいなものです","実は海外勤務の経験もあるんですよ","あ、勤務というか短期の研修で行ったことがあって","資格も持っているんです。名前はちょっと忘れました","履歴書には上級って書いていましたね","会話は翻訳アプリがあればだいたい大丈夫です","細かいことより、伝えようとする気持ちが大事ですよね"]},{"name":"ハルカ","age":29,"job":"保護猫カフェ店員","mine":false,"diff":1,"theme":"保護猫活動","lines":["保護猫カフェで働いていて、猫たちのお世話をしています","人に慣れるまで時間がかかる子もいるんです","焦らず距離を縮めるのが大切だなって思います","家でも猫を飼っていますが、迎える責任は大きいですね","旅行のときは預け先を必ず確認します","動物が好きでも、相手に強要はしたくないです","猫アレルギーなどもあるので相談したいですね","休日は譲渡会のお手伝いをすることもあります","小さな変化を一緒に喜べる人だと嬉しいです","動物との暮らしについてもゆっくり話せたら"]},{"name":"レオナ","age":31,"job":"ミニマリスト講師","mine":true,"diff":2,"theme":"極端な節約の押しつけ","lines":["はじめまして、レオナです。ミニマリスト講師をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","持ち物は少ない方で、必要なものだけにしています","節約すると心にも余裕ができるんですよ","最近は冷暖房もなるべく使わないようにしていて","食費は一人月8千円以内にしています","結婚したら二人で無駄をなくしたいですね","趣味や外食は優先順位が低いと思うんです","プレゼントも実用品なら十分です","相手のお金の使い方も一緒に管理したいな"]},{"name":"ツグミ","age":28,"job":"農家","mine":false,"diff":1,"theme":"季節の野菜","lines":["家では季節の野菜を育てています","朝は畑に出て、午後から出荷の準備をするんです","旬のものはシンプルに食べるのが好きです","形が不揃いでも味は変わらないんですよ","料理は得意というほどじゃないけど、漬物は作ります","忙しい時期は予定を調整してもらうことがあります","その分、落ち着いたらゆっくり出かけたいです","自然の中を散歩するのもおすすめですよ","相手の好きな食べ物も作ってみたいです","食卓を一緒に楽しめる関係がいいですね"]},{"name":"マユ","age":34,"job":"パート勤務","mine":true,"diff":2,"theme":"占い依存と決めつけ","lines":["はじめまして、マユです。パート勤務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","最近タロットをよく見てもらうんです","人との相性って、生年月日でかなり分かるんですよ","前の仕事を辞めたのも占いの結果で","大事なことは先生に相談してから決めています","恋愛も相性が悪いと長続きしないらしくて","あなたの生年月日も聞いていいですか？","相性が悪かったら、会う回数を減らすかも","先生が言うことは結構当たるんです"]},{"name":"ジゼル","age":30,"job":"アパレル販売員","mine":false,"diff":1,"theme":"古着と買い物","lines":["はじめまして、ジゼルです。アパレル販売員をしています","仕事では古着と買い物に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は古着と買い物にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"ノゾミ","age":27,"job":"介護士","mine":true,"diff":2,"theme":"時間にルーズ・責任転嫁","lines":["はじめまして、ノゾミです。介護士をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","仕事では時間を守ることが大切だと思っています","約束に遅れる人はちょっと苦手ですね","ただ、私は朝が弱くて寝坊しがちなんです","この前も待ち合わせに一時間遅れちゃって","でも相手が早く来すぎたのもあると思うんです","遅刻した分、優しくしてくれてもいいですよね","仕事の疲れがあると仕方ないと思っていて","待つ時間も二人の思い出になるじゃないですか"]},{"name":"アオイ","age":17,"job":"高校生","mine":true,"diff":3,"theme":"年齢・参加資格の偽り","lines":["アオイです。高校2年で、学校では放送委員をしています","今日は友達に誘われて来たんです。会場の雰囲気が気になって","受付では年齢のことを聞かれて、ちょっと困っちゃいました","実は申込フォーム、年齢を選ぶところを適当に入力したんです","高校生でも参加できると思っていたんですけどね","親には友達のイベントに行くって伝えてあります","身分証を見せてと言われたら、学生証しか持っていなくて","こういう場に高校生がいるのは、やっぱりおかしいですよね","年齢を確認して、スタッフさんに事情を話した方がよさそうです","すみません。ママにも連絡して、今日は帰ります"]},{"name":"ユリ","age":18,"job":"高校生","mine":true,"diff":3,"theme":"年齢・身分確認の回避","lines":["ユリです。高校3年で、卒業後は専門学校を考えています","プロフィールには成人って書いたんですけど、まだ18歳です","友達が大人向けの交流会だと思わず申し込んじゃって","受付で本人確認の話になって、書類を出せませんでした","実は生年月日を入力するとき、参加できるように変えたんです","親にはこの会のことを詳しく話していません","周りの人も大人ばかりで、場違いだなって感じています","このまま参加を続けるのはよくないですよね","スタッフさんに本当の年齢を伝えて、参加を取り消します","ママにも連絡します。確認してくれてありがとうございます"]},{"name":"ナツミ","age":29,"job":"一般事務","mine":true,"diff":2,"theme":"親への経済的依存","lines":["はじめまして、ナツミです。一般事務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","実家暮らしで、家族とは仲がいいんです","家にお金は入れていないけど、家事は少し手伝っています","大きな買い物は親に相談して決めることが多くて","スマホ代や保険も親が払ってくれているんです","自分の給料は趣味に使いたいので","結婚しても親に近くにいてほしいですね","困ったときは親に頼るのが一番だと思います","生活費も親が少し援助してくれたら安心かな"]},{"name":"ミサキ","age":31,"job":"契約社員","mine":false,"diff":1,"theme":"資格取得と将来設計","lines":["はじめまして、ミサキです。契約社員をしています","仕事では資格取得と将来設計に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は資格取得と将来設計にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"エリ","age":28,"job":"Webデザイナー","mine":false,"diff":2,"theme":"ものづくりと働き方","lines":["はじめまして、エリです。Webデザイナーをしています","仕事ではものづくりと働き方に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近はものづくりと働き方にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"カナ","age":35,"job":"税理士事務所スタッフ","mine":false,"diff":1,"theme":"家計と小さな旅行","lines":["はじめまして、カナです。税理士事務所スタッフをしています","仕事では家計と小さな旅行に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は家計と小さな旅行にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"リサ","age":27,"job":"美容師","mine":true,"diff":2,"theme":"外見への過剰な要求","lines":["はじめまして、リサです。美容師をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","美容師なので、髪や服装を見る癖があるんです","清潔感って大切だと思いませんか？","元恋人には服を全部選んであげていました","髪型も月一で美容室に行ってほしいです","服は私の好みに合わせてもらえたら嬉しいな","体型管理も一緒に頑張りたいですね","写真を撮るときは角度も大事です","第一印象は見た目で決まると思うんです"]},{"name":"チヒロ","age":30,"job":"研究補助員","mine":false,"diff":1,"theme":"科学館と学び","lines":["はじめまして、チヒロです。研究補助員をしています","仕事では科学館と学びに関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は科学館と学びにまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"マドカ","age":32,"job":"公務員","mine":true,"diff":2,"theme":"肩書・年収への執着","lines":["はじめまして、マドカです。公務員をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","仕事は安定している方がいいですよね","結婚相手の年収は大事な条件だと思います","できれば年収は800万円以上が理想です","職業や会社名も将来性を見たいです","友達の旦那さんと比べちゃうこともあります","生活水準は下げたくないんですよね","家や車もある程度いいものが欲しいです","条件が合えば性格は後から分かり合えると思います"]},{"name":"サクラ","age":25,"job":"パティシエ","mine":false,"diff":1,"theme":"お菓子作り","lines":["はじめまして、サクラです。パティシエをしています","仕事ではお菓子作りに関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近はお菓子作りにまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"ユカリ","age":34,"job":"一般企業・営業事務","mine":true,"diff":2,"theme":"元恋人との比較","lines":["はじめまして、ユカリです。一般企業・営業事務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","恋愛経験はそれなりにあります","前の彼は毎週レストランを予約してくれて","その前の人は記念日に旅行を用意してくれたんです","つい比べちゃうのは悪い癖だと思うんですけど","あなたなら前の人より気が利きそうですね","でも誕生日は前の彼と同じくらい期待しちゃうかも","連絡の頻度も前の人はもっと多かったんです","過去の恋愛を超えてくれる人がいいですね"]},{"name":"アヤカ","age":28,"job":"ドラッグストア勤務","mine":false,"diff":1,"theme":"健康と日々の習慣","lines":["はじめまして、アヤカです。ドラッグストア勤務をしています","仕事では健康と日々の習慣に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は健康と日々の習慣にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"ミホ","age":31,"job":"旅行会社勤務","mine":false,"diff":1,"theme":"近場の旅行","lines":["はじめまして、ミホです。旅行会社勤務をしています","仕事では近場の旅行に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は近場の旅行にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"ナナ","age":26,"job":"フリーター・イベントスタッフ","mine":true,"diff":2,"theme":"衝動買いと借金","lines":["はじめまして、ナナです。フリーター・イベントスタッフをしています","休日は友達と食事に行ったり、家でゆっくりしたりします","イベントの仕事をしていて、服や小物を見るのが好きです","気に入ったらその場で買っちゃうタイプで","カードの支払いは分ければ何とかなるんですよ","リボ払いも便利だから使っています","残高はあまり見ないようにしていて","趣味の出費は我慢したくないんです","貯金は今ほとんどないけど、何とかなるかなって","結婚したら家計は相手に任せたいです"]},{"name":"レイ","age":33,"job":"法律事務所事務","mine":true,"diff":2,"theme":"トラブルを他人のせいにする","lines":["はじめまして、レイです。法律事務所事務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","人間関係って難しいですよね","前の職場は周りの人が分かってくれなくて","友達とも急に連絡が取れなくなることが多いんです","でも私は悪くないと思うんですよ","注意されると、相手の言い方が気になっちゃって","謝るのは苦手で、向こうから来てほしいです","揉めたら距離を置くのが一番ですよね","相手が折れてくれると助かります"]},{"name":"フミ","age":30,"job":"書店員","mine":false,"diff":1,"theme":"本と喫茶店","lines":["書店で働いていて、本に囲まれる時間が好きです","仕事帰りに喫茶店で少し読書することもあります","最近はエッセイをよく読んでいます","本の好みは人それぞれで面白いですよね","おすすめを聞くのも、自分の本を紹介するのも好きです","休日は古本屋をのぞいたりします","歩き疲れたらコーヒーを飲んで休憩します","相手が本を読まなくても全然気にしません","好きなことを話してくれる人がいいな","今度、あなたの好きなものも教えてください"]},{"name":"マリ","age":29,"job":"一般企業・広報","mine":true,"diff":2,"theme":"SNS承認欲求","lines":["はじめまして、マリです。一般企業・広報をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","SNSに日常を載せるのが好きなんです","カフェや旅行の写真は必ず投稿します","交際したら二人の写真もたくさん載せたいな","記念日やプレゼントも写真に残したいです","投稿に反応が少ないとちょっと気になります","恋人ならコメントも毎回してほしいですね","プロフィールにも交際中って書きたいです","写真映えするデートを考えるのも楽しそう"]},{"name":"カエデ","age":27,"job":"動物病院スタッフ","mine":false,"diff":1,"theme":"動物と休日","lines":["はじめまして、カエデです。動物病院スタッフをしています","仕事では動物と休日に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は動物と休日にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"トモミ","age":36,"job":"大学職員","mine":true,"diff":2,"theme":"家族の過干渉","lines":["はじめまして、トモミです。大学職員をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","家族とは毎日連絡を取るくらい仲がいいです","母とは何でも相談していて","仕事や引っ越しも母の意見を聞いて決めました","結婚相手のことも家族に気に入ってほしいです","週末は実家で過ごすのが基本かな","二人のことも母に相談したいんですよね","家の鍵も渡しておくと便利だと思います","親の意見は経験がある分、正しいことが多いです"]},{"name":"アスカ","age":25,"job":"アパレル店員","mine":false,"diff":1,"theme":"服と古着屋巡り","lines":["はじめまして、アスカです。アパレル店員をしています","仕事では服と古着屋巡りに関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は服と古着屋巡りにまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"ヒナ","age":28,"job":"一般企業・営業","mine":true,"diff":2,"theme":"仕事の責任回避","lines":["はじめまして、ヒナです。一般企業・営業をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","営業の仕事は人との調整が多くて大変です","予定が変わることもよくあるんですよ","約束に間に合わないときは、だいたい周りのせいで","資料のミスも前の担当者の引き継ぎが悪くて","上司に注意されると納得できないことがあります","自分だけ責められるのはおかしいですよね","謝るより、状況を分かってほしいです","家庭でも相手がフォローしてくれると助かります"]},{"name":"メグミ","age":34,"job":"福祉施設職員","mine":false,"diff":1,"theme":"地域ボランティア","lines":["はじめまして、メグミです。福祉施設職員をしています","仕事では地域ボランティアに関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は地域ボランティアにまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"セリナ","age":29,"job":"花屋スタッフ","mine":false,"diff":1,"theme":"花と季節の行事","lines":["はじめまして、セリナです。花屋スタッフをしています","仕事では花と季節の行事に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は花と季節の行事にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"コトネ","age":26,"job":"コールセンター勤務","mine":true,"diff":2,"theme":"感情の起伏と暴言","lines":["はじめまして、コトネです。コールセンター勤務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","電話で人の相談を聞く仕事をしています","忙しい日は、どうしてもイライラしちゃって","店員さんの対応が悪いと強く言うこともあります","その場で言わないと気が済まないんですよ","友達にも思ったことははっきり伝えます","怒るのは相手に期待しているからだと思うんです","恋人には全部受け止めてほしいですね","機嫌が悪い日はそっとしておいてほしいです"]},{"name":"アイ","age":32,"job":"人事アシスタント","mine":false,"diff":1,"theme":"人の話を聞くこと","lines":["はじめまして、アイです。人事アシスタントをしています","仕事では人の話を聞くことに関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は人の話を聞くことにまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"マオ","age":30,"job":"食品メーカー勤務","mine":true,"diff":2,"theme":"食生活の支配","lines":["はじめまして、マオです。食品メーカー勤務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","食べるものには気を使っているんです","加工食品や甘いものはなるべく避けています","一緒に暮らすなら食事も健康的にしたいですね","外食のメニューも栄養で選びたいです","お菓子やジュースは家に置かない方がいいと思う","相手の食生活も整えてあげたいんです","体重や食事内容を記録するといいですよ","好きなものを食べたい日もあると思うけど"]},{"name":"チカ","age":27,"job":"イラストレーター","mine":false,"diff":1,"theme":"創作と散歩","lines":["はじめまして、チカです。イラストレーターをしています","仕事では創作と散歩に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は創作と散歩にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"ノア","age":31,"job":"一般企業・貿易事務","mine":true,"diff":2,"theme":"二重生活・説明の不一致","lines":["はじめまして、ノアです。一般企業・貿易事務をしています","休日は友達と食事に行ったり、家でゆっくりしたりします","貿易事務をしていて、平日は忙しいんです","休日は予定が読めないことが多くて","住んでいるのはこの辺りなんですけど、詳しくはまた今度","実家にもよく帰るので、連絡が取れない日があります","仕事用と個人用でスマホを分けているんです","住所の話は少し事情があって説明しにくくて","友達にもあまり家に来てもらわないんです","話がややこしくなるので、今は聞かないでほしいです"]},{"name":"リオ","age":28,"job":"イベント会社事務","mine":false,"diff":1,"theme":"イベントと段取り","lines":["はじめまして、リオです。イベント会社事務をしています","仕事ではイベントと段取りに関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近はイベントと段取りにまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]},{"name":"ハナ","age":35,"job":"図書館司書","mine":false,"diff":1,"theme":"読書会と地域活動","lines":["はじめまして、ハナです。図書館司書をしています","仕事では読書会と地域活動に関わることもあって、毎日発見があります","休日は気分転換に外へ出たり、家でのんびりしたりします","最近は読書会と地域活動にまつわる小さな楽しみを見つけました","特別なことじゃなくても、日々の中に楽しみがあるといいですよね","忙しいときは無理せず、休む時間も大切にしています","相手にも自分の好きな時間を持っていてほしいです","意見が違ったら、まず理由を聞いてみたいと思います","何でも一緒にするより、お互いを応援できる関係が理想です","あなたの休日の過ごし方も、よかったら聞かせてください"]}];
+
+const ORIGINAL_LOOKS = WOMEN.map(w=>w.look);
+WOMEN.length=0;
+FINAL_ROSTER.forEach((p,i)=>{
+ const baseLook=ORIGINAL_LOOKS[i%ORIGINAL_LOOKS.length]||ORIGINAL_LOOKS[0];
+ const w={name:p.name,age:p.age,job:p.job,prof:p.name==="アオイ"||p.name==="ユリ"?"「高校生。参加資格を確認中です」":`「${p.theme}を大切にしています」`,diff:p.diff,mine:p.mine,look:JSON.parse(JSON.stringify(baseLook)),lines:p.lines.map((t,j)=>({t,m:j>=7?(p.mine?"sly":"soft"):j>=4?"sm":"n"})),ev:p.mine?[2,4,6,8]:[1,3,5,7],evTitle:p.mine?p.theme+"に関する価値観・発言の問題":"一貫性と相手への配慮",explain:p.mine?(p.name==="アオイ"||p.name==="ユリ"?"未成年であり、参加資格や年齢を偽って参加していることが問題です。本人の安全を優先し、スタッフ・保護者へつなぐ判断が必要です。":p.theme+"に関する発言が会話の中で段階的に明らかになります。単発の言葉ではなく、本人の考え方と相手への要求を合わせて判断しましょう。"):p.theme+"について一貫した考えを持ち、相手の事情や価値観も尊重しています。癖や生活スタイルの違いだけで地雷とは言えません。",ok:p.mine?"話を順番に聞くと、気になる点がつながりました":"無理に合わせなくていいのが素敵ですね",ng:p.mine?"きっと気のせいですよね":"少し慎重になりすぎたかもしれません",angry:"そんなふうに決めつけるんですか？",badLine:p.mine?"結局、私の考えを受け入れてくれないんですね":"そんなつもりじゃなかったのに…",badEnd:p.mine?"その後——ハタノさんは、最初に聞いた小さな違和感を思い出すことになった。":"その後——お互いに話し合う機会を持てず、連絡は自然に途絶えた。",cry:"そう思われていたなんて、少し悲しいです…",happy:"ちゃんと話を聞いてくれて、ありがとうございます"};
+ if(p.name==="アオイ"||p.name==="ユリ"){w.look=JSON.parse(JSON.stringify(baseLook));w.look.top="#6b83a8";w.look.top2="#465b7c";w.prof="「学校生活と放送委員／進路の話」";}
+ WOMEN.push(w);
+});
+const TOTAL=WOMEN.length;
+const RANKS=[
+ {min:100,r:"S",title:"見極めの神",quip:"仕様通りです"},
+ {min:83,r:"A",title:"伝説の婚活アドバイザー",quip:"任せてください"},
+ {min:67,r:"B",title:"目利きの常連さん",quip:"やっぱりミカンは三ケ日みかんですよ"},
+ {min:50,r:"C",title:"カープ好きの一般人",quip:"カープ！カープ！カープ！"},
+ {min:-1,r:"D",title:"地雷ホイホイ",quip:"勘弁してくださいよ"}];
+
+let R={bestScore:0,bestAcc:0,plays:0,totalCorrect:0,totalAnswered:0,clears:0,sound:true};
+try{const s=localStorage.getItem("hatano_konkatsu_v1");if(s)R=Object.assign(R,JSON.parse(s));}catch(e){}
+function saveR(){try{localStorage.setItem("hatano_konkatsu_v1",JSON.stringify(R));}catch(e){}}
+
+const A={ctx:null,bus:null,master:null,muted:R.sound===false,started:false,heartIv:0,noiseBuf:null,
+unlock(){if(this.ctx){if(this.ctx.state==="suspended")this.ctx.resume();return;}
+ try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+  this.ctx=new C();if(this.ctx.state==="suspended")this.ctx.resume();
+  const comp=this.ctx.createDynamicsCompressor();comp.threshold.value=-18;comp.ratio.value=6;comp.connect(this.ctx.destination);
+  this.master=this.ctx.createGain();this.master.gain.value=this.muted?0:.9;this.master.connect(comp);this.bus=this.master;
+  const len=this.ctx.sampleRate*1.2,buf=this.ctx.createBuffer(1,len,this.ctx.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<len;i++)d[i]=Math.random()*2-1;this.noiseBuf=buf;this.padStart();}catch(e){}},
+setMute(m){this.muted=m;R.sound=!m;saveR();if(this.master)this.master.gain.linearRampToValueAtTime(m?0:.9,this.ctx.currentTime+.15);syncMuteIcons();},
+tone(o){if(!this.ctx||this.muted||this.ctx.state!=="running")return;const c=this.ctx,t0=c.currentTime+(o.t||0),d=o.d||.2;
+ const osc=c.createOscillator(),g=c.createGain();osc.type=o.type||"sine";
+ osc.frequency.setValueAtTime(o.f,t0);if(o.f2)osc.frequency.exponentialRampToValueAtTime(Math.max(1,o.f2),t0+d);
+ g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(o.v||.2,t0+(o.a||.006));g.gain.exponentialRampToValueAtTime(.0008,t0+d);
+ osc.connect(g);g.connect(this.bus);osc.start(t0);osc.stop(t0+d+.06);},
+noise(o){if(!this.ctx||this.muted||this.ctx.state!=="running")return;const c=this.ctx,t0=c.currentTime+(o.t||0),d=o.d||.15;
+ const s=c.createBufferSource();s.buffer=this.noiseBuf;s.loop=true;
+ const f=c.createBiquadFilter();f.type=o.ft||"bandpass";f.frequency.value=o.fc||1000;f.Q.value=o.q||1;
+ const g=c.createGain();g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(o.v||.1,t0+.01);g.gain.exponentialRampToValueAtTime(.0008,t0+d);
+ s.connect(f);f.connect(g);g.connect(this.bus);s.start(t0);s.stop(t0+d+.05);},
+padStart(){if(this.started||!this.ctx)return;this.started=true;const c=this.ctx;
+ const g=c.createGain();g.gain.value=.045;const f=c.createBiquadFilter();f.type="lowpass";f.frequency.value=520;f.Q.value=.6;
+ const lfo=c.createOscillator(),lg2=c.createGain();lfo.frequency.value=.055;lg2.gain.value=210;lfo.connect(lg2);lg2.connect(f.frequency);lfo.start();
+ const os=[];for(let i=0;i<3;i++){const o=c.createOscillator();o.type=i===2?"sine":"triangle";o.detune.value=(i-1)*5;o.connect(f);o.start();os.push(o);}
+ f.connect(g);g.connect(this.bus);
+ const chords=[[196,247,294],[164.8,207.7,247],[174.6,220,261.6],[146.8,185,220]];let ci=0;
+ const setChord=()=>{const ch=chords[ci%4];ci++;os.forEach((o,i)=>{o.frequency.linearRampToValueAtTime(ch[i]*(i===2?2:1),c.currentTime+2.5);});};
+ setChord();setInterval(setChord,9000);
+ const cr=c.createBufferSource();cr.buffer=this.noiseBuf;cr.loop=true;
+ const cf=c.createBiquadFilter();cf.type="bandpass";cf.frequency.value=3200;cf.Q.value=.4;
+ const cg=c.createGain();cg.gain.value=.006;cr.connect(cf);cf.connect(cg);cg.connect(this.bus);cr.start();},
+heart(on,slow){if(this.heartIv){clearInterval(this.heartIv);this.heartIv=0;}if(!on||!this.ctx)return;
+ const beat=()=>{this.tone({f:68,f2:40,d:.13,v:.5});this.tone({f:55,f2:36,d:.11,v:.34,t:.17});};
+ beat();this.heartIv=setInterval(beat,slow?1150:820);},
+ui(){this.tone({f:660,d:.045,type:"square",v:.06});},
+pop(){this.tone({f:520,f2:760,d:.07,v:.12});this.noise({d:.04,fc:2400,v:.04});},
+wblip(p){this.tone({f:p*(1+rnd(-.04,.06)),d:.035,type:"triangle",v:.045});},
+hblip(){this.tone({f:96*(1+rnd(-.08,.12)),f2:70,d:.06,type:"square",v:.05});},
+aiz(){this.tone({f:150,f2:110,d:.09,type:"square",v:.08});this.tone({f:220,d:.05,t:.06,type:"triangle",v:.05});},
+sting(){[220,261.6,311.1].forEach((f,i)=>this.tone({f,f2:f*.94,d:1.2,type:"sawtooth",v:.055,t:i*.03}));},
+dokun(){this.tone({f:190,f2:52,d:.4,v:.55});this.noise({d:.16,fc:300,v:.22,ft:"lowpass"});this.heart(true);},
+buzz(){this.tone({f:320,f2:120,d:.32,type:"sawtooth",v:.16,t:.25});this.tone({f:280,f2:100,d:.3,type:"sawtooth",v:.13,t:.55});},
+chime(){[523.3,659.3,784,1046.5].forEach((f,i)=>this.tone({f,d:.3,type:"sine",v:.14,t:i*.09}));this.noise({d:.4,fc:6000,v:.03,t:.3});},
+sad(){[392,349.2,311.1,261.6].forEach((f,i)=>this.tone({f,d:.42,type:"triangle",v:.12,t:i*.27}));for(let i=0;i<3;i++)this.noise({d:.14,fc:480,q:2,v:.09,t:.4+i*.42});},
+drone(){this.tone({f:55,d:3.4,type:"sawtooth",v:.14});this.tone({f:55.8,d:3.4,type:"sawtooth",v:.12});this.tone({f:440,d:2,type:"sine",v:.08,t:.4});this.tone({f:622.3,d:2,type:"sine",v:.07,t:.4});this.heart(true,true);},
+fanfare(){[523.3,523.3,659.3,784,1046.5].forEach((f,i)=>this.tone({f,d:.16,type:"triangle",v:.13,t:i*.12}));[523.3,659.3,784].forEach(f=>this.tone({f,d:.9,type:"sine",v:.08,t:.66}));}};
+
+const frame=$("frame"),cv=$("scene"),ctx=cv.getContext("2d");
+const VW=540;let S=1,VH=960,Wpx=0,Hpx=0,bgFar=null,bgTable=null,bgMode=null,dotsPat=null,stipplePat=null,noiseURL="",noiseCanvas=null;
+function makeNoise(){noiseCanvas=document.createElement("canvas");noiseCanvas.width=noiseCanvas.height=96;const c=noiseCanvas.getContext("2d");
+ const im=c.createImageData(96,96);for(let i=0;i<im.data.length;i+=4){const v=Math.random()*255|0;im.data[i]=im.data[i+1]=im.data[i+2]=v;im.data[i+3]=26;}
+ c.putImageData(im,0,0);noiseURL=noiseCanvas.toDataURL();
+ $("pageNoise").style.backgroundImage=`url(${noiseURL})`;$("grain").style.backgroundImage=`url(${noiseURL})`;}
+function makePatterns(){const d=document.createElement("canvas");d.width=d.height=26;const c=d.getContext("2d");
+ c.fillStyle="rgba(246,240,230,.92)";ell(c,7,7,3,3);c.fill();ell(c,20,20,3,3);c.fill();dotsPat=ctx.createPattern(d,"repeat");
+ const s=document.createElement("canvas");s.width=s.height=22;const sc=s.getContext("2d");
+ sc.fillStyle="rgba(130,120,150,.4)";for(let i=0;i<34;i++){ell(sc,rnd(22),rnd(22),.8,.8);sc.fill();}stipplePat=ctx.createPattern(s,"repeat");}
+function layout(){return G.phase==="title"?{T0:VH*.478,T1:VH*.542,WCX:318,WCY:VH*.34,HCX:270,HCY:VH*.775}:{T0:VH*.352,T1:VH*.418,WCX:318,WCY:VH*.168,HCX:270,HCY:VH*.77};}
+function resize(){const r=frame.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+ Wpx=Math.max(2,Math.round(r.width));Hpx=Math.max(2,Math.round(r.height));
+ cv.width=Math.max(2,Math.round(Wpx*dpr));cv.height=Math.max(2,Math.round(Hpx*dpr));
+ cv.style.width=Wpx+"px";cv.style.height=Hpx+"px";S=cv.width/VW;VH=cv.height/S;
+ frame.style.fontSize=Math.min(17,Math.max(12.5,Wpx*.038))+"px";buildBG();}
+function buildBG(){bgMode=G.phase==="title"?"title":"play";const L=layout();
+ bgFar=document.createElement("canvas");bgFar.width=cv.width;bgFar.height=cv.height;
+ const c=bgFar.getContext("2d");c.setTransform(S,0,0,S,0,0);
+ c.fillStyle=lg(c,0,0,0,VH,[[0,"#2a1430"],[.4,"#3b1f33"],[.62,"#241226"],[1,"#150a1b"]]);c.fillRect(0,0,VW,VH);
+ c.strokeStyle="rgba(255,190,120,.045)";c.lineWidth=1;
+ for(let x=-40;x<VW+40;x+=46){c.beginPath();c.moveTo(x,0);c.lineTo(x+VH*.35,VH*.62);c.stroke();c.beginPath();c.moveTo(x+46,0);c.lineTo(x+46-VH*.35,VH*.62);c.stroke();}
+ const wx=26,wy=VH*.075,ww=170,wh=VH*.24;
+ rr(c,wx,wy,ww,wh,16);c.fillStyle=lg(c,wx,wy,wx,wy+wh,[[0,"#0d1030"],[1,"#241a4a"]]);c.fill();
+ c.save();rr(c,wx,wy,ww,wh,16);c.clip();
+ c.fillStyle="#ffe9b0";ell(c,wx+128,wy+34,13,13);c.fill();c.fillStyle="rgba(255,233,176,.16)";ell(c,wx+128,wy+34,24,24);c.fill();
+ const sky=[[.05,.72],[.2,.6],[.33,.78],[.47,.55],[.6,.68],[.74,.5],[.88,.74]];
+ c.fillStyle="#0a0c22";sky.forEach(s=>{const bx=wx+s[0]*ww,bh=wh*(1-s[1]);c.fillRect(bx,wy+wh-bh,ww*.14,bh);});
+ sky.forEach(s=>{const bx=wx+s[0]*ww,bh=wh*(1-s[1]);for(let i=0;i<5;i++){c.fillStyle=pick(["rgba(255,179,71,.8)","rgba(63,214,255,.7)","rgba(255,79,154,.7)"]);c.fillRect(bx+3+(i%2)*8,wy+wh-bh+6+Math.floor(i/2)*12,3.5,4.5);}});
+ c.fillStyle="rgba(255,255,255,.8)";for(let i=0;i<10;i++){ell(c,wx+rnd(10,ww-10),wy+rnd(8,wh*.4),1,1);c.fill();}c.restore();
+ c.lineWidth=7;c.strokeStyle="#7a4a2a";rr(c,wx,wy,ww,wh,16);c.stroke();
+ c.lineWidth=3;c.beginPath();c.moveTo(wx+ww/2,wy);c.lineTo(wx+ww/2,wy+wh);c.moveTo(wx,wy+wh*.55);c.lineTo(wx+ww,wy+wh*.55);c.stroke();
+ const sy=VH*.115;c.fillStyle="#6a3f22";rr(c,414,sy+40,112,9,3);c.fill();
+ [[424,"#3f7a4a",26],[448,"#c98a3f",34],[474,"#7a2a4a",22]].forEach(b=>{rr(c,b[0],sy+40-b[2],16,b[2],4);c.fillStyle=b[1];c.fill();c.fillStyle="rgba(255,255,255,.25)";c.fillRect(b[0]+3,sy+44-b[2],3,b[2]-8);c.fillStyle="#3a2a20";c.fillRect(b[0]+5,sy+34-b[2],6,7);});
+ c.fillStyle="#a04a2a";rr(c,498,sy+22,20,18,3);c.fill();c.strokeStyle="#3f8a4a";c.lineWidth=3;c.lineCap="round";
+ for(let i=0;i<4;i++){c.beginPath();c.moveTo(508,sy+24);c.quadraticCurveTo(500+i*6,sy+6,494+i*8,sy+2+i*2);c.stroke();}
+ c.strokeStyle="#3a2a20";c.lineWidth=3;c.beginPath();c.moveTo(468,0);c.lineTo(468,VH*.085);c.stroke();
+ c.fillStyle=lg(c,440,VH*.085,496,VH*.12,[[0,"#d98a3f"],[1,"#8a4a1f"]]);c.beginPath();c.moveTo(446,VH*.12);c.lineTo(456,VH*.083);c.lineTo(480,VH*.083);c.lineTo(490,VH*.12);c.closePath();c.fill();
+ c.fillStyle="#ffe9b0";ell(c,468,VH*.125,7,7);c.fill();
+ c.strokeStyle="#3a2a20";c.lineWidth=2.5;c.beginPath();c.moveTo(-6,VH*.045);c.quadraticCurveTo(VW/2,VH*.085,VW+6,VH*.045);c.stroke();
+ c.fillStyle=lg(c,0,L.T1,0,VH,[[0,"#1c0f22"],[1,"#0e0714"]]);c.fillRect(0,L.T1,VW,VH-L.T1);
+ c.fillStyle="rgba(255,179,71,.05)";for(let i=0;i<8;i++){ell(c,rnd(VW),rnd(L.T1+30,VH),rnd(14,40),rnd(8,20));c.fill();}
+ c.fillStyle=rg(c,VW/2,VH*.42,VH*.3,VH*.78,[[0,"rgba(0,0,0,0)"],[1,"rgba(8,3,12,.5)"]]);c.fillRect(0,0,VW,VH);
+ if(noiseCanvas){try{const np=c.createPattern(noiseCanvas,"repeat");c.globalAlpha=.5;c.fillStyle=np;c.fillRect(0,0,VW,VH);c.globalAlpha=1;}catch(e){}}
+ bgTable=document.createElement("canvas");bgTable.width=cv.width;bgTable.height=cv.height;
+ const t=bgTable.getContext("2d");t.setTransform(S,0,0,S,0,0);
+ t.fillStyle=lg(t,0,L.T0,0,L.T1,[[0,"#c08048"],[.5,"#a06a38"],[1,"#8a5a30"]]);t.fillRect(-8,L.T0,VW+16,L.T1-L.T0);
+ t.strokeStyle="rgba(60,30,10,.16)";t.lineWidth=1.5;
+ for(let i=0;i<5;i++){t.beginPath();t.moveTo(-8,L.T0+8+i*((L.T1-L.T0)/5));t.bezierCurveTo(VW*.3,L.T0+4+i*13,VW*.6,L.T0+14+i*12,VW+8,L.T0+8+i*12);t.stroke();}
+ t.fillStyle="#5f3a1e";t.fillRect(-8,L.T1,VW+16,13);t.fillStyle="rgba(0,0,0,.35)";t.fillRect(-8,L.T1+13,VW+16,10);t.fillStyle="rgba(255,235,200,.14)";t.fillRect(-8,L.T0,VW+16,3);
+ t.fillStyle="rgba(243,226,199,.92)";rr(t,206,L.T0+4,128,L.T1-L.T0-2,4);t.fill();t.strokeStyle="rgba(194,36,127,.35)";t.lineWidth=1.5;
+ for(let x=214;x<330;x+=12){t.beginPath();t.moveTo(x,L.T0+8);t.lineTo(x+6,L.T1-6);t.stroke();}
+ t.fillStyle="#e8e0d2";ell(t,372,L.T0+30,20,6.5);t.fill();t.fillStyle=lg(t,358,L.T0+10,388,L.T0+30,[[0,"#fff6e6"],[1,"#d9cdb8"]]);rr(t,358,L.T0+10,28,19,5);t.fill();
+ t.fillStyle="#8a5a30";ell(t,372,L.T0+12,12,4);t.fill();t.fillStyle="rgba(255,240,220,.7)";ell(t,369,L.T0+11,5,2);t.fill();t.strokeStyle="#d9cdb8";t.lineWidth=3;t.beginPath();t.arc(390,L.T0+19,6,-.9,1.2);t.stroke();
+ t.fillStyle="#a01a28";rr(t,132,L.T0+22,36,26,6);t.fill();t.fillStyle="#7a1020";ell(t,150,L.T0+24,17,5);t.fill();t.fillStyle="#3a1a10";ell(t,150,L.T0+24,13,3.5);t.fill();
+ t.fillStyle="#fff6e6";ell(t,150,L.T0+36,7,7);t.fill();t.fillStyle="#a01a28";t.font="900 10px sans-serif";t.textAlign="center";t.textBaseline="middle";t.fillText("C",150,L.T0+37);t.strokeStyle="#a01a28";t.lineWidth=4;t.beginPath();t.arc(170,L.T0+34,7,-1.1,1.3);t.stroke();
+ t.fillStyle="rgba(200,230,255,.16)";rr(t,258,L.T0+6,22,26,5);t.fill();t.strokeStyle="rgba(255,255,255,.3)";t.lineWidth=1.5;rr(t,258,L.T0+6,22,26,5);t.stroke();t.fillStyle="#f3e2c7";rr(t,261,L.T0+18,16,12,3);t.fill();
+ t.fillStyle="#e8e0d2";ell(t,322,L.T0+52,22,7);t.fill();t.fillStyle="#fff0f4";t.beginPath();t.moveTo(306,L.T0+50);t.lineTo(338,L.T0+50);t.lineTo(330,L.T0+34);t.lineTo(312,L.T0+34);t.closePath();t.fill();
+ t.fillStyle="#ff7ab8";t.fillRect(308,L.T0+41,28,4);t.fillStyle="#e6318f";ell(t,321,L.T0+31,4.5,4.5);t.fill();t.fillStyle="rgba(255,255,255,.6)";ell(t,319.5,L.T0+29.5,1.4,1.4);t.fill();
+ t.fillStyle="rgba(200,230,255,.2)";rr(t,441,L.T0+8,15,24,5);t.fill();t.strokeStyle="#3f8a4a";t.lineWidth=2.5;t.beginPath();t.moveTo(448,L.T0+10);t.quadraticCurveTo(452,L.T0-8,447,L.T0-16);t.stroke();
+ t.fillStyle="#ff4f9a";for(let i=0;i<5;i++){const a=i/5*TAU;ell(t,447+Math.cos(a)*5.5,L.T0-18+Math.sin(a)*5.5,4,4);t.fill();}t.fillStyle="#ffd166";ell(t,447,L.T0-18,3,3);t.fill();
+ t.save();t.translate(66,L.T0+28);t.rotate(-.13);t.fillStyle="#f3e2c7";rr(t,-17,-20,34,42,3);t.fill();t.strokeStyle="rgba(122,42,74,.5)";t.lineWidth=1.5;
+ for(let i=0;i<4;i++){t.beginPath();t.moveTo(-11,-11+i*8);t.lineTo(11,-11+i*8);t.stroke();}t.fillStyle="#c2247f";ell(t,0,-15,2.5,2.5);t.fill();t.restore();}
+
+function hairGrad(c,L,len){return lg(c,-50,-56,50,len,[[0,L.hc],[1,L.hc2]]);}
+function drawHairBack(c,L,len){c.fillStyle=hairGrad(c,L,len);c.strokeStyle="rgba(0,0,0,.22)";c.lineWidth=2;const p=new Path2D();
+ switch(L.hair){
+  case"wavy":p.moveTo(-50,-10);p.bezierCurveTo(-64,10,-58,30,-64,52);p.quadraticCurveTo(-70,70,-60,84);p.quadraticCurveTo(-52,96,-62,110);p.quadraticCurveTo(-70,126,-56,len-8);p.quadraticCurveTo(-40,len+6,-24,len-4);p.quadraticCurveTo(-8,len+8,8,len-4);p.quadraticCurveTo(24,len+6,40,len-4);p.quadraticCurveTo(56,len+4,58,len-10);p.quadraticCurveTo(68,120,60,104);p.quadraticCurveTo(52,92,62,78);p.quadraticCurveTo(70,62,62,48);p.bezierCurveTo(66,26,62,8,50,-10);p.quadraticCurveTo(0,-64,-50,-10);p.closePath();break;
+  case"bob":p.moveTo(-52,-12);p.bezierCurveTo(-58,16,-56,34,-46,44);p.quadraticCurveTo(-20,54,0,52);p.quadraticCurveTo(20,54,46,44);p.bezierCurveTo(56,34,58,16,52,-12);p.quadraticCurveTo(0,-62,-52,-12);p.closePath();break;
+  case"pony":p.moveTo(-48,-14);p.quadraticCurveTo(0,-60,48,-14);p.quadraticCurveTo(50,2,44,10);p.quadraticCurveTo(0,-24,-44,10);p.quadraticCurveTo(-50,2,-48,-14);p.closePath();p.moveTo(34,-40);p.bezierCurveTo(72,-52,86,-18,78,12);p.bezierCurveTo(74,44,84,70,70,len*.72);p.quadraticCurveTo(63,len*.82,57,len*.66);p.bezierCurveTo(66,44,58,20,62,-6);p.bezierCurveTo(64,-24,52,-36,34,-40);p.closePath();break;
+  case"messy":p.moveTo(-50,-8);p.lineTo(-58,14);p.lineTo(-48,20);p.lineTo(-58,38);p.lineTo(-44,40);p.lineTo(-50,56);p.lineTo(-30,50);p.lineTo(-20,60);p.lineTo(0,52);p.lineTo(20,60);p.lineTo(30,50);p.lineTo(50,56);p.lineTo(44,40);p.lineTo(58,38);p.lineTo(48,20);p.lineTo(58,14);p.lineTo(50,-8);p.quadraticCurveTo(0,-62,-50,-8);p.closePath();break;
+  case"updo":p.moveTo(-46,-12);p.quadraticCurveTo(0,-58,46,-12);p.quadraticCurveTo(48,6,40,14);p.quadraticCurveTo(0,-18,-40,14);p.quadraticCurveTo(-48,6,-46,-12);p.closePath();p.moveTo(24,-50);p.ellipse(0,-50,24,19,0,0,TAU);break;
+  case"hime":p.moveTo(-54,-10);p.bezierCurveTo(-58,30,-56,80,-52,len-6);p.quadraticCurveTo(0,len+8,52,len-6);p.bezierCurveTo(56,80,58,30,54,-10);p.quadraticCurveTo(0,-62,-54,-10);p.closePath();break;
+  case"pixie":p.moveTo(-46,-10);p.quadraticCurveTo(-52,10,-42,20);p.quadraticCurveTo(-30,28,-20,20);p.quadraticCurveTo(0,30,20,20);p.quadraticCurveTo(30,28,42,20);p.quadraticCurveTo(52,10,46,-10);p.quadraticCurveTo(0,-60,-46,-10);p.closePath();break;
+  case"twin":p.moveTo(-46,-12);p.quadraticCurveTo(0,-58,46,-12);p.quadraticCurveTo(48,6,40,14);p.quadraticCurveTo(0,-20,-40,14);p.quadraticCurveTo(-48,6,-46,-12);p.closePath();for(const s of[-1,1]){p.moveTo(s*40,-24);p.bezierCurveTo(s*66,-16,s*60,20,s*68,44);p.quadraticCurveTo(s*74,70,s*62,len*.78);p.quadraticCurveTo(s*55,len*.86,s*51,len*.7);p.bezierCurveTo(s*58,52,s*48,30,s*52,6);p.quadraticCurveTo(s*50,-14,s*40,-24);p.closePath();}break;
+  case"lowbun":p.moveTo(-48,-12);p.quadraticCurveTo(0,-58,48,-12);p.quadraticCurveTo(50,8,42,16);p.quadraticCurveTo(0,-14,-42,16);p.quadraticCurveTo(-50,8,-48,-12);p.closePath();p.moveTo(20,42);p.ellipse(0,42,20,15,0,0,TAU);break;
+  case"braid":p.moveTo(-48,-12);p.quadraticCurveTo(0,-58,48,-12);p.quadraticCurveTo(50,4,42,12);p.quadraticCurveTo(0,-20,-42,12);p.quadraticCurveTo(-50,4,-48,-12);p.closePath();break;}
+ c.fill(p);c.stroke(p);
+ if(L.hair==="braid"){for(let i=0;i<6;i++){const bx=-46+(i%2?4:-2),by=10+i*15,r=12-i*1.1;c.fillStyle=i%2?L.hc:L.hc2;ell(c,bx,by,r,r*.85);c.fill();c.strokeStyle="rgba(0,0,0,.2)";c.stroke();}c.fillStyle="#c2247f";ell(c,-44,102,5,4);c.fill();}
+ if(L.hair==="pony"){c.fillStyle="#ffd166";ell(c,44,-33,6,7);c.fill();}
+ if(L.hair==="updo"){c.strokeStyle="rgba(0,0,0,.25)";c.lineWidth=2;c.beginPath();c.ellipse(0,-50,17,12,0,.4,2.6);c.stroke();c.strokeStyle=L.hc;c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(44,-2);c.quadraticCurveTo(54,24,44,44);c.stroke();}
+ c.strokeStyle="rgba(0,0,0,.18)";c.lineWidth=2;c.beginPath();c.moveTo(-30,10);c.quadraticCurveTo(-36,len*.5,-28,len*.8);c.stroke();c.beginPath();c.moveTo(30,10);c.quadraticCurveTo(36,len*.5,28,len*.8);c.stroke();}
+function drawHairFront(c,L){c.fillStyle=lg(c,0,-52,0,-4,[[0,L.hc],[1,L.hc2]]);c.strokeStyle="rgba(0,0,0,.2)";c.lineWidth=1.5;const p=new Path2D();
+ switch(L.hair){
+  case"wavy":p.moveTo(-46,-16);p.quadraticCurveTo(-30,-46,0,-47);p.quadraticCurveTo(30,-46,46,-16);p.quadraticCurveTo(40,-6,30,-14);p.quadraticCurveTo(24,-4,12,-14);p.quadraticCurveTo(4,-2,-8,-14);p.quadraticCurveTo(-18,-4,-28,-14);p.quadraticCurveTo(-38,-6,-46,-16);p.closePath();for(const s of[-1,1]){p.moveTo(s*44,-12);p.quadraticCurveTo(s*54,10,s*44,32);p.quadraticCurveTo(s*39,40,s*35,30);p.quadraticCurveTo(s*44,12,s*37,-8);p.closePath();}break;
+  case"bob":p.moveTo(-46,-16);p.quadraticCurveTo(0,-50,46,-16);p.lineTo(46,-6);p.quadraticCurveTo(30,-13,22,-6);p.quadraticCurveTo(10,-13,0,-6);p.quadraticCurveTo(-10,-13,-22,-6);p.quadraticCurveTo(-30,-13,-46,-6);p.closePath();p.moveTo(-48,-10);p.quadraticCurveTo(-50,16,-42,32);p.lineTo(-34,30);p.quadraticCurveTo(-40,12,-38,-8);p.closePath();p.moveTo(48,-10);p.quadraticCurveTo(50,16,42,32);p.lineTo(34,30);p.quadraticCurveTo(40,12,38,-8);p.closePath();break;
+  case"pony":p.moveTo(-46,-18);p.quadraticCurveTo(-20,-48,20,-43);p.quadraticCurveTo(42,-38,46,-20);p.quadraticCurveTo(20,-31,-6,-27);p.quadraticCurveTo(-30,-23,-46,-18);p.closePath();break;
+  case"messy":p.moveTo(-46,-14);p.quadraticCurveTo(-24,-44,2,-45);p.quadraticCurveTo(30,-43,46,-16);p.lineTo(34,-4);p.lineTo(24,-16);p.lineTo(10,-2);p.lineTo(-2,-16);p.lineTo(-16,-4);p.lineTo(-28,-16);p.lineTo(-40,-6);p.closePath();break;
+  case"updo":p.moveTo(-46,-16);p.quadraticCurveTo(-10,-50,30,-41);p.quadraticCurveTo(46,-35,46,-18);p.quadraticCurveTo(20,-35,-10,-31);p.quadraticCurveTo(-34,-27,-46,-16);p.closePath();break;
+  case"hime":p.moveTo(-46,-18);p.quadraticCurveTo(0,-52,46,-18);p.lineTo(46,-8);p.lineTo(-46,-8);p.closePath();p.moveTo(-54,-12);p.lineTo(-40,-12);p.lineTo(-40,44);p.lineTo(-54,44);p.closePath();p.moveTo(54,-12);p.lineTo(40,-12);p.lineTo(40,44);p.lineTo(54,44);p.closePath();break;
+  case"pixie":p.moveTo(-44,-16);p.quadraticCurveTo(-10,-46,26,-39);p.quadraticCurveTo(44,-33,44,-14);p.quadraticCurveTo(28,-23,12,-16);p.quadraticCurveTo(0,-25,-14,-16);p.quadraticCurveTo(-28,-23,-44,-16);p.closePath();break;
+  case"twin":p.moveTo(-46,-14);p.quadraticCurveTo(-26,-46,0,-46);p.quadraticCurveTo(26,-46,46,-14);p.quadraticCurveTo(36,-8,26,-14);p.quadraticCurveTo(14,-6,0,-14);p.quadraticCurveTo(-14,-6,-26,-14);p.quadraticCurveTo(-36,-8,-46,-14);p.closePath();break;
+  case"lowbun":p.moveTo(-46,-14);p.quadraticCurveTo(0,-52,46,-14);p.quadraticCurveTo(46,-4,38,-2);p.quadraticCurveTo(20,-25,-8,-27);p.quadraticCurveTo(-34,-25,-42,-2);p.quadraticCurveTo(-46,-4,-46,-14);p.closePath();break;
+  case"braid":p.moveTo(-46,-14);p.quadraticCurveTo(-16,-48,16,-43);p.quadraticCurveTo(42,-37,46,-14);p.quadraticCurveTo(30,-10,18,-19);p.quadraticCurveTo(0,-8,-16,-19);p.quadraticCurveTo(-32,-10,-46,-14);p.closePath();break;}
+ c.fill(p);c.stroke(p);
+ if(L.hair==="twin"){for(const s of[-1,1]){c.fillStyle="#ff7ab8";c.beginPath();c.moveTo(s*44,-22);c.lineTo(s*56,-32);c.lineTo(s*54,-18);c.closePath();c.fill();c.beginPath();c.moveTo(s*44,-22);c.lineTo(s*34,-34);c.lineTo(s*36,-18);c.closePath();c.fill();c.fillStyle="#e6318f";ell(c,s*44,-22,3.5,3.5);c.fill();}}
+ if(L.hair==="messy"){c.strokeStyle=L.hc;c.lineWidth=3;c.lineCap="round";c.beginPath();c.moveTo(-30,-40);c.quadraticCurveTo(-40,-56,-34,-62);c.stroke();c.beginPath();c.moveTo(18,-42);c.quadraticCurveTo(26,-58,36,-58);c.stroke();}
+ c.strokeStyle="rgba(255,255,255,.16)";c.lineWidth=6;c.lineCap="round";c.beginPath();c.ellipse(0,-26,33,17,0,Math.PI*1.12,Math.PI*1.88);c.stroke();}
+function drawAcc(c,L){switch(L.acc){
+ case"glasses":c.strokeStyle="#4a3a52";c.lineWidth=2.4;c.fillStyle="rgba(63,214,255,.09)";rr(c,-31,-11,24,18,8);c.fill();c.stroke();rr(c,7,-11,24,18,8);c.fill();c.stroke();c.beginPath();c.moveTo(-7,-4);c.quadraticCurveTo(0,-8,7,-4);c.stroke();c.beginPath();c.moveTo(-31,-4);c.lineTo(-44,-7);c.moveTo(31,-4);c.lineTo(44,-7);c.stroke();c.strokeStyle="rgba(255,255,255,.5)";c.lineWidth=1.6;c.beginPath();c.moveTo(-26,-7);c.lineTo(-19,-1);c.stroke();break;
+ case"pearl":for(const s of[-1,1]){c.fillStyle="#f6f0e6";ell(c,s*45,14,3.6,3.6);c.fill();c.fillStyle="rgba(255,255,255,.9)";ell(c,s*44,12.6,1.2,1.2);c.fill();}break;
+ case"cross":for(const s of[-1,1]){c.strokeStyle="#c9c4d4";c.lineWidth=1.6;c.beginPath();c.moveTo(s*45,16);c.lineTo(s*45,24);c.stroke();c.lineWidth=2.6;c.beginPath();c.moveTo(s*45,24);c.lineTo(s*45,34);c.moveTo(s*41,28);c.lineTo(s*49,28);c.stroke();}break;
+ case"rose":c.fillStyle="#c81e3c";for(let i=0;i<6;i++){const a=i/6*TAU;ell(c,-40+Math.cos(a)*6,-34+Math.sin(a)*6,5,5);c.fill();}c.fillStyle="#ff3b4e";ell(c,-40,-34,5,5);c.fill();c.fillStyle="#7a0f22";ell(c,-40,-34,2.2,2.2);c.fill();c.fillStyle="#3f8a4a";ell(c,-49,-27,4,2.4);c.fill();break;
+ case"pin":c.strokeStyle="#ffd166";c.lineWidth=3;c.lineCap="round";c.beginPath();c.moveTo(20,-38);c.lineTo(34,-30);c.moveTo(22,-30);c.lineTo(34,-38);c.stroke();break;
+ case"band":c.strokeStyle=L.style==="jacket"&&L.top==="#d92a3c"?"#fff6e6":"#ff4f9a";c.lineWidth=6;c.beginPath();c.ellipse(0,-24,40,22,0,Math.PI*1.15,Math.PI*1.85);c.stroke();break;
+ case"pendant":c.strokeStyle="#ffd166";c.lineWidth=1.8;c.beginPath();c.moveTo(-14,66);c.quadraticCurveTo(0,84,14,66);c.stroke();c.fillStyle="#ffd166";ell(c,0,80,4,5);c.fill();c.fillStyle="rgba(255,255,255,.7)";ell(c,-1,78,1.3,1.3);c.fill();break;
+ case"beads":c.fillStyle="#8a5a33";for(let i=0;i<7;i++){const a=Math.PI*.25+i*(Math.PI*.5/6);ell(c,Math.cos(a)*22,64+Math.sin(a)*16,3.4,3.4);c.fill();}break;}}
+function drawTorso(c,L,len){const g=lg(c,-60,64,60,len,[[0,L.top],[1,L.top2]]);const p=new Path2D();
+ p.moveTo(-64,len+8);p.bezierCurveTo(-66,110,-60,86,-34,74);p.quadraticCurveTo(-20,66,-14,64);
+ if(L.style==="dress"||L.style==="lace"){p.quadraticCurveTo(0,84,14,64);}else{p.lineTo(14,64);}
+ p.quadraticCurveTo(20,66,34,74);p.bezierCurveTo(60,86,66,110,64,len+8);p.closePath();
+ c.fillStyle=g;c.fill(p);c.strokeStyle="rgba(0,0,0,.25)";c.lineWidth=2;c.stroke(p);
+ c.strokeStyle="rgba(255,200,130,.3)";c.lineWidth=3;c.beginPath();c.moveTo(52,86);c.quadraticCurveTo(62,110,62,len);c.stroke();
+ c.strokeStyle="rgba(0,0,0,.13)";c.lineWidth=2;c.beginPath();c.moveTo(-30,100);c.quadraticCurveTo(-10,116,-24,len);c.stroke();c.beginPath();c.moveTo(26,104);c.quadraticCurveTo(14,120,28,len);c.stroke();
+ switch(L.style){
+  case"blouse":c.fillStyle="rgba(255,255,255,.85)";c.beginPath();c.moveTo(-14,64);c.lineTo(0,88);c.lineTo(-26,76);c.closePath();c.fill();c.beginPath();c.moveTo(14,64);c.lineTo(0,88);c.lineTo(26,76);c.closePath();c.fill();c.fillStyle="rgba(255,255,255,.8)";for(let i=0;i<3;i++){ell(c,0,96+i*16,2.2,2.2);c.fill();}break;
+  case"knit":c.fillStyle=L.top2;rr(c,-17,60,34,11,5);c.fill();c.strokeStyle="rgba(0,0,0,.09)";c.lineWidth=2;for(let x=-44;x<=44;x+=11){c.beginPath();c.moveTo(x,86);c.lineTo(x,len);c.stroke();}break;
+  case"suit":c.fillStyle="#f6f0e6";c.beginPath();c.moveTo(-13,64);c.lineTo(13,64);c.lineTo(0,100);c.closePath();c.fill();c.fillStyle=L.top2;c.beginPath();c.moveTo(-14,64);c.lineTo(-30,80);c.lineTo(-6,102);c.lineTo(0,100);c.closePath();c.fill();c.beginPath();c.moveTo(14,64);c.lineTo(30,80);c.lineTo(6,102);c.lineTo(0,100);c.closePath();c.fill();c.fillStyle="#ffd166";ell(c,0,108,2.4,2.4);c.fill();break;
+  case"jacket":c.fillStyle="#f6f0e6";c.beginPath();c.moveTo(-12,64);c.lineTo(12,64);c.lineTo(0,92);c.closePath();c.fill();c.strokeStyle="rgba(0,0,0,.35)";c.lineWidth=2.4;c.beginPath();c.moveTo(0,92);c.lineTo(0,len);c.stroke();c.fillStyle=L.top2;rr(c,-18,58,36,10,5);c.fill();break;
+  case"apron":c.fillStyle="#f3e2c7";rr(c,-30,88,60,Math.max(10,len-80),8);c.fill();c.strokeStyle="#f3e2c7";c.lineWidth=5;c.beginPath();c.moveTo(-26,90);c.lineTo(-34,72);c.moveTo(26,90);c.lineTo(34,72);c.stroke();c.strokeStyle="rgba(194,36,127,.4)";c.lineWidth=2;rr(c,-16,116,32,22,5);c.stroke();break;
+  case"lace":c.fillStyle="#1a1020";for(let i=-2;i<=2;i++){ell(c,i*11,68+Math.abs(i)*3,7,6);c.fill();}break;
+  case"dress":c.strokeStyle="rgba(255,255,255,.3)";c.lineWidth=2;c.beginPath();c.moveTo(-14,64);c.quadraticCurveTo(0,84,14,64);c.stroke();break;}}
+function drawWoman(c,Lk,e,t,len,talking){c.save();const breath=Math.sin(t*1.15)*1.5;const sob=e.tear>.4?Math.abs(Math.sin(t*6))*2.4*e.tear:0;const shake=e.anger>.4?(Math.random()-.5)*4*e.anger:0;c.translate(shake,breath+sob);
+ drawHairBack(c,Lk,len);c.fillStyle=Lk.skin;rr(c,-12,40,24,32,8);c.fill();c.fillStyle="rgba(0,0,0,.12)";rr(c,-12,40,24,10,5);c.fill();drawTorso(c,Lk,len);
+ const hp=new Path2D();hp.moveTo(-44,-4);hp.bezierCurveTo(-44,-48,44,-48,44,-4);hp.bezierCurveTo(44,22,26,47,0,50);hp.bezierCurveTo(-26,47,-44,22,-44,-4);hp.closePath();
+ c.fillStyle=lg(c,-30,-40,34,50,[[0,Lk.skin],[1,shade(Lk.skin,-18)]]);c.fill(hp);
+ c.strokeStyle="rgba(255,200,130,.35)";c.lineWidth=2.5;c.beginPath();c.moveTo(40,-14);c.quadraticCurveTo(44,14,26,40);c.stroke();
+ c.fillStyle=Lk.skin;ell(c,-44,6,6,9);c.fill();ell(c,44,6,6,9);c.fill();
+ if(e.glow>.05){c.save();c.clip(hp);c.fillStyle=lg(c,0,-50,0,14,[[0,`rgba(18,4,24,${.85*e.glow})`],[1,"rgba(18,4,24,0)"]]);c.fillRect(-46,-52,92,68);c.restore();}
+ const lash="#2a1a24";
+ for(const s of[-1,1]){const ex=s*19;
+  if(e.happy>.5){c.strokeStyle=lash;c.lineWidth=3.4;c.lineCap="round";c.beginPath();c.moveTo(ex-8,-1);c.quadraticCurveTo(ex,-10,ex+8,-1);c.stroke();}
+  else if(e.sad>.5){c.strokeStyle=lash;c.lineWidth=3.2;c.lineCap="round";c.beginPath();c.moveTo(ex-8,-5);c.quadraticCurveTo(ex,1,ex+8,-5);c.stroke();}
+  else{const op=clamp(e.open,.1,1.2),ry=6.5*op;c.fillStyle="#fff";ell(c,ex,-2,8.5,ry);c.fill();c.save();ell(c,ex,-2,8.5,ry);c.clip();
+   if(e.glow>.5){c.fillStyle=rg(c,ex,-2,0,9,[[0,"#ffd4e8"],[.4,"#ff4f9a"],[1,"#7a0f3a"]]);ell(c,ex,-2,7,7);c.fill();c.fillStyle="#fff";ell(c,ex,-2,2,2);c.fill();}
+   else{c.fillStyle=lg(c,ex,-8,ex,5,[[0,Lk.eye],[1,shade(Lk.eye,-40)]]);ell(c,ex,-1,5.8,5.8);c.fill();c.fillStyle="#1a1020";ell(c,ex,-1,2.6,2.6);c.fill();c.fillStyle="rgba(255,255,255,.95)";ell(c,ex-2,-3.4,1.8,1.8);c.fill();c.fillStyle="rgba(255,255,255,.6)";ell(c,ex+2.4,1.4,.9,.9);c.fill();}
+   if(op<.9){c.fillStyle=Lk.skin;c.fillRect(ex-9,-2-ry-1,18,(1-op)*13);}c.restore();
+   c.strokeStyle=lash;c.lineWidth=3;c.lineCap="round";c.beginPath();c.moveTo(ex-8.5,-2-ry*.55);c.quadraticCurveTo(ex,-2-ry-2.5,ex+8.5,-2-ry*.55);c.stroke();c.beginPath();c.moveTo(ex+s*8.5,-2-ry*.55);c.lineTo(ex+s*11,-2-ry*.85);c.stroke();}
+  const innerY=-14+e.tilt*5-e.raise*3-(s>0?e.raiseR*3:0),outerY=-17-e.tilt*4-e.raise*3-(s>0?e.raiseR*3:0);
+  c.strokeStyle=shade(Lk.hc2,-10);c.lineWidth=3.2;c.lineCap="round";c.beginPath();c.moveTo(s*10,innerY);c.quadraticCurveTo(s*19,(innerY+outerY)/2-2.5,s*28,outerY);c.stroke();}
+ if(Lk.tired){c.strokeStyle="rgba(90,60,90,.3)";c.lineWidth=1.6;for(const s of[-1,1]){c.beginPath();c.moveTo(s*12,6);c.quadraticCurveTo(s*19,9,s*26,6);c.stroke();}}
+ c.strokeStyle="rgba(120,70,70,.3)";c.lineWidth=1.8;c.beginPath();c.moveTo(2,9);c.quadraticCurveTo(4,13,1,15);c.stroke();
+ const mo=talking?clamp(e.openM+.22+.34*Math.abs(Math.sin(t*11)),0,1):e.openM;
+ if(e.glow>.5){c.strokeStyle="#ff4f9a";c.lineWidth=2.2;c.lineCap="round";c.beginPath();c.moveTo(-16,26);c.quadraticCurveTo(0,34,16,26);c.stroke();c.beginPath();c.moveTo(-16,26);c.lineTo(-19,23);c.moveTo(16,26);c.lineTo(19,23);c.stroke();}
+ else if(mo>.1){c.fillStyle="#8a3a4a";ell(c,e.curve>.4&&e.sad<.5?2:0,27,7+e.curve*3,mo*8.5);c.fill();if(mo>.4){c.fillStyle="#d97a8a";ell(c,0,29+mo*3,4.5,mo*3.4);c.fill();}c.strokeStyle="rgba(122,48,64,.7)";c.lineWidth=1.8;ell(c,0,27,7+e.curve*3,mo*8.5);c.stroke();}
+ else if(e.tear>.5){c.strokeStyle="#a05a6a";c.lineWidth=2.4;c.lineCap="round";c.beginPath();c.moveTo(-8,28);c.quadraticCurveTo(-4,25,0,28);c.quadraticCurveTo(4,31,8,28);c.stroke();}
+ else{c.strokeStyle="#a05a6a";c.lineWidth=2.5;c.lineCap="round";const mx=e.raiseR>.3?3:0;c.beginPath();c.moveTo(-9,26);c.quadraticCurveTo(mx,26+e.curve*8,9,26);c.stroke();}
+ c.fillStyle=`rgba(255,110,150,${e.blush*.5})`;ell(c,-27,15,8,4.2);c.fill();ell(c,27,15,8,4.2);c.fill();
+ if(e.anger>.1){c.fillStyle=`rgba(255,60,60,${e.anger*.16})`;c.fill(hp);}
+ if(e.tear>.4){c.fillStyle=`rgba(160,220,255,${e.tear*.8})`;ell(c,-20,3,2.5,3.5);c.fill();ell(c,20,3,2.5,3.5);c.fill();}
+ drawHairFront(c,Lk);drawAcc(c,Lk);
+ if(e.anger>.3){const pu=1+.12*Math.sin(t*10);c.save();c.translate(35,-36);c.scale(pu,pu);c.strokeStyle=`rgba(255,59,78,${e.anger})`;c.lineWidth=3.4;c.lineCap="round";for(let i=0;i<4;i++){const a=i*Math.PI/2+Math.PI/4;c.beginPath();c.arc(Math.cos(a)*7,Math.sin(a)*7,5,a+Math.PI*.7,a+Math.PI*1.6);c.stroke();}c.restore();}
+ c.restore();}
+function shade(hex,amt){const n=parseInt(hex.slice(1),16);const r=clamp((n>>16)+amt,0,255),g=clamp(((n>>8)&255)+amt,0,255),b=clamp((n&255)+amt,0,255);return `rgb(${r},${g},${b})`;}
+function drawArms(c,Lk,L){c.lineCap="round";for(const s of[-1,1]){c.strokeStyle=Lk.top2;c.lineWidth=15;c.beginPath();c.moveTo(L.WCX+s*56,L.T0-6);c.quadraticCurveTo(L.WCX+s*48,L.T0+10,L.WCX+s*34,L.T0+19);c.stroke();c.fillStyle=Lk.skin;ell(c,L.WCX+s*32,L.T0+21,8.5,7);c.fill();c.strokeStyle="rgba(120,70,70,.3)";c.lineWidth=1.2;c.beginPath();c.moveTo(L.WCX+s*29,L.T0+18);c.lineTo(L.WCX+s*29,L.T0+24);c.stroke();}}
+function drawHatano(c,out,t,len,bob){const O=OUTFITS[out];c.save();c.fillStyle="rgba(0,0,0,.35)";ell(c,0,len-8,232,38);c.fill();
+ const br=1+.008*Math.sin(t*1.35);c.translate(0,len);c.scale(1,br);c.translate(0,-len);
+ c.fillStyle=lg(c,0,len-62,0,len+30,[[0,"#d9b98a"],[1,"#b8956a"]]);rr(c,-202,len-62,404,96,18);c.fill();
+ c.strokeStyle="#6a4a2a";c.lineWidth=5;c.beginPath();c.moveTo(-200,len-52);c.lineTo(200,len-52);c.stroke();
+ c.strokeStyle="rgba(90,60,30,.35)";c.lineWidth=2.5;c.beginPath();c.moveTo(0,len-46);c.lineTo(0,len+30);c.stroke();c.beginPath();c.moveTo(-150,len-40);c.quadraticCurveTo(-120,len-16,-140,len+20);c.stroke();c.beginPath();c.moveTo(150,len-40);c.quadraticCurveTo(120,len-16,140,len+20);c.stroke();
+ c.fillStyle=lg(c,-50,0,50,60,[[0,"#e8b48c"],[1,"#cf9a70"]]);rr(c,-50,4,100,58,16);c.fill();
+ const hem=len-46;const tp=new Path2D();tp.moveTo(-216,hem+14);tp.bezierCurveTo(-226,150,-212,96,-176,74);tp.bezierCurveTo(-140,56,-96,48,-58,46);tp.quadraticCurveTo(0,62,58,46);tp.bezierCurveTo(96,48,140,56,176,74);tp.bezierCurveTo(212,96,226,150,216,hem+14);tp.quadraticCurveTo(0,hem+26,-216,hem+14);tp.closePath();
+ c.fillStyle=lg(c,-160,40,180,hem,[[0,O.col],[.55,O.col],[1,O.col2]]);c.fill(tp);c.save();c.clip(tp);
+ if(O.emblem==="dots"){c.fillStyle=dotsPat;c.fillRect(-230,30,460,hem+30);}
+ c.fillStyle=rg(c,0,90,40,260,[[0,"rgba(255,255,255,.1)"],[.6,"rgba(0,0,0,0)"],[1,"rgba(0,0,0,.22)"]]);c.fillRect(-230,30,460,hem+30);
+ c.strokeStyle="rgba(0,0,0,.12)";c.lineWidth=3;c.beginPath();c.moveTo(-150,66);c.quadraticCurveTo(-176,140,-186,hem);c.stroke();c.beginPath();c.moveTo(150,66);c.quadraticCurveTo(176,140,186,hem);c.stroke();c.beginPath();c.moveTo(-90,110);c.quadraticCurveTo(-20,128,60,112);c.stroke();c.beginPath();c.moveTo(-60,160);c.quadraticCurveTo(30,176,110,158);c.stroke();
+ c.strokeStyle="rgba(255,255,255,.14)";c.lineWidth=2.5;c.beginPath();c.moveTo(-80,96);c.quadraticCurveTo(0,110,80,96);c.stroke();c.restore();
+ c.strokeStyle="rgba(0,0,0,.3)";c.lineWidth=2.5;c.stroke(tp);
+ if(O.kind==="polo"){c.fillStyle=shade(O.col,-24);c.beginPath();c.moveTo(-60,44);c.quadraticCurveTo(0,58,60,44);c.quadraticCurveTo(0,78,-60,44);c.closePath();c.fill();c.strokeStyle="rgba(0,0,0,.25)";c.lineWidth=2;c.stroke();c.fillStyle=shade(O.col,-12);c.beginPath();c.moveTo(-60,44);c.lineTo(-78,62);c.lineTo(-50,60);c.closePath();c.fill();c.beginPath();c.moveTo(60,44);c.lineTo(78,62);c.lineTo(50,60);c.closePath();c.fill();}
+ else{c.fillStyle=shade(O.col,-26);c.beginPath();c.moveTo(-56,44);c.quadraticCurveTo(0,58,56,44);c.quadraticCurveTo(0,70,-56,44);c.closePath();c.fill();}
+ c.save();c.translate(Math.sin(t*.7)*1.2,bob);c.rotate(Math.sin(t*.5)*.018+bob*.002);
+ c.fillStyle=lg(c,-40,-50,50,60,[[0,"#e8b48c"],[1,"#cf9a70"]]);ell(c,0,0,62,62);c.fill();c.fillStyle="#e0a87e";ell(c,60,16,10,13);c.fill();
+ const hairP=new Path2D();hairP.moveTo(-62,18);hairP.lineTo(-32,25);hairP.quadraticCurveTo(0,33,32,25);hairP.lineTo(62,18);hairP.bezierCurveTo(66,-30,40,-62,0,-62);hairP.bezierCurveTo(-40,-62,-66,-30,-62,18);hairP.closePath();
+ c.fillStyle="#191320";c.fill(hairP);c.save();c.clip(hairP);c.fillStyle=stipplePat;c.fillRect(-64,-64,128,100);c.fillStyle=lg(c,0,14,0,32,[[0,"rgba(25,19,32,0)"],[1,"rgba(207,154,112,.55)"]]);c.fillRect(-64,14,128,20);c.fillStyle="rgba(255,255,255,.07)";ell(c,-18,-34,26,16);c.fill();c.restore();
+ c.strokeStyle="rgba(0,0,0,.3)";c.lineWidth=2;c.stroke(hairP);
+ for(const s of[-1,1]){c.fillStyle="#e0a87e";ell(c,s*60,7,9,13);c.fill();c.strokeStyle="rgba(120,70,50,.4)";c.lineWidth=1.6;c.beginPath();c.arc(s*60,7,5,-.6,1.8);c.stroke();c.strokeStyle="#23202a";c.lineWidth=5;c.lineCap="round";c.beginPath();c.moveTo(s*55,-1);c.lineTo(s*68,-11);c.stroke();c.fillStyle="#23202a";rr(c,s*64-3,-18,7,12,3);c.fill();c.fillStyle="rgba(63,214,255,.75)";ell(c,s*65,-14,1.4,1.4);c.fill();}
+ c.restore();c.restore();}
+function drawShirtIcon(c,out){const O=OUTFITS[out];c.clearRect(0,0,60,60);c.save();c.translate(30,8);const p=new Path2D();
+ p.moveTo(-20,6);p.lineTo(-27,14);p.lineTo(-21,20);p.lineTo(-17,16);p.lineTo(-17,44);p.lineTo(17,44);p.lineTo(17,16);p.lineTo(21,20);p.lineTo(27,14);p.lineTo(20,6);p.quadraticCurveTo(0,14,-20,6);p.closePath();
+ c.fillStyle=O.col;c.fill(p);c.strokeStyle=shade(O.col,-40);c.lineWidth=1.6;c.stroke(p);c.save();c.clip(p);if(O.emblem==="dots"){c.fillStyle=dotsPat;c.fillRect(-30,0,60,50);}c.restore();
+ if(O.kind==="polo"){c.fillStyle=shade(O.col,-22);c.beginPath();c.moveTo(-9,6);c.lineTo(0,15);c.lineTo(-14,12);c.closePath();c.fill();c.beginPath();c.moveTo(9,6);c.lineTo(0,15);c.lineTo(14,12);c.closePath();c.fill();c.strokeStyle=shade(O.col,-30);c.beginPath();c.moveTo(0,15);c.lineTo(0,24);c.stroke();c.fillStyle=shade(O.col,-40);ell(c,0,18,1,1);c.fill();ell(c,0,22,1,1);c.fill();}
+ else{c.strokeStyle=shade(O.col,-30);c.lineWidth=2;c.beginPath();c.moveTo(-8,7);c.quadraticCurveTo(0,12,8,7);c.stroke();}
+ const ex=8,ey=20;
+ if(O.emblem==="bear"){c.fillStyle="#8a5a33";ell(c,ex-3.4,ey-3.4,2,2);c.fill();ell(c,ex+3.4,ey-3.4,2,2);c.fill();ell(c,ex,ey,4.6,4.4);c.fill();c.fillStyle="#d9b98a";ell(c,ex,ey+1.4,2.4,1.8);c.fill();c.fillStyle="#2a1626";ell(c,ex-1.7,ey-.8,.7,.7);c.fill();ell(c,ex+1.7,ey-.8,.7,.7);c.fill();ell(c,ex,ey+1,.8,.6);c.fill();}
+ if(O.emblem==="robot"){c.fillStyle="#5a626e";rr(c,ex-4,ey-3.4,8,7,2);c.fill();c.strokeStyle="#5a626e";c.lineWidth=1.4;c.beginPath();c.moveTo(ex,ey-3.4);c.lineTo(ex,ey-6);c.stroke();c.fillStyle="#ff3b4e";ell(c,ex,ey-6.4,1.1,1.1);c.fill();c.fillStyle="#3fd6ff";ell(c,ex-1.8,ey-.4,1,1);c.fill();ell(c,ex+1.8,ey-.4,1,1);c.fill();c.strokeStyle="#3fd6ff";c.lineWidth=1;c.beginPath();c.moveTo(ex-2,ey+1.8);c.lineTo(ex+2,ey+1.8);c.stroke();}c.restore();}
+function drawHatanoIcon(c,out){const O=OUTFITS[out];c.clearRect(0,0,44,44);c.save();c.translate(22,16);
+ c.fillStyle=O.col;c.beginPath();c.moveTo(-20,28);c.quadraticCurveTo(-18,12,-8,9);c.quadraticCurveTo(0,13,8,9);c.quadraticCurveTo(18,12,20,28);c.closePath();c.fill();
+ if(O.emblem==="dots"){c.save();c.clip();c.fillStyle=dotsPat;c.fillRect(-22,6,44,24);c.restore();}
+ c.fillStyle="#e0a87e";ell(c,0,0,13,13);c.fill();c.fillStyle="#191320";c.beginPath();c.moveTo(-13,4);c.quadraticCurveTo(0,8,13,4);c.bezierCurveTo(14,-8,8,-13,0,-13);c.bezierCurveTo(-8,-13,-14,-8,-13,4);c.closePath();c.fill();
+ c.fillStyle="#e0a87e";ell(c,-12.6,2,2.2,3);c.fill();ell(c,12.6,2,2.2,3);c.fill();c.strokeStyle="#23202a";c.lineWidth=2;c.beginPath();c.moveTo(-11,0);c.lineTo(-14,-2.4);c.moveTo(11,0);c.lineTo(14,-2.4);c.stroke();c.restore();}
+
+const MOODS={n:{open:1,curve:.18,openM:0,tilt:0,raise:0,raiseR:0,blush:.15,tear:0,anger:0,happy:0,sad:0,glow:0},
+ sm:{open:.9,curve:.6,openM:0,tilt:0,raise:.15,raiseR:0,blush:.32,tear:0,anger:0,happy:0,sad:0,glow:0},
+ soft:{open:.82,curve:.4,openM:0,tilt:-.12,raise:.2,raiseR:0,blush:.25,tear:0,anger:0,happy:0,sad:0,glow:0},
+ smug:{open:.55,curve:.45,openM:0,tilt:.1,raise:0,raiseR:.6,blush:.1,tear:0,anger:0,happy:0,sad:0,glow:0},
+ sly:{open:.7,curve:.5,openM:0,tilt:.15,raise:0,raiseR:.35,blush:.15,tear:0,anger:0,happy:0,sad:0,glow:0},
+ ex:{open:1.12,curve:.9,openM:.3,tilt:0,raise:.4,raiseR:0,blush:.45,tear:0,anger:0,happy:0,sad:0,glow:0},
+ angry:{open:1.15,curve:-.7,openM:.55,tilt:1,raise:0,raiseR:0,blush:.55,tear:0,anger:1,happy:0,sad:0,glow:0},
+ cry:{open:.1,curve:-.6,openM:.15,tilt:-1,raise:.5,raiseR:0,blush:.3,tear:1,anger:0,happy:0,sad:1,glow:0},
+ happy:{open:.1,curve:1,openM:.3,tilt:-.3,raise:.4,raiseR:0,blush:.6,tear:0,anger:0,happy:1,sad:0,glow:0},
+ dark:{open:.9,curve:.8,openM:0,tilt:.2,raise:0,raiseR:0,blush:.1,tear:0,anger:0,happy:0,sad:0,glow:1}};
+let EX=Object.assign({},MOODS.n),EXT=Object.assign({},MOODS.n),blinkT=2.5;
+function setMood(m){EXT=Object.assign({},MOODS[m]||MOODS.n);}
+let parts=[];
+function spawnP(type,x,y,o={}){if(parts.length>230)return;parts.push(Object.assign({type,x,y,vx:0,vy:0,life:0,ttl:1.4,size:6,rot:rnd(TAU),vr:rnd(-2,2),col:"#ffd166"},o));}
+function updateParts(dt,L){const rate=REDUCED?.4:1;
+ if(Math.random()<dt*2.2*rate)spawnP("dust",rnd(VW),rnd(VH*.15,VH*.9),{vy:-rnd(4,10),vx:rnd(-3,3),ttl:rnd(3,6),size:rnd(1.5,3.5)});
+ if(EX.tear>.5&&G.phase!=="title"&&Math.random()<dt*9)spawnP("tear",L.WCX+(Math.random()<.5?-19:19)+rnd(-2,2),L.WCY+4,{vy:rnd(30,60),vx:rnd(-6,6),ttl:.9,size:rnd(2.5,4)});
+ if(EX.happy>.5&&Math.random()<dt*5)spawnP("heart",L.WCX+rnd(-70,70),L.WCY+rnd(-30,40),{vy:-rnd(24,46),vx:rnd(-10,10),ttl:1.6,size:rnd(5,9),col:pick(["#ff4f9a","#ff7ab8","#ffd166"])});
+ if(EX.anger>.5&&Math.random()<dt*6)spawnP("puff",L.WCX+rnd(-55,55),L.WCY+rnd(-50,10),{vy:-rnd(10,26),ttl:.6,size:rnd(4,9)});
+ if(EX.glow>.5&&Math.random()<dt*8)spawnP("dark",L.WCX+rnd(-80,80),L.WCY+rnd(-20,90),{vy:-rnd(14,34),ttl:1.4,size:rnd(2,5)});
+ if(G.phase==="judge"&&Math.random()<dt*.8)spawnP("sweat",L.WCX+42,L.WCY-24,{vy:26,ttl:1,size:4});
+ for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.life+=dt;if(p.life>p.ttl){parts.splice(i,1);continue;}p.x+=p.vx*dt;p.y+=p.vy*dt;p.rot+=p.vr*dt;if(p.type==="tear")p.vy+=260*dt;if(p.type==="heart")p.x+=Math.sin(p.life*6)*14*dt;}}
+function drawParts(c){for(const p of parts){const k=1-p.life/p.ttl;c.save();c.globalAlpha=k;c.translate(p.x,p.y);
+ if(p.type==="dust"){c.fillStyle="rgba(255,210,150,.35)";ell(c,0,0,p.size,p.size);c.fill();}
+ else if(p.type==="heart"){c.rotate(Math.sin(p.rot)*.3);c.fillStyle=p.col;const s=p.size/6;c.beginPath();c.moveTo(0,3*s);c.bezierCurveTo(-6*s,-3*s,-3*s,-7*s,0,-3*s);c.bezierCurveTo(3*s,-7*s,6*s,-3*s,0,3*s);c.fill();}
+ else if(p.type==="tear"){c.fillStyle="rgba(150,215,255,.9)";c.beginPath();c.moveTo(0,-p.size);c.quadraticCurveTo(p.size*.8,0,0,p.size*.7);c.quadraticCurveTo(-p.size*.8,0,0,-p.size);c.fill();}
+ else if(p.type==="puff"){c.strokeStyle="rgba(255,80,90,.8)";c.lineWidth=2.5;ell(c,0,0,p.size*(1+p.life*2),p.size*(1+p.life*2));c.stroke();}
+ else if(p.type==="dark"){c.fillStyle=rg(c,0,0,0,p.size*2.4,[[0,"rgba(255,79,154,.85)"],[1,"rgba(194,36,127,0)"]]);ell(c,0,0,p.size*2.4,p.size*2.4);c.fill();}
+ else if(p.type==="sweat"){c.fillStyle="rgba(120,210,255,.85)";c.beginPath();c.moveTo(0,-p.size);c.quadraticCurveTo(p.size*.75,p.size*.2,0,p.size);c.quadraticCurveTo(-p.size*.75,p.size*.2,0,-p.size);c.fill();}
+ else if(p.type==="spark"){c.rotate(p.rot);c.strokeStyle=p.col;c.lineWidth=2;c.lineCap="round";const s=p.size*k;c.beginPath();c.moveTo(-s,0);c.lineTo(s,0);c.moveTo(0,-s);c.lineTo(0,s);c.stroke();}
+ c.restore();}}
+
+const G={phase:"title",si:0,turn:0,score:0,streak:0,bestStreak:0,correct:0,answered:0,aiz:0,results:[],
+ dark:0,darkT:0,shake:0,flashC:"rgba(255,255,255,",flashA:0,titleIdx:0,titleT:0,titleFade:1,
+ lastAuto:-1,forcedCarp:false,hHideAt:0,autoT:0,judgeT:0,resultT:0,lineT:0,manualLast:0,outcome:null,pendingChoice:null};
+let t=0,twW=null,twH=null;
+function clearTimers(){for(const k of["autoT","judgeT","resultT","lineT"]){if(G[k]){clearTimeout(G[k]);G[k]=0;}}}
+function ov(id,show){$(id).classList.toggle("show",show);}
+function curWoman(){return WOMEN[G.phase==="title"?G.titleIdx:G.si];}
+function outfitIdx(){return G.si%3;}
+function startTW(slot,el,full,speed,voice,onDone){const o={el,full,i:0,acc:0,speed,voice,onDone,done:false};el.textContent="";el.classList.add("typing");if(slot==="w")twW=o;else twH=o;return o;}
+function stepTW(o,dt){if(!o||o.done)return;o.acc+=dt;while(o.acc>=o.speed&&o.i<o.full.length){o.i++;o.acc-=o.speed;if(o.i%3===0){if(o.voice==="w")A.wblip(curWoman().look.voice);else A.hblip();}}o.el.textContent=o.full.slice(0,o.i);if(o.i>=o.full.length)finishTW(o);}
+function finishTW(o){if(!o||o.done)return;o.done=true;o.i=o.full.length;o.el.textContent=o.full;o.el.classList.remove("typing");if(o.onDone)o.onDone();}
+const logScroll=$("logScroll");
+function nearBottom(){return logScroll.scrollHeight-logScroll.scrollTop-logScroll.clientHeight<48;}
+function addLog(kind,text,num){const stick=nearBottom();const d=document.createElement("div");d.className="entry "+kind;
+ if(kind==="w"){const n=document.createElement("span");n.className="num";n.textContent=NUM[num];d.appendChild(n);}else{const w=document.createElement("span");w.className="who";w.textContent="ハタノ";d.appendChild(w);}
+ const b=document.createElement("div");b.className="body";b.textContent=text;d.appendChild(b);logScroll.appendChild(d);if(stick)logScroll.scrollTo({top:logScroll.scrollHeight,behavior:"smooth"});}
+logScroll.addEventListener("scroll",()=>{$("jumpChip").classList.toggle("on",!nearBottom());});
+$("jumpChip").addEventListener("click",()=>{A.ui();logScroll.scrollTo({top:logScroll.scrollHeight,behavior:"smooth"});});
+$("filterChip").addEventListener("click",()=>{A.ui();const on=logScroll.classList.toggle("womenOnly");$("filterChip").classList.toggle("on",on);logScroll.scrollTo({top:logScroll.scrollHeight});});
+function buildPips(){$("pips").innerHTML="";for(let i=0;i<10;i++){const s=document.createElement("span");s.className="pip";$("pips").appendChild(s);}}
+function updatePips(judge){[...$("pips").children].forEach((p,i)=>{p.classList.toggle("done",i<G.turn);p.classList.toggle("judge",!!judge);});}
+function updateHUD(){$("hudStage").textContent=`出会い ${Math.min(G.si+1,TOTAL)} / ${TOTAL}`;$("hudName").textContent=curWoman().name+"（"+curWoman().age+"）";$("hudScore").textContent=G.score;$("hudAcc").textContent="見極め率 "+(G.answered?Math.round(G.correct/G.answered*100)+"%":"—");const sc=$("streakChip");sc.classList.toggle("on",G.streak>=2);sc.textContent="🔥×"+G.streak;}
+function toast(txt,cls){const d=document.createElement("div");d.className="toast "+cls;d.textContent=txt;$("toasts").appendChild(d);setTimeout(()=>d.remove(),1700);}
+function syncMuteIcons(){document.querySelectorAll(".muteBtn").forEach(b=>{b.innerHTML=A.muted?ICONS.mute:ICONS.sound;b.style.color=A.muted?"var(--dim)":"var(--gold)";});}
+function showBubbleW(name,text,mood){const b=$("bubbleW");b.classList.remove("wait");b.classList.add("show");$("bubbleWTag").textContent=name;setMood(mood);
+ startTW("w",$("bubbleWTxt"),text,.028,"w",()=>{addLog("w",text,G.turn-1);updatePips();
+  if(G.turn<10){G.autoT=setTimeout(()=>{G.autoT=0;autoAizuchi();},480);}
+  else{const ab=$("advanceBtn");ab.innerHTML="判定へ ⚖";ab.classList.remove("primary");ab.classList.add("gold","tojudge");}});}
+function hatanoSay(text){if(twH&&!twH.done)finishTW(twH);$("bubbleH").classList.add("show");A.aiz();bobV=-160;startTW("h",$("bubbleHTxt"),text,.016,"h",()=>{addLog("h",text);G.hHideAt=t+2.6;});}
+function pickAuto(){let i;do{i=Math.floor(Math.random()*AIZUCHI.length);}while(i===G.lastAuto);G.lastAuto=i;return AIZUCHI[i];}
+function autoAizuchi(){if(G.phase!=="talk")return;let line;if(G.si===6&&G.turn===2&&!G.forcedCarp){line="カープ！カープ！カープ！";G.forcedCarp=true;G.lastAuto=9;}else line=pickAuto();hatanoSay(line);}
+function manualAizuchi(){if(!(G.phase==="talk"||G.phase==="judge"))return;const now=performance.now();if(now-G.manualLast<380)return;G.manualLast=now;if(G.autoT){clearTimeout(G.autoT);G.autoT=0;}G.aiz++;const bd=$("aizBadge");bd.textContent="×"+G.aiz;bd.classList.add("on");hatanoSay(pickAuto());}
+let bob=0,bobV=0;
+function showTitle(){clearTimers();A.heart(false);G.phase="title";G.darkT=0;G.titleT=0;G.titleFade=1;G.pendingChoice=null;
+ frame.classList.add("mode-title");frame.classList.remove("mode-play");
+ ["ovIntro","ovHow","ovConfirm","ovFinal","ovJudgeConfirm"].forEach(id=>ov(id,false));ov("ovTitle",true);
+ $("resultPanel").classList.remove("show");$("bubbleW").classList.remove("show");$("bubbleH").classList.remove("show");
+ parts=[];setMood("sm");EX=Object.assign({},MOODS.sm);
+ $("recScore").textContent=R.bestScore;$("recAcc").textContent=R.bestAcc?R.bestAcc+"%":"—";$("recTotal").textContent=R.totalCorrect+"/"+R.totalAnswered;}
+function startRun(){A.unlock();clearTimers();A.heart(false);
+ for(let i=WOMEN.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[WOMEN[i],WOMEN[j]]=[WOMEN[j],WOMEN[i]];}
+ Object.assign(G,{si:0,turn:0,score:0,streak:0,bestStreak:0,correct:0,answered:0,aiz:0,results:[],forcedCarp:false,outcome:null,pendingChoice:null});
+ $("aizBadge").classList.remove("on");ov("ovTitle",false);ov("ovFinal",false);ov("ovJudgeConfirm",false);
+ frame.classList.remove("mode-title");frame.classList.add("mode-play");showIntro(0);}
+function showIntro(i){clearTimers();A.heart(false);G.si=i;G.turn=0;G.phase="intro";G.darkT=0;G.dark=0;G.pendingChoice=null;parts=[];
+ logScroll.innerHTML="";$("jumpChip").classList.remove("on");buildPips();updatePips();
+ $("resultPanel").classList.remove("show","bad");$("judgePrompt").classList.remove("on");$("bubbleW").classList.remove("show");$("bubbleH").classList.remove("show");ov("ovJudgeConfirm",false);
+ setMood("n");EX=Object.assign({},MOODS.n);
+ $("actTalk").classList.remove("hidden");$("actJudge").classList.add("hidden");$("actResult").classList.add("hidden");
+ const ab=$("advanceBtn");ab.innerHTML="次の発言 ▶";ab.classList.add("primary");ab.classList.remove("gold","tojudge");
+ const w=WOMEN[i];$("introStageNo").textContent=`出会い ${i+1} / ${TOTAL}`;$("introName").textContent=w.name;$("introMeta").textContent=`${w.age}歳 ・ ${w.job}`;
+ $("introDiff").textContent="微妙さ "+"★".repeat(w.diff)+"☆".repeat(3-w.diff);$("introProf").textContent=w.prof;$("outfitName").textContent=OUTFITS[i%3].name;
+ const pc=$("introPortrait").getContext("2d");pc.setTransform(1,0,0,1,0,0);pc.clearRect(0,0,132,132);pc.save();pc.beginPath();pc.arc(66,66,64,0,TAU);pc.clip();
+ pc.fillStyle=rg(pc,66,50,10,90,[[0,"#5a2a4a"],[1,"#241226"]]);pc.fillRect(0,0,132,132);pc.translate(66,56);drawWoman(pc,w.look,Object.assign({},MOODS.sm),1.2,96,false);pc.restore();
+ drawShirtIcon($("outfitIcon").getContext("2d"),i%3);updateHUD();ov("ovIntro",true);}
+function startTalk(){A.ui();ov("ovIntro",false);G.phase="talk";G.lineT=setTimeout(()=>{G.lineT=0;spawnLine(0);},350);}
+function spawnLine(k){if(G.phase!=="talk")return;G.turn=k+1;updatePips();A.pop();const w=WOMEN[G.si],ln=w.lines[k];showBubbleW(w.name,ln.t,ln.m);}
+function advance(){if(G.phase!=="talk")return;if(twW&&!twW.done){finishTW(twW);A.ui();return;}if(G.autoT){clearTimeout(G.autoT);G.autoT=0;autoAizuchi();}if(G.turn<10)spawnLine(G.turn);else enterJudge();}
+function enterJudge(){if(G.phase!=="talk")return;clearTimers();if(twW&&!twW.done)finishTW(twW);if(G.autoT){clearTimeout(G.autoT);G.autoT=0;autoAizuchi();}if(twH&&!twH.done)finishTW(twH);clearTimers();
+ G.phase="judge";updatePips(true);setMood("soft");const b=$("bubbleW");b.classList.add("show","wait");$("bubbleWTag").textContent=WOMEN[G.si].name;$("bubbleWTxt").textContent="（返事を待っています…）";
+ $("actTalk").classList.add("hidden");$("actJudge").classList.remove("hidden");$("judgePrompt").classList.add("on");A.sting();A.heart(true);}
+function askJudge(choice){if(G.phase!=="judge")return;G.pendingChoice=choice;A.ui();const w=WOMEN[G.si];
+ $("jcWoman").textContent=w.name+"（"+w.age+"・"+w.job+"）への判定";
+ const jc=$("jcChoice");jc.className=(choice==="mine"?"mine":"safe")+" disp";jc.innerHTML=choice==="mine"?"💣 地雷だ！":"💚 セーフ！";
+ $("jcYes").className="btn "+(choice==="mine"?"danger":"safe");$("jcYes").innerHTML="はい、見極めた ✔";
+ drawHatanoIcon($("jcHatanoIcon").getContext("2d"),outfitIdx());ov("ovJudgeConfirm",true);}
+function confirmJudgeYes(){const c=G.pendingChoice;G.pendingChoice=null;ov("ovJudgeConfirm",false);if(c)judge(c);}
+function confirmJudgeNo(){G.pendingChoice=null;ov("ovJudgeConfirm",false);A.ui();}
+function judge(choice){if(G.phase!=="judge")return;G.phase="reveal";A.heart(false);A.ui();$("judgeMine").disabled=true;$("judgeSafe").disabled=true;$("judgePrompt").classList.remove("on");
+ const w=WOMEN[G.si],truth=w.mine;const outcome=choice==="mine"?(truth?"catch":"false"):(truth?"bad":"approve");G.outcome=outcome;
+ let delta=0,bonus=0;if(outcome==="catch"||outcome==="approve"){bonus=Math.min(100,G.streak*20);delta=100+bonus;G.streak++;G.bestStreak=Math.max(G.bestStreak,G.streak);G.correct++;}else if(outcome==="false"){delta=0;G.streak=0;}else{delta=-50;G.streak=0;}
+ G.score=Math.max(0,G.score+delta);G.answered++;G.results.push({i:G.si,choice,truth,outcome,delta});const L=layout();
+ if(outcome==="catch"){setMood("angry");G.shake=REDUCED?4:13;G.flashC="rgba(255,59,78,";G.flashA=.4;A.dokun();A.buzz();for(let i=0;i<10;i++)spawnP("puff",L.WCX+rnd(-60,60),L.WCY+rnd(-50,20),{ttl:.7,size:rnd(4,9),vy:-rnd(10,30)});}
+ else if(outcome==="approve"){setMood("happy");G.flashC="rgba(47,224,140,";G.flashA=.28;A.chime();for(let i=0;i<14;i++)spawnP("spark",L.WCX+rnd(-90,90),L.WCY+rnd(-60,60),{ttl:1.1,size:rnd(4,9),col:pick(["#ffd166","#2fe08c","#ff7ab8"]),vy:-rnd(6,20)});}
+ else if(outcome==="false"){setMood("cry");G.flashC="rgba(90,140,255,";G.flashA=.3;A.sad();}
+ else{setMood("dark");G.darkT=1;G.shake=REDUCED?3:8;A.drone();}
+ updateHUD();if(delta>0){toast("+"+delta,"gold");if(G.streak>=2)toast("🔥 "+G.streak+"連続正解！","fire");}else if(delta<0)toast(delta,"red");
+ G.resultT=setTimeout(()=>{G.resultT=0;showResult(outcome,bonus);},outcome==="bad"?1700:1050);}
+function showResult(outcome,bonus){G.phase="result";if(outcome!=="bad")A.heart(false);$("bubbleW").classList.remove("show");$("bubbleH").classList.remove("show");
+ const w=WOMEN[G.si],r=G.results[G.results.length-1];const P=$("resultPanel");P.classList.add("show");P.classList.toggle("bad",outcome==="bad");
+ const V={catch:{ic:ICONS.bomb,bg:"linear-gradient(150deg,#ff3b4e,#c81e3c)",col:"#fff",h:"見極め成功！",s:"地雷を検知 — 彼女は激怒しています"},
+ approve:{ic:ICONS.heart,bg:"linear-gradient(150deg,#25c97c,#0c8a4e)",col:"#fff",h:"見極め成功！",s:"いい感じ！ — 彼女は満面の笑みです"},
+ false:{ic:ICONS.cry,bg:"linear-gradient(150deg,#5a8cff,#2a4a9a)",col:"#fff",h:"冤罪でした…",s:"彼女は誠実でした — 泣いています"},
+ bad:{ic:ICONS.skull,bg:"linear-gradient(150deg,#3a0a14,#1a0510)",col:"#ff3b4e",h:"BAD END",s:"地雷を見逃しました…"}}[outcome];
+ const dcls=r.delta>0?"plus":r.delta<0?"minus":"zero";const dtx=(r.delta>0?"+":"")+r.delta+(bonus?`<span style="font-size:.6em"> (連続+${bonus})</span>`:"");
+ const qmap={catch:["qAngry","💢 激怒",w.angry],approve:["qHappy","☺ ご機嫌",w.happy],false:["qCry","😢 号泣",w.cry],bad:["qDark","🖤 暗転",w.badLine]}[outcome];
+ const rcCls=i=>{if(outcome==="catch"||outcome==="bad")return w.ev.includes(i)?"hot":"";if(outcome==="false")return w.ev.includes(i)?"cool":"";return "good";};
+ let html=`<div class="verdict"><div class="vic" style="background:${V.bg};color:${V.col}">${V.ic}</div><div><h3 class="disp" style="color:${outcome==="bad"?"#ff5a6a":outcome==="false"?"#9ab8ff":"#ffd166"}">${V.h}</h3><div class="vsub">${V.s}</div></div><div class="deltaChip ${dcls}">${dtx}</div></div><div class="quote ${qmap[0]}"><span class="ql">${qmap[1]} ・ ${w.name}</span>${qmap[2]}</div><div class="evHead">${outcome==="approve"||outcome==="false"?"🔍 一貫性チェック":"💥 決定的な発言"} — ${w.evTitle}</div>`;
+ w.lines.forEach((ln,i)=>{html+=`<div class="rc ${rcCls(i)}"><b>${NUM[i]}</b><span>${ln.t}</span></div>`;});
+ html+=`<div class="explain">${w.explain}</div><div class="hcomment"><canvas id="hcIcon" width="44" height="44"></canvas><div class="hb"><span class="hl">ハタノさんのマイペースな一言</span><span class="ht">「${outcome==="catch"||outcome==="approve"?w.ok:w.ng}」</span></div></div>`;
+ if(outcome==="bad")html+=`<div class="epilogue"><span class="el">— そして</span>${w.badEnd}</div>`;
+ $("resultScroll").innerHTML=html;$("resultScroll").scrollTop=0;drawHatanoIcon($("hcIcon").getContext("2d"),outfitIdx());
+ $("actJudge").classList.add("hidden");$("actResult").classList.remove("hidden");$("judgeMine").disabled=false;$("judgeSafe").disabled=false;
+ $("nextBtn").innerHTML=G.si===TOTAL-1?"結果発表へ ▶":"次の出会いへ ▶";}
+function nextStage(){A.ui();A.heart(false);$("resultPanel").classList.remove("show");if(G.si===TOTAL-1)showFinal();else showIntro(G.si+1);}
+function showFinal(){clearTimers();A.heart(false);G.phase="final";G.darkT=0;const acc=Math.round(G.correct/TOTAL*100);const rank=RANKS.find(r=>acc>=r.min);
+ const perfect=G.correct===TOTAL;if(perfect)G.score+=300;const newRec=G.score>R.bestScore;
+ R.bestScore=Math.max(R.bestScore,G.score);R.bestAcc=Math.max(R.bestAcc,acc);R.plays++;R.clears++;R.totalCorrect+=G.correct;R.totalAnswered+=TOTAL;saveR();
+ $("rankStamp").textContent=rank.r;$("rankTitle").textContent=rank.title;$("newRecord").classList.toggle("on",newRec);
+ $("finalStats").innerHTML=[["スコア",G.score+(perfect?"<span style='font-size:.55em;color:#7dffb8'> +300</span>":"")],["正解",G.correct+" / "+TOTAL],["見極め率",acc+"%"],["最大連続",G.bestStreak],["相槌回数",G.aiz],["称号",rank.r+"ランク"]].map(s=>`<div class="fstat"><span class="fl">${s[0]}</span><span class="fv">${s[1]}</span></div>`).join("");
+ $("finalQuipTxt").textContent="「"+rank.quip+"」";drawHatanoIcon($("finalHatano").getContext("2d"),2);
+ const OL={catch:"看破",approve:"承認",false:"冤罪",bad:"BAD END"};
+ $("finalList").innerHTML=G.results.map(r=>{const w=WOMEN[r.i];return `<div class="frow"><span class="ft">${r.truth?"💣":"🌿"}</span><span class="fn">${w.name}（${w.job}）</span><span style="color:var(--dim);font-size:.85em">あなた:${r.choice==="mine"?"💣":"💚"}</span><span class="fo ${r.outcome}">${OL[r.outcome]}</span></div>`;}).join("");
+ ov("ovFinal",true);A.fanfare();updateHUD();}
+
+const starTw=[[60,.1],[110,.16],[150,.09],[80,.2],[170,.14],[45,.15]];
+function render(){if(!bgFar)return;const L=layout();ctx.setTransform(S,0,0,S,0,0);ctx.clearRect(0,0,VW,VH);ctx.save();
+ const sh=G.shake;const drift=Math.sin(t*.23)*(G.phase==="title"?3:1.4);ctx.translate(drift+(Math.random()-.5)*sh,(Math.random()-.5)*sh*.7);
+ ctx.drawImage(bgFar,0,0,VW,VH);
+ for(let i=0;i<12;i++){const bx=20+i*45.5,by=VH*.045+Math.sin(Math.PI*(bx/VW))*VH*.036;const tw=.55+.45*Math.sin(t*2+i*1.7);const col=["#ffb347","#ff4f9a","#3fd6ff"][i%3];ctx.fillStyle=col;ell(ctx,bx,by+4,3,3.6);ctx.fill();ctx.globalAlpha=tw*.5;ctx.fillStyle=rg(ctx,bx,by+4,0,11,[[0,col],[1,"rgba(0,0,0,0)"]]);ell(ctx,bx,by+4,11,11);ctx.fill();ctx.globalAlpha=1;}
+ starTw.forEach((s,i)=>{ctx.globalAlpha=.4+.5*Math.sin(t*1.6+i*2.2);ctx.fillStyle="#fff";ell(ctx,s[0],VH*s[1]+VH*.02,1.2,1.2);ctx.fill();ctx.globalAlpha=1;});
+ ctx.fillStyle=rg(ctx,468,VH*.13,4,120,[[0,`rgba(255,200,110,${.2+.04*Math.sin(t*3.1)})`],[1,"rgba(255,200,110,0)"]]);ell(ctx,468,VH*.13,120,120);ctx.fill();
+ const w=curWoman();ctx.save();if(G.phase==="title")ctx.globalAlpha=G.titleFade;ctx.translate(L.WCX,L.WCY);drawWoman(ctx,w.look,EX,t,L.T0-L.WCY+10,twW&&!twW.done);ctx.restore();
+ ctx.drawImage(bgTable,0,0,VW,VH);ctx.lineCap="round";
+ [[372,L.T0+8,1],[150,L.T0+20,1.4]].forEach(cup=>{for(let k=0;k<3;k++){const ph=(t*.5+k*.33)%1;ctx.strokeStyle=`rgba(246,231,205,${(1-ph)*.3})`;ctx.lineWidth=2.6*cup[2];ctx.beginPath();const sx=cup[0]+Math.sin(t*2+k*2.1)*5;ctx.moveTo(sx,cup[1]-ph*44);ctx.quadraticCurveTo(sx+7*Math.sin(t*1.4+k),cup[1]-ph*44-12,sx+3*Math.sin(t*2.2+k*3),cup[1]-ph*44-22);ctx.stroke();}});
+ const fl=1+.16*Math.sin(t*13)+.09*Math.sin(t*7.3);ctx.fillStyle=rg(ctx,269,L.T0+8,2,52,[[0,`rgba(255,190,90,${.22+.05*Math.sin(t*5)})`],[1,"rgba(255,190,90,0)"]]);ell(ctx,269,L.T0+8,52,52);ctx.fill();
+ ctx.save();ctx.translate(269,L.T0+14);ctx.scale(1,fl);ctx.fillStyle="#ffd166";ctx.beginPath();ctx.moveTo(0,-11);ctx.quadraticCurveTo(5,-3,0,3);ctx.quadraticCurveTo(-5,-3,0,-11);ctx.fill();ctx.fillStyle="#fff6e6";ell(ctx,0,-1,1.8,3);ctx.fill();ctx.restore();
+ drawArms(ctx,w.look,L);ctx.save();ctx.translate(L.HCX,L.HCY);drawHatano(ctx,G.phase==="title"?0:outfitIdx(),t,VH-L.HCY,bob);ctx.restore();
+ if(G.dark>.02){ctx.fillStyle=`rgba(6,2,10,${G.dark*.86})`;ctx.fillRect(-20,-20,VW+40,VH+40);ctx.save();ctx.beginPath();ctx.rect(0,0,VW,L.T0+4);ctx.clip();ctx.fillStyle=rg(ctx,L.WCX,L.WCY,20,190,[[0,`rgba(194,36,127,${G.dark*.3})`],[1,"rgba(194,36,127,0)"]]);ell(ctx,L.WCX,L.WCY,190,190);ctx.fill();ctx.translate(L.WCX,L.WCY);drawWoman(ctx,w.look,EX,t,L.T0-L.WCY+10,false);ctx.restore();ctx.fillStyle=`rgba(6,2,10,${G.dark*.25})`;ctx.fillRect(0,0,VW,L.T0);}
+ drawParts(ctx);if(G.flashA>.01){ctx.fillStyle=G.flashC+G.flashA+")";ctx.fillRect(-20,-20,VW+40,VH+40);}ctx.restore();}
+let last=performance.now();
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;t+=dt;const mode=G.phase==="title"?"title":"play";if(mode!==bgMode)buildBG();
+ if(G.phase==="title"){G.titleT+=dt;if(G.titleT>4.6){G.titleT=0;G.titleIdx=(G.titleIdx+1)%WOMEN.length;G.titleFade=0;}G.titleFade=Math.min(1,G.titleFade+dt*2);}
+ stepTW(twW,dt);stepTW(twH,dt);if(G.hHideAt&&t>G.hHideAt&&(!twH||twH.done)){$("bubbleH").classList.remove("show");G.hHideAt=0;}
+ const k=Math.min(1,dt*9);for(const key in EX)EX[key]=lerp(EX[key],EXT[key],k);blinkT-=dt;if(blinkT<0)blinkT=rnd(2.4,5.2);
+ if(blinkT<.13&&EX.happy<.5&&EX.sad<.5&&EX.glow<.5)EX.open=Math.min(EX.open,.12);
+ bobV+=(-bob*130-bobV*9)*dt;bob+=bobV*dt;G.shake*=Math.exp(-dt*5.5);if(G.shake<.05)G.shake=0;G.flashA=Math.max(0,G.flashA-dt*1.6);G.dark=lerp(G.dark,G.darkT,Math.min(1,dt*1.5));
+ updateParts(dt,layout());render();requestAnimationFrame(loop);}
+
+function bind(id,fn){$(id).addEventListener("click",e=>{e.stopPropagation();fn();});}
+bind("startBtn",()=>{A.unlock();A.ui();startRun();});
+bind("howBtn",()=>{A.unlock();A.ui();ov("ovHow",true);});
+bind("howClose",()=>{A.ui();ov("ovHow",false);});
+bind("logHelp",()=>{A.ui();ov("ovHow",true);});
+bind("talkStartBtn",startTalk);bind("advanceBtn",advance);bind("aizuchiBtn",manualAizuchi);
+bind("judgeMine",()=>askJudge("mine"));bind("judgeSafe",()=>askJudge("safe"));
+bind("jcYes",confirmJudgeYes);bind("jcNo",confirmJudgeNo);
+bind("nextBtn",nextStage);bind("againBtn",()=>{A.ui();startRun();});bind("finalTitleBtn",()=>{A.ui();showTitle();});
+bind("homeBtn",()=>{A.ui();ov("ovConfirm",true);});bind("confirmNo",()=>{A.ui();ov("ovConfirm",false);});bind("confirmYes",()=>{A.ui();ov("ovConfirm",false);showTitle();});
+document.querySelectorAll(".muteBtn").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();A.unlock();A.setMute(!A.muted);if(!A.muted)A.ui();}));
+cv.addEventListener("pointerdown",()=>{A.unlock();if(G.phase==="talk")advance();});
+cv.addEventListener("contextmenu",e=>e.preventDefault());
+document.addEventListener("pointerdown",()=>A.unlock(),{once:true});
+document.addEventListener("keydown",e=>{if(e.repeat)return;const key=e.key;
+ if(key==="m"||key==="M"){A.unlock();A.setMute(!A.muted);return;}
+ if($("ovHow").classList.contains("show")){if(key==="Escape"||key==="Enter"||key===" "){e.preventDefault();ov("ovHow",false);}return;}
+ if($("ovConfirm").classList.contains("show")){if(key==="Escape")ov("ovConfirm",false);return;}
+ if($("ovJudgeConfirm").classList.contains("show")){if(key==="Enter"||key===" "){e.preventDefault();confirmJudgeYes();}else if(key==="Escape")confirmJudgeNo();return;}
+ if(key==="l"||key==="L"){$("filterChip").click();return;}
+ switch(G.phase){
+  case"title":if(key==="Enter"||key===" "){e.preventDefault();A.unlock();startRun();}else if(key==="h"||key==="H")ov("ovHow",true);break;
+  case"intro":if(key==="Enter"||key===" "){e.preventDefault();startTalk();}break;
+  case"talk":if(key===" "||key==="Enter"||key==="ArrowRight"){e.preventDefault();advance();}else if(key==="a"||key==="A")manualAizuchi();break;
+  case"judge":if(key==="1"||key==="ArrowLeft"){e.preventDefault();askJudge("mine");}else if(key==="2"||key==="ArrowRight"){e.preventDefault();askJudge("safe");}else if(key==="a"||key==="A")manualAizuchi();break;
+  case"result":if(key==="Enter"||key===" "){e.preventDefault();nextStage();}break;
+  case"final":if(key==="Enter")startRun();break;}
+ if(key==="Escape"&&["talk","judge","result","intro"].includes(G.phase))ov("ovConfirm",true);});
+document.addEventListener("visibilitychange",()=>{if(!A.ctx)return;if(document.hidden)A.ctx.suspend();else A.ctx.resume();});
+let rzQ=false;window.addEventListener("resize",()=>{if(rzQ)return;rzQ=true;requestAnimationFrame(()=>{rzQ=false;resize();});});
+window.addEventListener("orientationchange",()=>setTimeout(resize,120));
+$("homeBtn").innerHTML=ICONS.home;$("logTitle").innerHTML=ICONS.scroll+"会話ログ";
+makeNoise();makePatterns();syncMuteIcons();buildPips();resize();showTitle();updateHUD();requestAnimationFrame(loop);
+</script>
+</body>
+</html>
